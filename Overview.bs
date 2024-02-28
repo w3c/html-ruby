@@ -1,0 +1,14 @@
+<pre class='metadata'>
+Title: Placeholder
+Shortname: placeholder
+Level: 1
+Status: w3c/UD
+Group: htmlwg
+Repository: w3c/html-ruby
+URL: https://w3c.github.io/html-ruby/
+Editor: TBD
+Abstract: Placeholder
+</pre>
+
+Nothing interesting here yet.
+
