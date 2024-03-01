@@ -1057,18 +1057,20 @@ Conforming Features </h2>
 
 <h2 class="no-num non-normative" id=html-tweaks>
 Appendix A:
-Other Tweaks to HTML</h2>
+Editorial Tweaks to HTML</h2>
 
 	<i>This section is non-normative</i>
 
 	In complement to the normative statements made in the main body of this specification,
-	this section details additional editorial or minor changes
+	this section details additional editorial changes
 	that would be desirable to make to the [[HTML inline]]
 	in order to make it fully align it with what is covered here.
 
 	<ul>
 		<li>
-			Removing the following 3 paragraphs in [[html/rendering#phrasing-content-3]]:
+			Remove the outdated informative description
+			of CSS annonymous box generation for ruby bases
+			in the following paragraph in [[html/rendering#phrasing-content-3]]:
 
 			<blockquote class="non-normative">
 				For the purposes of the CSS ruby model,
@@ -1076,33 +1078,33 @@ Other Tweaks to HTML</h2>
 				that are not <{rt}> or <{rp}> elements
 				are expected to be wrapped in anonymous boxes
 				whose 'display' property has the value ''ruby-base''.
-
-				When a particular part of a ruby has more than one annotation,
-				the annotations <span class=allow-2119>should</span> be distributed
-				on both sides of the base text
-				so as to minimize the stacking of ruby annotations on one side.
-
-				Note: When it becomes possible to do so,
-				the preceding requirement will be updated to be expressed in terms of CSS ruby.
-				(Currently, CSS ruby does not handle nested <{ruby}> elements
-				or multiple sequential <{rt}> elements,
-				which is how this semantic is expressed.)
+				[[CSS-RUBY-1]]
 			</blockquote>
 
-			Issue: Should they be updated instead of removed?
-			The Note is wrong, due to the different ruby model,
-			but the preceding two paragraphs could be kept.
-			The first one would need to mention <{rtc}> alongside with <{rt}> and <{rp}>
-			but is otherwise correct,
-			although it isn't clear why the HTML spec is concerned with
-			the generation of anonymous boxes
-			for the purposes of CSS.
-			The second paragraph also remains correct
-			(and is realized by default thanks to <span class=non-normative>''ruby-position/alternate''</span>
-			being the initial value of <span class=non-normative>'ruby-position'</span>,
-			but this “should” requirement
-			is the only one HTML has about the rendering of ruby,
-			and feels unnecessary.
+			The matter is already covered in exhaustive detail by [[CSS-RUBY-1#box-fixup]].
+
+		<li>
+			Replace the following note in [[html/rendering#phrasing-content-3]]:
+
+			<blockquote>
+
+				<del>
+
+					Note: When it becomes possible to do so,
+					the preceding requirement will be updated to be expressed in terms of CSS ruby.
+					(Currently, CSS ruby does not handle nested <{ruby}> elements
+					or multiple sequential <{rt}> elements,
+					which is how this semantic is expressed.)
+				</del>
+
+				<ins>
+
+					Note: In CSS, this is achieved by default:
+					the initial value of the 'ruby-position' property
+					is ''ruby-position/alternate'',
+					which produces this effect.
+				</ins>
+			</blockquote>
 
 		<li>
 			Replacing the <q><{ruby}>, <{rt}>, <{rp}></q> row of the table in [[HTML/text-level-semantics#usage-summary]],
