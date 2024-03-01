@@ -8,6 +8,7 @@ Repository: w3c/html-ruby
 URL: https://w3c.github.io/html-ruby/
 Editor: TBD
 Abstract: Placeholder
+Local Boilerplate: copyright yes
 </pre>
 
 Nothing interesting here yet.
