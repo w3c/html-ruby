@@ -1,15 +1,1346 @@
 <pre class='metadata'>
-Title: Placeholder
-Shortname: placeholder
+Title: HTML Ruby Markup Extensions
+Shortname: html-ruby-markup
 Level: 1
 Status: w3c/UD
 Group: htmlwg
 Repository: w3c/html-ruby
 URL: https://w3c.github.io/html-ruby/
-Editor: TBD
-Abstract: Placeholder
-Local Boilerplate: copyright yes
+Previous Version: https://www.w3.org/TR/2014/NOTE-html-ruby-extensions-20140204/
+Editor: Florian Rivoal, Invited Expert, https://florian.rivoal.net, w3cid 43241
+Abstract:
+	Ruby, a form of interlinear annotation,
+	are short runs of text alongside the base text.
+	They are typically used in East Asian documents
+	to indicate pronunciation or to provide a short annotation.
+
+	This specification revises and extends the markup model established by HTML to express ruby.
+Complain About: accidental-2119 yes, missing-example-ids yes
+Markup Shorthands: markdown yes
+Status Text:
+	This document is developed
+	under the terms of the <a href="https://www.w3.org/2022/02/ruby-agreement">Agreement on HTML Ruby Markup</a>
+	between W3C and the WHATWG.
+Local Boilerplate: copyright yes, status yes
 </pre>
 
-Nothing interesting here yet.
+<pre class="anchors">
+	spec: html; urlPrefix: https://html.spec.whatwg.org/multipage/
+		type:dfn; for:/; text:text; url: dom.html#text-content
+		type:dfn; for:/; text:categories; url: dom.html#concept-element-categories
+</pre>
 
+<pre class=link-defaults>
+	spec:css-ruby-1; type:value; text:ruby-base
+</pre>
+
+<pre class=biblio>
+{
+	"QA-RUBY": {
+		"href": "https://www.w3.org/International/questions/qa-ruby",
+		"title": "What is ruby?",
+		"publisher": "W3C",
+		"authors": [ "Richard Ishida" ]
+	},
+	"UNIFIED-RUBY": {
+		"href": "https://fantasai.inkedblade.net/weblog/2011/ruby/",
+		"title": "Towards a Unified Ruby Model",
+		"authors": [ "Elika J. Etemad" ]
+	}
+}
+</pre>
+
+
+<h2 id=intro>
+Introduction</h2>
+
+	<i>This section is non-normative</i>
+
+	<dfn export>Ruby</dfn> is a name for small annotations that are rendered alongside base text.
+	This is especially useful for Japanese and other East Asian content
+	(ruby may be called <i>furigana</i> in Japanese).
+	It is most often used to provide a reading (pronunciation guide).
+
+	Ruby text is usually presented alongside the base text,
+	using a smaller typeface.
+	The name ruby originated from a named font size
+	(about half the size of the normal 10 point font)
+	used by British typesetters.
+
+	Typically ruby is used in East Asian scripts
+	to provide phonetic transcriptions of obscure and little known characters,
+	characters that the reader is not expected
+	to be familiar with
+	(such as children or foreigners learning to write),
+	or characters that have multiple readings
+	which can't be determined by the context
+	(eg. some Japanese names).
+	For example it is widely used in educational materials and children’s texts.
+	It is also occasionally used to convey information about the meaning of ideographic characters.
+
+	<figure>
+		<img src="images/ruby-shinkansen.png"
+			width=320 height=70
+			alt="An example of annotating text with ruby:
+				the Japanese word for bullet-train is written with 3 kanji characters,
+				written horizontally, left to right.
+				Their pronunciation is indicated by 6 hiragana characters
+				placed immediately above.
+				The annotation is half the font size of the base it annotates.">
+	</figure>
+
+	Specialized markup, as defined in this document, is necessary
+	to describe the semantic associations between the base text and its annotations,
+	to enable its various visual layouts
+	as well as correct non-visual presentation and processing.
+
+	Note: [[CSS-RUBY-1 inline]] defines the ruby layout model in CSS,
+	enabling the ruby presentation described above
+	and frequently desired variations.
+
+
+<h3 id=relations>
+Background and Relation to the [[HTML inline]]</h3>
+
+	A set of HTML elements to markup ruby has evolved over the years in multiple specifications,
+	starting from the 2001 [[RUBY inline]] specification
+	all the way to the current [[HTML inline]],
+	with different incarnations varying in flexibility, complexity, or verbosity.
+
+	While concise and effective in simple cases,
+	the ruby model described in the [[HTML inline]]
+	(at the time of writing this document)
+	is insufficiently expressive to handle all use cases well.
+	Moreover, some aspects of it are also not interoperably implemented;
+	yet implementing them would not completely address the remaining use cases.
+	Additionally, these aspects are at odds with the CSS layout model.
+
+	This specification is written to promote--
+	and guide implementations of--
+	an revised and extended model for ruby,
+	in order to more completely address the needs of ruby on the Web platform.
+	This effort is undertaken with the <a href="https://www.w3.org/2022/02/ruby-agreement">agreement of W3C and the WHATWG</a>.
+
+	[[#diff-html]] summarizes the main differences,
+	and provides a brief overview of why these differences are desirable.
+
+	Note that the semantics of the subset of the [[HTML inline]]
+	that is interoperably implemented
+	remain unchanged in this extension specification,
+	making the ruby model described here
+	backwards compatible
+	with any ruby content
+	supported by existing user agents.
+
+	<div class=advisement>
+		In this document,
+		advisement blocks like this one
+		indicate how normative parts of the document
+		relate to and replace various part of the [[HTML inline]].
+	</div>
+
+	It is hoped that the changes described here will in time
+	be adopted by the WHATWG
+	and integrated into the [[HTML inline]],
+	reducing the delta between the two documents.
+
+
+<h2 id=elements>
+HTML Elements for Ruby</h2>
+
+	<div class=advisement>
+		This section and it subsections replace and extendent
+		sections [[HTML/text-level-semantics#the-ruby-element]] through [[HTML/text-level-semantics#the-rp-element]]
+		of the [[HTML inline]].
+	</div>
+
+
+<h3 id=the-ruby-element>
+The <dfn element><code>ruby</code></dfn> element</h3>
+
+	<dl class="def">
+		<dt><a spec=html>Categories</a>:
+		<dd><a>Flow content</a>.
+		<dd><a>Phrasing content</a>.
+		<dd><a>Palpable content</a>.
+
+		<dt><a spec=html>Contexts in which this element can be used</a>:
+		<dd>Where <a>phrasing content</a> is expected.
+
+		<dt><a spec=html>Content model</a>:
+		<dd>See prose.
+
+		<dt><a spec=html>Content attributes</a>:
+		<dd><a spec=html>Global attributes</a>
+
+		<dt> <a spec=html>Accessibility considerations</a>:
+		<dd><a href="https://w3c.github.io/html-aria/#el-ruby">For authors</a>.
+		<dd><a href="https://w3c.github.io/html-aam/#el-ruby">For implementers</a>.
+
+		<dt><a spec=html>DOM interface</a>:
+		<dd>Uses {{HTMLElement}}.
+	</dl>
+
+	The <{ruby}> element <a spec=html>represents</a> one or more ranges of phrasing content
+	paired with associated ruby annotations.
+	Ruby annotations are short runs of annotation text presented alongside base text.
+	Although primarily used in East Asian typography as a guide for pronunciation,
+	they can also be used for other associated information.
+	Ruby is most commonly presented as interlinear annotations,
+	although other presentations are also used.
+	<span class=non-normative>A more complete introduction to ruby and its rendering
+	can be found in W3C’s [[QA-RUBY inline]] article
+	and in [[CSS-RUBY-1 inline]].</span>
+
+	<div class="example" id=basic-ruby-ex>
+		This example shows Japanese text,
+		with ruby markup used to annotate the ideographs with their pronunciation.
+
+		<pre><code highlight="html">
+			&lt;ruby>霧&lt;rt>きり&lt;/rt>&lt;/ruby>とも&lt;ruby>霞&lt;rt>かすみ&lt;/rt>&lt;/ruby>とも
+		</code></pre>
+
+		A typical rendering would be something akin to the following image:
+
+		<figure>
+			<img
+				src="images/composition.png"
+				width="280" height="75"
+				alt="A short piece of horizontal Japanese text,
+					with the reading of each kanji character
+					indicated by small hiragana characters above it.
+					Each group of hiragana is horizontally centered
+					relative to the kanji it annotates.">
+		</figure>
+	</div>
+
+	The content model of <{ruby}> elements consists of
+	one or more of the following [=ruby segment=] sequences:
+
+	<ol>
+		<li>
+			One or more <a>phrasing content</a> nodes
+			or <{rb}> elements
+			(or a combination)
+			<a spec=html>representing</a> the base-level content being annotated
+			(the <dfn local-lt="base range">ruby base range</dfn>).
+
+		<li>
+			One or more <{rt}> or <{rtc}> elements
+			(or a combination)
+			<a spec=html>representing</a> any annotations associated
+			with the preceding base content,
+			where each <{rtc}> element or sequence of <{rt}> elements
+			<a spec=html>represents</a> one independent level of annotation
+			(a <dfn local-lt="annotation range">ruby annotation range</dfn>).
+			Each [=annotation range=],
+			and [=annotation units=] within each range,
+			and can optionally be preceded by / followed by / interleaved with
+			individual <{rp}> elements.
+			(The optional <{rp}> element can be used
+			to add presentational content such as parentheses,
+			which can be useful when rendering annotations inline,
+			including as a fallback when ruby layout is not supported.)
+	</ol>
+
+	Note: For authoring convenience,
+	the internal ruby elements <{rb}>, <{rt}>, <{rtc}>, and <{rp}>
+	have <a class=allow-2119 href="#optional-tags">optional end tags</a>.
+
+	<div class="example" id=ruby-optional-tag-ex>
+		In Taiwan,
+		phonetic annotations for Chinese text are typically provided
+		using Zhuyin characters (also known as Bopomofo).
+		In mainland China,
+		phonetic annotations are typically provided
+		using Latin characters using Pinyin transcription.
+		In this example, both are provided:
+
+		<figure>
+			<img
+				src="images/zhuyin-mei.png"
+				width="80" height="84"
+				alt="“Beautiful” in Chinese,
+					with both pinyin and bopomofo annotations.">
+		</figure>
+
+		<pre><code highlight="html">
+			&lt;ruby lang=zh-TW>
+				&lt;rb>美&lt;/rb>&lt;rtc>&lt;rt>ㄇㄟˇ&lt;/rt>&lt;/rtc>&lt;rtc lang=zh-Latn>&lt;rt>měi&lt;/rt>&lt;/rtc>
+			&lt;/ruby>
+		</code></pre>
+
+		<p>Certain features of HTML ruby allow for simpler markup:
+
+		<ul>
+			<li>End tags can be omitted.
+
+			<li>
+				Text contained directly by a <{ruby}> element
+				implicitly represents a [=ruby base unit=]
+				(as if it were contained in an <{rb}> element).
+
+			<li>
+				Consecutive <{rt}> children of a <{ruby}> element
+				are implicitly grouped into a [=ruby annotation range=]
+				(as if they were contained in an <{rtc}> element).
+
+			<li>
+				Text contained directly by an <{rtc}> element
+				implicity represents a [=ruby annotation unit=].
+		</ul>
+
+		In effect,
+		the above example is equivalent
+		(in meaning, though not in the DOM it produces)
+		to the following:
+
+		<pre><code highlight="html">
+		&lt;ruby lang=zh-TW>
+			美&lt;rt>ㄇㄟˇ&lt;rtc lang=zh-Latn>měi
+		&lt;/ruby>
+		</code></pre>
+	</div>
+
+	Note: The [[CSS-RUBY-1 inline]] enables authors
+	to control the rendering of the HTML <{ruby}> element and its contents,
+	supporting a variety of layouts based on the same markup.
+
+	<div class="example" id=ruby-bopomofo-ex>
+		Three rendering styles are commonly used with Zhuyin (Bopomofo) characters.
+		(Annotations here are shown in blue for clarity,
+		though in actual uses there would be no color distinction.)
+
+		When the text is written vertically,
+		the phonetic annotations are rendered to the right,
+		along the base text:
+
+		<figure>
+			<img
+				src="images/zhuyin-vert.png"
+				width="87" height="132"
+				alt="A Chinese word composed of two characters, written vertically.
+					To the right of each character,
+					phonetic annotations appear,
+					written vertically.">
+		</figure>
+
+		In horizontal writing,
+		they are frequently also typeset to the right,
+		in this case sandwiched between individual base characters:
+
+		<figure>
+			<img src="images/zhuyin.png"
+				width="174" height="66"
+				alt="A Chinese word composed of two characters,
+					written horizontally.
+					To the right of each character,
+					phonetic annotations appear,
+					written vertically.">
+		</figure>
+
+		However, sometimes Zhuyin annotations are instead typeset
+		above horizontal base text:
+
+		<figure>
+			<img src="images/zhuyin-above.png"
+				width="125" height="92"
+				alt="A Chinese word composed of two characters,
+					written horizontally.
+					Above each character,
+					phonetic annotations appear,
+					written horizontally.">
+		</figure>
+
+		These differences are stylistic,
+		not semantic,
+		and therefore share the same markup:
+
+		<pre lang="zh-TW"><code highlight="html">
+		&lt;ruby lang=zh-TW>
+			&lt;rb>電&lt;rb>腦
+			&lt;rt>ㄉㄧㄢˋ&lt;rt>ㄋㄠˇ
+		&lt;/ruby>
+		</code></pre>
+	</div>
+
+
+<h4 id="ruby-pairing">
+Ruby Segmentation and Pairing</h4>
+
+	Within a ruby element,
+	content is parcelled into a series of ruby segments.
+	Ignoring <a spec=html>inter-element whitespace</a> and <{rp}> elements,
+	each <dfn>ruby segment</dfn> consists of:
+
+	<ul>
+		<li>
+			One [=ruby base range=]:
+			zero or more <dfn local-lt="base unit">ruby base units</dfn>,
+			each of which is either a DOM range containing a single child <{rb}> element
+			or a maximal DOM range of child content
+			that does not contain a child <{rb}> element.
+
+		<li>
+			Zero or more [=ruby annotation ranges=],
+			each a DOM range corresponding to either
+			a single <{rtc}> element
+			or to a maximal sequence of consecutive <{rt}> elements.
+			The [=ruby annotation range=] is further parcelled
+			into a sequence of <dfn local-lt="annotation unit">ruby annotation units</dfn>:
+			if it consists of a sequence of <{rt}> elements,
+			then each such element is an individual [=ruby annotation unit=];
+			if it consists of an <{rtc}> element,
+			then each of its child <{rt}> elements
+			and each maximal DOM range of non-<{rt}> child content
+			is a [=ruby annotation unit=].
+	</ul>
+
+	<div class="example" id=ruby-combine-ex>
+		Annotating text character by character is also typical in Chinese.
+		In this example,
+		each character is individually annotated in its own <{ruby}> element:
+
+		<code highlight="html" lang=zh>
+			&lt;ruby>千&lt;rt>qiān&lt;/ruby>&lt;ruby>里&lt;rt>lǐ&lt;/ruby>&lt;ruby>之&lt;rt>zhī&lt;/ruby>&lt;ruby>行&lt;rt>xíng&lt;/ruby>﹐&lt;ruby>始&lt;rt>shǐ&lt;/ruby>&lt;ruby>於&lt;rt>yú&lt;/ruby>&lt;ruby>足&lt;rt>zú&lt;/ruby>&lt;ruby>下&lt;rt>xià&lt;/ruby>。
+		</code>
+
+		<figure>
+			<img src="images/ruby-pinyin.png"
+			width="365" height="75"
+			alt="A Chinese phrase,
+				with each character phonetically annotated with a pinyin syllable">
+		</figure>
+
+		Multiple adjacent ruby segments can also be combined into the same <{ruby}> parent:
+
+		<code highlight="html" lang=zh>
+			&lt;ruby>千&lt;rt>qiān&lt;/rt>里&lt;rt>lǐ&lt;/rt>之&lt;rt>zhī&lt;/rt>行&lt;rt>xíng&lt;/ruby>﹐&lt;ruby>始&lt;rt>shǐ&lt;/rt>於&lt;rt>yú&lt;/rt>足&lt;rt>zú&lt;/rt>下&lt;rt>xià&lt;/ruby>。
+		</code>
+	</div>
+
+	The process of <dfn export>annotation pairing</dfn> associates [=ruby annotation units=]
+	with [=ruby base units=].
+	Within each [=ruby segment=],
+	each [=ruby base unit=] is paired with a [=ruby annotation unit=]
+	from each [=ruby annotation range=].
+	If a [=ruby annotation range=] consists of an <{rtc}> element
+	that contains no <{rt}> elements,
+	the single [=ruby annotation unit=] represented by its contents spans
+	(is paired with)
+	every [=ruby base unit=] in the [=ruby segment=].
+	Otherwise,
+	each [=ruby annotation unit=] in the [=ruby annotation range=] is paired,
+	in order,
+	with the corresponding [=ruby base unit=] in the segment’s [=ruby base range=].
+	<span class=w-nodev>
+		If there are not enough [=ruby base units=],
+		any remaining [=ruby annotation units=]
+		are assumed to be associated
+		with empty, hypothetical bases
+		inserted at the end of the [=ruby base range=].
+		If there are not enough [=ruby annotation units=]
+		in a [=ruby annotation range=],
+		the remaining [=ruby base units=]
+		are assumed to not have an annotation from that annotation level.
+	</span>
+
+	<div class="example" id="ruby-inlining">
+		In some contexts,
+		for example when the font size or line height are too small
+		for interlinear ruby to be readable,
+		it is desirable to inline the ruby annotation
+		such that it appears in parentheses after the text it annotates.
+		This also provides an appropriate fallback rendering
+		for user agents that do not support ruby layout.
+
+		However,
+		for compound words in Japanese particularly,
+		per-character inlined phonetics are awkward.
+		Instead,
+		the more natural rendering
+		is to place the annotation of an entire word
+		together after its base text.
+		For example,
+		when typeset inline,
+		<span lang="ja">京都市</span> (“Kyoto City”)
+		is expected to be rendered as
+		“<span lang="ja">京都市（きょうとし）</span>”,
+		not “<span lang="ja">京（きょう）都（と）市（し）</span>”.
+		This can be marked up using consecutive <{rb}> elements followed by consecutive <{rt}> elements:
+
+		<pre><code highlight="html">
+			&lt;ruby>&lt;rb>京&lt;rb>都&lt;rb>市&lt;rt>きょう&lt;rt>と&lt;rt>し&lt;ruby>
+		</code></pre>
+
+		If each base character was immediately followed by its annotation in the markup
+		(each base-annotation pair forming its own segment),
+		inlining would result in the undesirable and awkward
+		“<span lang="ja">京（きょう）都（と）市（し）</span>”.
+
+		Note that the markup above does not automatically provide the parentheses.
+		Parentheses can be inserted using CSS generated content
+		when intentionally typesetting inline,
+		however they would be missing
+		when a UA that does not support ruby
+		falls back to inline layout automatically from interlinear layout.
+		The <{rp}> element can be inserted
+		to provide the appropriate punctuation for when ruby is not supported:
+
+		<pre><code highlight="html">
+			&lt;ruby>&lt;rb>京&lt;rb>都&lt;rb>市&lt;rp>（&lt;rt>きょう&lt;rt>と&lt;rt>し&lt;rp>）&lt;ruby>
+		</code></pre>
+	</div>
+
+
+<h4 id="ruby-compound" class=non-normative>
+Markup Patterns for Multi-Character Ruby</h4>
+
+	<i>This section is non-normative</i>
+
+	In the simplest examples,
+	each [=ruby base unit=] contains only a single character,
+	a pattern often used for character-per-character phonetic annotations.
+	However, [=ruby base units=] are not restricted
+	to containing a single character.
+	In some cases it may be impossible
+	to map an annotation to the base characters individually,
+	and the annotation may need to jointly apply to a group of characters.
+
+	<div class="example" id=grou-ruby-ex>
+		For example,
+		the Japanese word for “today” is written with the characters 今日,
+		literally “this”+“day”.
+		But it's pronounced きょう (kyō),
+		which can't be broken down
+		into a “this” part
+		and a “day” part.
+
+		Therefore phonetic ruby indicating the reading of 今日
+		would be marked up as follows:
+
+		<pre><code highlight="html">
+			&lt;ruby>今日&lt;rt>きょう&lt;/ruby>
+		</code></pre>
+
+		<figure>
+		<img src="images/group.png"
+			width="87" height="71"
+			alt="“きょう” annotating “今日”">
+		</figure>
+
+	</div>
+
+	<div class="example" id=group-ruby-ex-2>
+		Ruby can also be used to describe the meaning of the base text,
+		rather than (or in addition to) the pronunciation.
+		In such cases,
+		both the base text and the annotation
+		are typically made of multiple characters,
+		with no meaningful subdivision possible.
+
+		Here a compound ideographic word
+		has an English-derived synonym
+		(written in katakana)
+		given as an annotation:
+
+		<pre><code highlight="html">
+			&lt;ruby>境界面&lt;rt>インターフェース&lt;/ruby>
+		</code></pre>
+
+		<figure>
+			<img src="images/ruby-interface.png"
+				width=170 height=70
+				alt="“インターフェース” annotating “境界面”">
+		</figure>
+
+		Here a compound ideographic word
+		has its English equivalent
+		directly provided as an annotation:
+
+		<pre><code highlight="html">
+			&lt;ruby lang="ja">編集者&lt;rt lang="en">editor&lt;/ruby>
+		</code></pre>
+
+		<figure>
+			<img src="images/ruby-editor.png"
+				width=130 height=70
+				alt="“editor” annotating “編集者”">
+		</figure>
+	</div>
+
+	In compound words,
+	although phonetic annotations might correspond to individual characters,
+	they are sometimes nonetheless typeset to share space above the base text,
+	rendering similar to annotations on multi-character bases.
+	However, there are subtle distinctions in their rendering
+	that require encoding the pairing relationships within the compound word
+	as well as its identification as a word.
+	Furthermore, sharing space in this way
+	versus rendering each pair in its own visual “column” is a stylistic preference:
+	the markup needs to provide enough information to allow for both renderings
+	(as well as correct inlining).
+
+	<div class="example" id="jukugo-ruby">
+		In this example,
+		we will use the Japanese noun “<span lang="ja">京都市</span>”,
+		meaning “Kyoto City”.
+		Its characters are pronounced “きょう”, “と”, and “し”, respectively.
+		(Distinct colors shown in these examples for clarity:
+		in actual usage there would be no color distinction.)
+
+		Such compound words could be rendered
+		with phonetic annotations placed over each character one by one.
+		In this style,
+		when an annotation is visually longer than the character it annotates,
+		surrounding text is pushed apart,
+		to make the correspondance between each character and its annotation clear.
+
+		<figure>
+			<img src="images/kyoto-s.png"
+				width="140" height="71"
+				alt="“Kyoto City” written in horizontal Japanese,
+					with phonetic annotations over each of the three characters.
+					The first and second character are pushed apart from each other,
+					as the annotation over the first one is too long to fit.">
+		</figure>
+
+		However, it is common to present such a word
+		with its annotations sharing space together
+		when they would otherwise create a separation in the base text,
+		to preserve the implication that it is a single word.
+		This style is called “jukugo ruby”
+		(“jukugo” meaning “compound word”).
+
+		<figure>
+			<img src="images/kyoto-m.png"
+				width="120" height="71"
+				alt="“Kyoto City” written in horizontal Japanese,
+					with phonetic annotations over the word.
+					The characters of each annotation are not alligned
+					to their corresponding base,
+					instead they are collectively aligned to the whole word.">
+		</figure>
+
+		Even when presenting as “jukugo ruby“ though,
+		the annotation are not always merged.
+		If a line break occurs in the middle of the word,
+		the annotations are expected to remain associated with the correct base character.
+
+		<figure>
+			<img src="images/kyoto-lb.png"
+				width="224" height="123"
+				alt="“Kyoto City” written in horizontal Japanese,
+					broken across two lines.
+					The phonetic annotations displayed over the word
+					are paired with each base character,
+					and line break together.">
+		</figure>
+
+		Whether—and how much—the annotations are merged can vary,
+		and can depend on the font size,
+		as “jukugo ruby“ only merges annotations
+		when at least one of them is longer than its base.
+
+		<figure>
+			<img src="images/kyoto-33.png"
+				width="119" height="64"
+				alt="“Kyoto City” written in horizontal Japanese,
+					with phonetic annotations over each of the three characters.
+					At 33% of the base font size,
+					annotations are small enough to fit their base character,
+					and are aligned to it.">
+			<figcaption>Ruby sized at 33%</figcaption>
+		</figure>
+
+		<figure>
+			<img src="images/kyoto-50.png"
+				width="120" height="71"
+				alt="“Kyoto City” written in horizontal Japanese,
+					with phonetic annotations over each of the three characters.
+					At 50% of the base font size,
+					the first annotation doesn't fit over its base character,
+					so it merges with the second one.
+					The third remains separate.">
+			<figcaption>Ruby sized at 50%</figcaption>
+		</figure>
+
+		<figure>
+			<img src="images/kyoto-60.png"
+				width="120" height="75"
+				alt="“Kyoto City” written in horizontal Japanese,
+					with phonetic annotations over each of the three characters.
+					At 60% of the base font size,
+					the first annotation doesn't fit over the first character,
+					nor do the first and second together fit over the first two characters.
+					All three are merged and aligned together.">
+		<figcaption>Ruby sized at 60%</figcaption>
+		</figure>
+
+		Since choosing to render as “jukugo ruby” or not is a stylistic choice,
+		the same markup needs to enable both--
+		and it needs to encode both the pairing information within the word
+		as well as the grouping of these pairs as a single word:
+
+		<pre><code highlight="html">
+			&lt;ruby>&lt;rb>京&lt;rb>都&lt;rb>市&lt;rt>きょう&lt;rt>と&lt;rt>し&lt;ruby>
+		</code></pre>
+
+		Correct “jukugo ruby” is not be possible
+		if all the base characters are part of a single <{rb}> element
+		and all the annotation text in a single <{rt}> element,
+		as their individual pairings would be lost.
+	</div>
+
+	Note: For more details on Japanese and Chinese ruby usage and rendering,
+	see [[JLREQ inline]]
+	(particularly
+	[[JLREQ#ruby_and_emphasis_dots|Ruby and Emphasis Dots]]
+	and [[JLREQ#positioning_of_jukugoruby|Appendix F]]),
+	[[SIMPLE-RUBY inline]],
+	and the section on [[CLREQ#interlinear_annotations|Interlinear annotations]] of [[CLREQ inline]].
+
+
+<h3 id=the-rb-element>
+The <dfn element><code>rb</code></dfn> element</h3>
+
+	<dl class="def">
+		<dt><a spec=html>Categories</a>:
+		<dd>None.
+
+		<dt><a spec=html>Contexts in which this element can be used</a>:
+		<dd>As a child of a <{ruby}> element.
+
+		<dt><a spec=html>Content model</a>:
+		<dd><a>Phrasing content</a>.
+
+		<dt><a spec=html>Content attributes</a>:
+		<dd><a spec=html>Global attributes</a>
+
+		<dt><a spec=html>DOM interface</a>:
+		<dd>Uses {{HTMLElement}}.
+	</dl>
+
+	An <{rb}> (“ruby base”) element
+	<span class=w-nodev>that is the child of a <{ruby}> element</span>
+	<a spec=html>represents</a> a [=ruby base unit=]:
+	a unitary component of base-level text
+	annotated by any ruby annotation(s) to which it is paired.
+
+	<p class=w-nodev>
+	An <{rb}> element that is not a child of a <{ruby}> element
+	<a spec=html>represents</a> the same thing as its children.
+
+	<div class="example" id=rb-ex>
+		When no <{rb}> element is used, the base is implied:
+
+		<pre><code highlight="html">
+			&lt;ruby>base&lt;rt>annotation&lt;/ruby>
+		</code></pre>
+
+		The element can also be made explicit:
+
+		<pre><code highlight="html">
+			&lt;ruby>&lt;rb>base&lt;rt>annotation&lt;/ruby>
+		</code></pre>
+
+		Both markup patterns have identical semantics.
+		Explicit <{rb}> elements can be useful for styling,
+		and are necessary
+		when marking up consecutive bases to pair with consecutive annotations
+		(for example,
+		when representing a compound word;
+		see <span lang="ja">京都市</span> <a href="#ruby-inlining">inlining</a>
+		and <a href="#jukugo-ruby">jukugo ruby</a> examples above).
+	</div>
+
+<h3 id=the-rt-element>
+The <dfn element><code>rt</code></dfn> element</h3>
+
+	<dl class="def">
+		<dt><a spec=html>Categories</a>:
+		<dd>None.
+
+		<dt><a spec=html>Contexts in which this element can be used</a>:
+		<dd>
+			As a child of a <{ruby}>
+			or of an <{rtc}> element.
+
+		<dt><a spec=html>Content model</a>:
+		<dd><a>Phrasing content</a>.
+
+		<dt><a spec=html>Content attributes</a>:
+		<dd><a spec=html>Global attributes</a>
+
+		<dt><a spec=html>Accessibility considerations</a>:
+		<dd><a href="https://w3c.github.io/html-aria/#el-rt">For authors</a>.
+		<dd><a href="https://w3c.github.io/html-aam/#el-rt">For implementers</a>.
+
+		<dt><a spec=html>DOM interface</a>:
+		<dd>Uses {{HTMLElement}}.
+	</dl>
+
+	An <{rt}> (“ruby text”) element
+	<span class=w-nodev>that is the child of a <{ruby}> element
+	or of an <{rtc}> element
+	that is itself the child of a <{ruby}> element</span>
+	<a spec=html>represents</a> a [=ruby annotation unit=]:
+	a unitary annotation of the [=ruby base unit=] to which it is paired.
+
+	<p class=w-nodev>
+	An <{rt}> element that is not a child of a <{ruby}> element
+	nor of an <{rtc}> element
+	that is itself the child of a <code>ruby</code> element
+	<a spec=html>represents</a> the same thing as its children.
+
+
+<h3 id=the-rtc-element>
+The <dfn element><code>rtc</code></dfn> element</h3>
+
+	<dl class="def">
+		<dt><a spec=html>Categories</a>:
+		<dd>None.
+
+		<dt><a spec=html>Contexts in which this element can be used</a>:
+		<dd>
+			As a child of a <{ruby}> element.
+
+		<dt><a spec=html>Content model</a>:
+		<dd>
+			Either [=phrasing content=] or a sequence of <{rt}> elements;
+			optionally preceded, interleaved with, or followed by individual <{rp}> elements.
+
+		<dt><a spec=html>Content attributes</a>:
+		<dd><a spec=html>Global attributes</a>
+
+		<dt><a spec=html>DOM interface</a>:
+		<dd>Uses {{HTMLElement}}.
+	</dl>
+
+	An <{rtc}> (“ruby text container”) element
+	<span class=w-nodev>that is the child of a <{ruby}> element</span>
+	<a spec=html>represents</a> one level of annotation
+	(a [=ruby annotation range=])
+	for the preceding sequence of [=ruby base units=]
+	(its <span>ruby base range</span>).
+
+	Note: In simple cases,
+	<{rtc}> elements can be omitted
+	as a [=ruby annotation range=] is implied
+	by consecutive <{rt}> elements.
+	However, they are necessary
+	in order to associate multiple levels of annotation
+	with a single [=ruby base range=],
+	for example to provide both phonetic and semantic information,
+	phonetic information in different scripts,
+	or semantic information in different languages.
+
+	<div class="example" id=ruby-rtc-ex>
+		In this example,
+		the Japanese compound word 上手 ("skillful")
+		has phonetic annotations in both kana and romaji phonetics
+		while at the same time maintaining the pairing to bases
+		and annotation grouping information.
+
+		<figure>
+			<img src="images/mono-or-jukugo-double.png"
+				width="72" height="81"
+				alt="上手 (skill) annotated in both kana and romaji">
+		</figure>
+
+		This enabled by the following  markup:
+
+		<pre><code highlight="html">
+			&lt;ruby>
+				&lt;rb>上&lt;rb>手
+				&lt;rt>じよう&lt;rt>ず
+				&lt;rtc>&lt;rt>jou&lt;rt>zu
+			&lt;/ruby>
+		</code></pre>
+	</div>
+
+	Note: Text that is a direct child of the <{rtc}> element
+	implicitly represents a [=ruby annotation unit=]
+	as if it were contained in an <{rt}> element,
+	except that this annotation spans all the bases in the segment.
+
+	<div class="example" id=rtc-ex>
+		In this example, the Chinese word for San Francisco
+		(<span lang="zh-Hans">旧金山</span>, i.e. “old gold mountain”)
+		is annotated both using pinyin to give the pronunciation,
+		and with the original English.
+
+		<figure>
+			<img src="images/group-double.png"
+				width="113" height="84"
+				alt="San Francisco in Chinese,
+					with both pinyin and the original English as annotations.">
+		</figure>
+
+		Which is marked up as follows:
+
+		<pre><code highlight="html">
+			&lt;ruby>
+				&lt;rb>旧&lt;rb>金&lt;rb>山
+				&lt;rt>jiù&lt;rt>jīn&lt;rt>shān
+				&lt;rtc>San Francisco
+			&lt;/ruby>
+		</code></pre>
+
+		Here, a single base run of three base characters
+		is annotated with three pinyin ruby text segments
+		in a first (implicit) container,
+		and an <{rtc}> element is introduced
+		in order to provide a second single ruby annotation
+		being the city's English name.
+	</div>
+
+	<p class=w-nodev>
+	An <{rtc}> element that is not a child of a <{ruby}> element
+	<a spec=html>represents</a> the same thing as its children.
+
+
+<h3 id=the-rp-element>
+The <dfn element><code>rp</code></dfn> element</h3>
+
+	<dl class="def">
+		<dt><a spec=html>Categories</a>:
+		<dd>None.
+
+		<dt><a spec=html>Contexts in which this element can be used</a>:
+		<dd>
+			As a child of a <{ruby}> or <{rtc}> element,
+			either immediately before or immediately after an <{rtc}> element or a [=ruby annotation unit=].
+
+		<dt><a spec=html>Content model</a>:
+		<dd><a spec=html>Text</a>.
+
+		<dt><a spec=html>Content attributes</a>:
+		<dd><a spec=html>Global attributes</a>
+
+		<dt><a spec=html>Accessibility considerations</a>:
+		<dd><a href="https://w3c.github.io/html-aria/#el-rp">For authors</a>.</dd>
+		<dd><a href="https://w3c.github.io/html-aam/#el-rp">For implementers</a>.</dd>
+
+		<dt><a spec=html>DOM interface</a>:
+		<dd>Uses {{HTMLElement}}.
+	</dl>
+
+	The <{rp}> (“ruby parenthetical”) element <a spec=html>represents</a> nothing.
+	It is used to provide presentational content
+	(such as parentheses)
+	around [=ruby annotation units=],
+	to be shown when presenting ruby content inline,
+	without using ruby-specific layout.
+	This may happen when using a user agent that does not support ruby layout,
+	or for stylistic reasons.
+	In typical ruby layout,
+	it is not displayed.
+
+	<div class="example" id=rp-ex>
+		In this example,
+		each ideograph in the text <span lang="ja">&#28450;&#23383;</span>
+		is annotated with its phonetic reading.
+		Furthermore, it uses <{rp}> so that in legacy user agents the readings are in parentheses:
+
+		<pre lang="ja"><code highlight="html">
+			...&lt;ruby>&#28450;&lt;rb>&#23383;&lt;rp>（&lt;rt>&#12363;&#12435;&lt;rt>&#12376;&lt;rp>）&lt;/ruby>...
+		</code></pre>
+
+		In user agents that support ruby layout,
+		the rendering ommit the parentheses,
+		but in user agents that do not, the rendering would be:
+
+		<pre lang="ja">...&#28450;&#23383;（&#12363;&#12435;&#12376;）...</pre>
+	</div>
+
+	<div class="example" id=contrieved-rp-ex>
+		Here a contrived example
+		showing some symbols with names given in English and French
+		using double-sided annotations,
+		with <{rp}> elements as well:
+
+		<pre><code highlight="html">
+			&lt;ruby>
+				&lt;rb>&#x2665;&lt;rp>: &lt;rt>Heart&lt;rp>, &lt;rtc lang=fr>C&oelig;ur&lt;/rtc>&lt;rp>.&lt;/rp>
+				&lt;rb>&#x2618;&lt;rp>: &lt;rt>Shamrock&lt;rp>, &lt;rtc lang=fr>Tr&egrave;fle&lt;/rtc>&lt;rp>.&lt;/rp>
+				&lt;rb>&#x2736;&lt;rp>: &lt;rt>Star&lt;rp>, &lt;rtc lang=fr>&Eacute;toile&lt;/rtc>&lt;rp>.&lt;/rp>
+			&lt;/ruby>
+		</code></pre>
+
+		This would make the example render as follows in non-ruby-capable user agents:
+
+		<pre>&#x2665;: Heart, <span lang="fr">C&oelig;ur</span>. &#x2618;: Shamrock, <span
+		lang="fr">Tr&egrave;fle</span>. &#x2736;: Star, <span lang="fr">&Eacute;toile</span>.</pre>
+	</div>
+
+
+<h2 id=optional-tags class=non-normative>
+Optional Tags</h2>
+
+	<div class=advisement>
+		This section extends the [[HTML/syntax#optional-tags]] section of the [[HTML inline]],
+		replacing the paragraphs of that section about <{rt}> and <{rp}>,
+		and adding two more for <{rb}> and <{rtc}>.
+	</div>
+
+	An <{rb}> element's <a spec=html>end tag</a> may be omitted
+	if the <{rb}> element is immediately followed by
+	an <{rb}>, <{rt}>, <{rtc}> or <{rp}> element,
+	or if there is no more content in the parent element.
+
+	An <{rt}> element's <a spec=html>end tag</a> may be omitted
+	if the <{rt}> element is immediately followed by
+	an <{rb}>, <{rt}>, <{rtc}> or <{rp}> element,
+	or if there is no more content in the parent element.
+
+	An <{rtc}> element's <a spec=html>end tag</a> may be omitted
+	if the <{rtc}> element is immediately followed by
+	an <{rb}> or <{rtc}> element,
+	or if there is no more content in the parent element.
+
+	An <{rp}> element's <a spec=html>end tag</a> may be omitted
+	if the <{rp}> element is immediately followed by
+	an <{rb}>, <{rt}>, <{rtc}> or <{rp}> element,
+	or if there is no more content in the parent element.
+
+
+<h2 id=rendering>
+Rendering</h3>
+
+	<div class=advisement>
+		This section completes the [[html/rendering#non-replaced-elements]] section of the [[HTML inline]],
+		and in partcicular its [[HTML/rendering#phrasing-content-3]] subsection,
+		with the exception of
+		the <code highlight=css>rp { display: none; }</code> rule
+		which belongs in the [[html/rendering#hidden-elements]] subsection.
+	</div>
+
+	The following rules are added
+	to the <a href="https://html.spec.whatwg.org/multipage/rendering.html#the-css-user-agent-style-sheet-and-presentational-hints">HTML user agent style sheet</a>:
+
+	<pre><code highlight=css>
+		ruby { display: ruby; }
+		rb { display: ruby-base; white-space: nowrap; }
+		rbc { display: ruby-base-container; } /* For compatibility with XHTML-inspired markup */
+		rp { display: none; }
+		rt { display: ruby-text; }
+		rtc { display: ruby-text-container; }
+		ruby, rb, rbc, rt, rtc { unicode-bidi: isolate; }
+		rtc, rt {
+			font-variant-east-asian: ruby;
+			text-emphasis: none;
+			white-space: nowrap;
+			line-height: 1;
+		}
+		rtc, :not(rtc) > rt {
+			font-size: 50%;
+		}
+		rtc:lang(zh-TW), :not(rtc) > rt:lang(zh-TW) {
+				font-size: 30%;
+			}
+	</code></pre>
+
+
+<h2 id=conforming-features>
+Conforming Features </h2>
+
+	<div class=advisement>
+		Even though <{rb}> and <{rtc}> are included
+		in the list of “entirely obsolete” elements
+		which “must not be used by authors”
+		in [[HTML/obsolete#non-conforming-features]],
+		this specification revokes this obsolete status,
+		and deems these two elements fully conforming.
+	</div>
+
+
+<h2 class="no-num non-normative" id=html-tweaks>
+Appendix A:
+Other Tweaks to HTML</h2>
+
+	<i>This section is non-normative</i>
+
+	In complement to the normative statements made in the main body of this specification,
+	this section details additional editorial or minor changes
+	that would be desirable to make to the [[HTML inline]]
+	in order to make it fully align it with what is covered here.
+
+	<ul>
+		<li>
+			Removing the following 3 paragraphs in [[html/rendering#phrasing-content-3]]:
+
+			<blockquote class="non-normative">
+				For the purposes of the CSS ruby model,
+				runs of children of <{ruby}> elements
+				that are not <{rt}> or <{rp}> elements
+				are expected to be wrapped in anonymous boxes
+				whose 'display' property has the value ''ruby-base''.
+
+				When a particular part of a ruby has more than one annotation,
+				the annotations <span class=allow-2119>should</span> be distributed
+				on both sides of the base text
+				so as to minimize the stacking of ruby annotations on one side.
+
+				Note: When it becomes possible to do so,
+				the preceding requirement will be updated to be expressed in terms of CSS ruby.
+				(Currently, CSS ruby does not handle nested <{ruby}> elements
+				or multiple sequential <{rt}> elements,
+				which is how this semantic is expressed.)
+			</blockquote>
+
+			Issue: Should they be updated instead of removed?
+			The Note is wrong, due to the different ruby model,
+			but the preceding two paragraphs could be kept.
+			The first one would need to mention <{rtc}> alongside with <{rt}> and <{rp}>
+			but is otherwise correct,
+			although it isn't clear why the HTML spec is concerned with
+			the generation of anonymous boxes
+			for the purposes of CSS.
+			The second paragraph also remains correct
+			(and is realized by default thanks to <span class=non-normative>''ruby-position/alternate''</span>
+			being the initial value of <span class=non-normative>'ruby-position'</span>,
+			but this “should” requirement
+			is the only one HTML has about the rendering of ruby,
+			and feels unnecessary.
+
+		<li>
+			Replacing the <q><{ruby}>, <{rt}>, <{rp}></q> row of the table in [[HTML/text-level-semantics#usage-summary]],
+			with the following:
+
+			<table class="data complex">
+				<thead>
+					<tr>
+						<th>Element
+						<th>Purpose
+						<th>Example
+				<tbody>
+					<tr>
+						<td><{ruby}>, <{rb}>, <{rt}>, <{rtc}>, <{rp}>
+						<td>Ruby annotations
+						<td><code highlight="html">
+						&lt;ruby<wbr>>&lt;rb<wbr>>旧&lt;rb<wbr>>金&lt;rb<wbr>>山&lt;rp<wbr>> (&lt;rt<wbr>>jiù&lt;rt<wbr>>jīn&lt;rt<wbr>>shān&lt;rtc<wbr>>&lt;rp<wbr>>: &lt;/rp<wbr>>San Francisco&lt;/rtc<wbr>>&lt;rp<wbr>>)&lt;/ruby<wbr>>
+						</code>
+			</table>
+
+		<li>
+			Updating the table at [[html/indices#elements-3]]
+			to add rows for  <{rb}> and <{rtc}>,
+			and to replace the rows for <{rp}>, <{rt}>, and <{ruby}>,
+			as follows:
+
+			<table class="data complex">
+				<thead>
+					<tr>
+						<th>Element
+						<th>Description
+						<th>Categories
+						<th>Parents†
+						<th>Children
+						<th>Attributes
+						<th>Interface
+				<tbody>
+					<tr>
+						<th><{rb}>
+						<td>Ruby base
+						<td>none
+						<td><{ruby}>
+						<td>[=phrasing content|phrasing=]
+						<td><a spec=html lt="Global attributes">globals</a>
+						<td>{{HTMLElement}}
+					<tr>
+						<th><{rp}>
+						<td>Parenthesis for ruby annotation text
+						<td>none
+						<td><{ruby}>; <{rtc}>
+						<td><a spec=html>text</a>
+						<td><a spec=html lt="Global attributes">globals</a>
+						<td>{{HTMLElement}}
+					<tr>
+						<th><{rt}>
+						<td>Ruby annotation text
+						<td>none
+						<td>
+							<{ruby}>;
+							<{rtc}>
+						<td>[=phrasing content|phrasing=]
+						<td><a spec=html lt="Global attributes">globals</a>
+						<td>{{HTMLElement}}
+					<tr>
+						<th><{rtc}>
+						<td>Ruby annotation container
+						<td>none
+						<td> <{ruby}>
+						<td>
+							[=phrasing content|phrasing=];
+							<{rt}>;
+							<{rp}>
+						<td><a spec=html lt="Global attributes">globals</a>
+						<td>{{HTMLElement}}
+					<tr>
+						<th><{ruby}>
+						<td>Ruby annotation(s)
+						<td>
+							[=flow content|flow=];
+							[=phrasing content|phrasing=];
+							[=palpable content|palpable=]
+						<td>[=phrasing content|phrasing=]
+						<td>
+							[=phrasing content|phrasing=];
+							<{rb}>;
+							<{rt}>;
+							<{rtc}>;
+							<{rp}>*
+						<td><a spec=html lt="Global attributes">globals</a>
+						<td>{{HTMLElement}}
+			</table>
+
+		<li>
+			Updating the table at [[HTML/indices#element-interfaces]]
+			to add the following two rows:
+
+			<table class="data complex">
+				<thead>
+					<tr>
+						<th>Element(s)
+						<th>Interface(s)
+				<tbody>
+					<tr>
+						<td><{rb}>
+						<td>{{HTMLElement}}
+					<tr>
+						<td><{rtc}>
+						<td>{{HTMLElement}}
+			</table>
+	</ol>
+
+
+<h2 class=no-num id=diff-html>
+Appendix B:
+Comparison With The HTML Standard</h2>
+
+	<i>This section is non-normative</i>
+
+	Note: This comparison is based on the state of the [[HTML inline]]
+	at the time of writing this document.
+	If the [[HTML inline]] adopts some or all of the changes described here,
+	or otherwise evolves its handling of ruby,
+	this section is expected to be updated accordingly,
+	but there could be a delay before this happens.
+
+	While this specification reintroduces the previously obsoleted <{rb}> and <{rtc}> elements,
+	it makes no changes to [[HTML/parsing#parsing]]:
+	these elements are handled there already,
+	including their optional end tags.
+
+	There are, however, differences in how the various ruby related elements can be used,
+	the two essential ones being:
+
+	<ol>
+		<li>
+			In addition to the ability to interleave <{rt}> elements between anonymous ruby bases,
+			the previously obsoleted <{rb}> element is restored,
+			enabling the so-called <dfn>tabular markup</dfn> pattern
+			where several consecutive bases are followed
+			their respective annotations:
+
+			<pre><code highlight=html>
+				&lt;ruby>
+					&lt;rb>…&lt;rb>…&lt;rb>…
+					&lt;rt>…&lt;rt>…&lt;rt>…
+				&lt;/ruby>
+			</code></pre>
+
+			Without <{rb}> and [=tabular markup=],
+			in order to have the individual base/annotation pairing
+			necessary to correct handle
+			the various possible presentations of ruby on <a href=#jukugo-ruby>compound words</a>,
+			interleaving the <{rt}> elements between segments of base text would be required.
+			However, such this markup would not enable correct <a href=#ruby-inlining>ruby inlining</a>.
+
+			Moreover, interleaved markup is also a source of issues
+			with operations like
+			copy&amp;paste,
+			searching through the document,
+			or speech synthesis,
+			due to the base text being interrupted by the annotations.
+
+		<li>
+			This document defines a different model for handling multiple levels of annotations:
+			<ul>
+				<li>
+					The ability to associate multiple consecutive <{rt}> elements with the preceding base text segment
+					without using explicit annotation containers
+					is dropped.
+					This pattern does not have interoperable implementations with the semantics intended by the [[HTML inline]],
+					and is in tension with [=tabular markup=].
+
+					Instead, the previously obsoleted <{rtc}> element is restored,
+					providing the ability to indicate multiple annotation ranges over the same base(s),
+					using either interleaved or [=tabular markup=] patterns.
+
+				<li>
+					While the ability to nest ruby is retained,
+					specialized semantics for nested ruby are dropped.
+					That markup pattern is strictly less expressive
+					than using <{rtc}> for additional levels of annotations,
+					since it does not allow pairing individual annotations in the outer ruby
+					with individual bases in the inner ruby.
+					The <a href="#ruby-rtc-ex">example about “上手”</a>
+					can therefore be realized using <{rtc}>
+					but could not be with nested ruby.
+
+					Nested ruby as defined in the [[HTML inline]] also does not have interoperable implementations
+					beyond the ordinary semantics of nesting,
+					and is at odds with the layout model of [[CSS-RUBY-1 inline]].
+			</ul>
+	</ol>
+
+	A [[UNIFIED-RUBY inline|2011 blog post by fantasai]] explains in more details
+	these requirements and resulting design choices.
+
+
+<h2 class=no-num id=ack>
+Appendix C:
+Acknowledgements</h2>
+
+	<i>This section is non-normative</i>
+
+	This document derives from several sources (which to some degree also derive from each other).
+	We would like to thank the contributors to all these sources, notably:
+	* The many <a href="https://html.spec.whatwg.org/multipage/acknowledgements.html#ipr">editors and contributors</a> of the [[HTML inline]]
+	* Robin Berjon, the editor of previous version of <a href="https://www.w3.org/TR/2014/NOTE-html-ruby-extensions-20140204/">W3C HTML Ruby Markup Extensions</a>
+	* The editors and <a href="https://www.w3.org/TR/ruby/#ack">contributors</a> of [[RUBY inline]]
+
+	In addition,
+	none of this would be possible without the expert input,
+	many years of research,
+	and extensive documentation
+	by the participants of the <a href="https://www.w3.org/groups/wg/i18n-core/">Internationalization Working Group</a>,
+	notably:
+	* The many contributors to [[JLREQ inline]]
+	* The many contributors to [[CLREQ inline]]
+	* Richard Ishida
+	* Elika J. Etemad (aka. fantasai)
+
+
+<h2 class=no-num id=changes>
+Appendix D:
+Changes</h2>
+
+	<i>This section is non-normative</i>
+
+
+<h3 id=changes-since-2014>
+Changes since the 04 February 2014 <cite>W3C HTML Ruby Markup Extensions</cite> Working Group Note
+</h3>
+
+	The markup model described here
+	is substantially the same as the one established by the <a href="https://www.w3.org/TR/2014/NOTE-html-ruby-extensions-20140204/">2014 Working Group Note</a>,
+	though the text describing it,
+	as well as the examples,
+	has been extensively reworked.
+
+	The <a href="https://www.w3.org/TR/2014/NOTE-html-ruby-extensions-20140204/#parsing-changes">parsing changes</a> proposed in the 2014 Working Group Note
+	are no longer discussed here
+	as they have since been adopted by the [[HTML inline]].
