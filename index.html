@@ -8,7 +8,7 @@
   <meta content="Bikeshed version 82ce88815, updated Thu Sep 7 16:33:55 2023 -0700" name="generator">
   <link href="https://w3c.github.io/html-ruby/" rel="canonical">
   <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
-  <meta content="ac98aee33aac8f1e35bd6c10ebac85814db0b618" name="document-revision">
+  <meta content="c7a00036c7827926fc1dd21f35aed588ea7d1f35" name="document-revision">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
@@ -855,13 +855,13 @@ Comparison With The HTML Standard</a> summarizes the main differences,
     <li> One or more <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#phrasing-content-2" id="ref-for-phrasing-content-2②">phrasing content</a> nodes
 			or <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb">rb</a></code> elements
 			(or a combination) <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#represents" id="ref-for-represents①">representing</a> the base-level content being annotated
-			(the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="ruby-base-range">ruby base range</dfn>). 
+			(the <dfn class="dfn-paneled" data-dfn-type="dfn" data-local-lt="base range" data-noexport id="ruby-base-range">ruby base range</dfn>). 
     <li> One or more <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt">rt</a></code> or <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc">rtc</a></code> elements
 			(or a combination) <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#represents" id="ref-for-represents②">representing</a> any annotations associated
 			with the preceding base content,
 			where each <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc①">rtc</a></code> element or sequence of <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt①">rt</a></code> elements <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#represents" id="ref-for-represents③">represents</a> one independent level of annotation
-			(a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="ruby-annotation-range">ruby annotation range</dfn>).
-			Each <a data-link-type="dfn">annotation range</a>,
+			(a <dfn class="dfn-paneled" data-dfn-type="dfn" data-local-lt="annotation range" data-noexport id="ruby-annotation-range">ruby annotation range</dfn>).
+			Each <a data-link-type="dfn" href="#ruby-annotation-range" id="ref-for-ruby-annotation-range">annotation range</a>,
 			and <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units">annotation units</a> within each range,
 			and can optionally be preceded by / followed by / interleaved with
 			individual <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp">rp</a></code> elements.
@@ -892,7 +892,7 @@ Comparison With The HTML Standard</a> summarizes the main differences,
      <li> Text contained directly by a <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby②">ruby</a></code> element
 				implicitly represents a <a data-link-type="dfn" href="#ruby-base-units" id="ref-for-ruby-base-units">ruby base unit</a> (as if it were contained in an <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb②">rb</a></code> element). 
      <li> Consecutive <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt③">rt</a></code> children of a <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby③">ruby</a></code> element
-				are implicitly grouped into a <a data-link-type="dfn" href="#ruby-annotation-range" id="ref-for-ruby-annotation-range">ruby annotation range</a> (as if they were contained in an <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc③">rtc</a></code> element). 
+				are implicitly grouped into a <a data-link-type="dfn" href="#ruby-annotation-range" id="ref-for-ruby-annotation-range①">ruby annotation range</a> (as if they were contained in an <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc③">rtc</a></code> element). 
      <li> Text contained directly by an <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc④">rtc</a></code> element
 				implicity represents a <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units①">ruby annotation unit</a>. 
     </ul>
@@ -954,11 +954,11 @@ Comparison With The HTML Standard</a> summarizes the main differences,
 			each of which is either a DOM range containing a single child <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb③">rb</a></code> element
 			or a maximal DOM range of child content
 			that does not contain a child <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb④">rb</a></code> element. 
-    <li> Zero or more <a data-link-type="dfn" href="#ruby-annotation-range" id="ref-for-ruby-annotation-range①">ruby annotation ranges</a>,
+    <li> Zero or more <a data-link-type="dfn" href="#ruby-annotation-range" id="ref-for-ruby-annotation-range②">ruby annotation ranges</a>,
 			each a DOM range corresponding to either
 			a single <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc⑤">rtc</a></code> element
 			or to a maximal sequence of consecutive <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt④">rt</a></code> elements.
-			The <a data-link-type="dfn" href="#ruby-annotation-range" id="ref-for-ruby-annotation-range②">ruby annotation range</a> is further parcelled
+			The <a data-link-type="dfn" href="#ruby-annotation-range" id="ref-for-ruby-annotation-range③">ruby annotation range</a> is further parcelled
 			into a sequence of <dfn class="dfn-paneled" data-dfn-type="dfn" data-local-lt="annotation unit" data-noexport id="ruby-annotation-units">ruby annotation units</dfn>:
 			if it consists of a sequence of <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt⑤">rt</a></code> elements,
 			then each such element is an individual <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units②">ruby annotation unit</a>;
@@ -979,20 +979,20 @@ Comparison With The HTML Standard</a> summarizes the main differences,
    </div>
    <p>The process of <dfn data-dfn-type="dfn" data-export id="annotation-pairing">annotation pairing<a class="self-link" href="#annotation-pairing"></a></dfn> associates <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units④">ruby annotation units</a> with <a data-link-type="dfn" href="#ruby-base-units" id="ref-for-ruby-base-units①">ruby base units</a>.
 	Within each <a data-link-type="dfn" href="#ruby-segment" id="ref-for-ruby-segment①">ruby segment</a>,
-	each <a data-link-type="dfn" href="#ruby-base-units" id="ref-for-ruby-base-units②">ruby base unit</a> is paired with a <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units⑤">ruby annotation unit</a> from each <a data-link-type="dfn" href="#ruby-annotation-range" id="ref-for-ruby-annotation-range③">ruby annotation range</a>.
-	If a <a data-link-type="dfn" href="#ruby-annotation-range" id="ref-for-ruby-annotation-range④">ruby annotation range</a> consists of an <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc⑦">rtc</a></code> element
+	each <a data-link-type="dfn" href="#ruby-base-units" id="ref-for-ruby-base-units②">ruby base unit</a> is paired with a <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units⑤">ruby annotation unit</a> from each <a data-link-type="dfn" href="#ruby-annotation-range" id="ref-for-ruby-annotation-range④">ruby annotation range</a>.
+	If a <a data-link-type="dfn" href="#ruby-annotation-range" id="ref-for-ruby-annotation-range⑤">ruby annotation range</a> consists of an <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc⑦">rtc</a></code> element
 	that contains no <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt⑧">rt</a></code> elements,
 	the single <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units⑥">ruby annotation unit</a> represented by its contents spans
 	(is paired with)
 	every <a data-link-type="dfn" href="#ruby-base-units" id="ref-for-ruby-base-units③">ruby base unit</a> in the <a data-link-type="dfn" href="#ruby-segment" id="ref-for-ruby-segment②">ruby segment</a>.
 	Otherwise,
-	each <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units⑦">ruby annotation unit</a> in the <a data-link-type="dfn" href="#ruby-annotation-range" id="ref-for-ruby-annotation-range⑤">ruby annotation range</a> is paired,
+	each <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units⑦">ruby annotation unit</a> in the <a data-link-type="dfn" href="#ruby-annotation-range" id="ref-for-ruby-annotation-range⑥">ruby annotation range</a> is paired,
 	in order,
 	with the corresponding <a data-link-type="dfn" href="#ruby-base-units" id="ref-for-ruby-base-units④">ruby base unit</a> in the segment’s <a data-link-type="dfn" href="#ruby-base-range" id="ref-for-ruby-base-range①">ruby base range</a>. <span class="w-nodev"> If there are not enough <a data-link-type="dfn" href="#ruby-base-units" id="ref-for-ruby-base-units⑤">ruby base units</a>,
 		any remaining <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units⑧">ruby annotation units</a> are assumed to be associated
 		with empty, hypothetical bases
 		inserted at the end of the <a data-link-type="dfn" href="#ruby-base-range" id="ref-for-ruby-base-range②">ruby base range</a>.
-		If there are not enough <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units⑨">ruby annotation units</a> in a <a data-link-type="dfn" href="#ruby-annotation-range" id="ref-for-ruby-annotation-range⑥">ruby annotation range</a>,
+		If there are not enough <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units⑨">ruby annotation units</a> in a <a data-link-type="dfn" href="#ruby-annotation-range" id="ref-for-ruby-annotation-range⑦">ruby annotation range</a>,
 		the remaining <a data-link-type="dfn" href="#ruby-base-units" id="ref-for-ruby-base-units⑥">ruby base units</a> are assumed to not have an annotation from that annotation level. </span></p>
    <div class="example" id="ruby-inlining">
     <a class="self-link" href="#ruby-inlining"></a> In some contexts,
@@ -1238,10 +1238,10 @@ Comparison With The HTML Standard</a> summarizes the main differences,
     <dd>Uses <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/dom.html#htmlelement" id="ref-for-htmlelement③">HTMLElement</a></code>. 
    </dl>
    <p>An <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc①①">rtc</a></code> (“ruby text container”) element <span class="w-nodev">that is the child of a <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby①⑤">ruby</a></code> element</span> <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#represents" id="ref-for-represents⑧">represents</a> one level of annotation
-	(a <a data-link-type="dfn" href="#ruby-annotation-range" id="ref-for-ruby-annotation-range⑦">ruby annotation range</a>)
+	(a <a data-link-type="dfn" href="#ruby-annotation-range" id="ref-for-ruby-annotation-range⑧">ruby annotation range</a>)
 	for the preceding sequence of <a data-link-type="dfn" href="#ruby-base-units" id="ref-for-ruby-base-units①①">ruby base units</a> (its <span>ruby base range</span>).</p>
    <p class="note" role="note"><span class="marker">Note:</span> In simple cases, <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc①②">rtc</a></code> elements can be omitted
-	as a <a data-link-type="dfn" href="#ruby-annotation-range" id="ref-for-ruby-annotation-range⑧">ruby annotation range</a> is implied
+	as a <a data-link-type="dfn" href="#ruby-annotation-range" id="ref-for-ruby-annotation-range⑨">ruby annotation range</a> is implied
 	by consecutive <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt①④">rt</a></code> elements.
 	However, they are necessary
 	in order to associate multiple levels of annotation
@@ -1667,7 +1667,9 @@ Changes</span><a class="self-link" href="#changes"></a></h2>
   <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="index">
    <li><a href="#annotation-pairing">annotation pairing</a><span>, in § 2.1.1</span>
+   <li><a href="#ruby-annotation-range">annotation range</a><span>, in § 2.1</span>
    <li><a href="#ruby-annotation-units">annotation unit</a><span>, in § 2.1.1</span>
+   <li><a href="#ruby-base-range">base range</a><span>, in § 2.1</span>
    <li><a href="#ruby-base-units">base unit</a><span>, in § 2.1.1</span>
    <li><a href="#elementdef-rb">rb</a><span>, in § 2.2</span>
    <li><a href="#elementdef-rp">rp</a><span>, in § 2.5</span>
@@ -2072,7 +2074,7 @@ window.dfnpanelData['073cf09c'] = {"dfnID": "073cf09c", "url": "https://html.spe
 window.dfnpanelData['62ac5b1c'] = {"dfnID": "62ac5b1c", "url": "https://html.spec.whatwg.org/multipage/dom.html#text-content", "dfnText": "text", "refSections": [{"refs": [{"id": "ref-for-text-content"}], "title": "2.5. \nThe rp element"}, {"refs": [{"id": "ref-for-text-content\u2460"}], "title": "\nAppendix A:\nEditorial Tweaks to HTML"}], "external": true};
 window.dfnpanelData['elementdef-ruby'] = {"dfnID": "elementdef-ruby", "url": "#elementdef-ruby", "dfnText": "ruby", "refSections": [{"refs": [{"id": "ref-for-elementdef-ruby"}, {"id": "ref-for-elementdef-ruby\u2460"}, {"id": "ref-for-elementdef-ruby\u2461"}, {"id": "ref-for-elementdef-ruby\u2462"}, {"id": "ref-for-elementdef-ruby\u2463"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-elementdef-ruby\u2464"}, {"id": "ref-for-elementdef-ruby\u2465"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}, {"refs": [{"id": "ref-for-elementdef-ruby\u2466"}, {"id": "ref-for-elementdef-ruby\u2467"}, {"id": "ref-for-elementdef-ruby\u2468"}], "title": "2.2. \nThe rb element"}, {"refs": [{"id": "ref-for-elementdef-ruby\u2460\u24ea"}, {"id": "ref-for-elementdef-ruby\u2460\u2460"}, {"id": "ref-for-elementdef-ruby\u2460\u2461"}, {"id": "ref-for-elementdef-ruby\u2460\u2462"}], "title": "2.3. \nThe rt element"}, {"refs": [{"id": "ref-for-elementdef-ruby\u2460\u2463"}, {"id": "ref-for-elementdef-ruby\u2460\u2464"}, {"id": "ref-for-elementdef-ruby\u2460\u2465"}], "title": "2.4. \nThe rtc element"}, {"refs": [{"id": "ref-for-elementdef-ruby\u2460\u2466"}], "title": "2.5. \nThe rp element"}, {"refs": [{"id": "ref-for-elementdef-ruby\u2460\u2467"}, {"id": "ref-for-elementdef-ruby\u2460\u2468"}, {"id": "ref-for-elementdef-ruby\u2461\u24ea"}, {"id": "ref-for-elementdef-ruby\u2461\u2460"}, {"id": "ref-for-elementdef-ruby\u2461\u2461"}, {"id": "ref-for-elementdef-ruby\u2461\u2462"}, {"id": "ref-for-elementdef-ruby\u2461\u2463"}, {"id": "ref-for-elementdef-ruby\u2461\u2464"}, {"id": "ref-for-elementdef-ruby\u2461\u2465"}, {"id": "ref-for-elementdef-ruby\u2461\u2466"}], "title": "\nAppendix A:\nEditorial Tweaks to HTML"}], "external": false};
 window.dfnpanelData['ruby-base-range'] = {"dfnID": "ruby-base-range", "url": "#ruby-base-range", "dfnText": "ruby base range", "refSections": [{"refs": [{"id": "ref-for-ruby-base-range"}, {"id": "ref-for-ruby-base-range\u2460"}, {"id": "ref-for-ruby-base-range\u2461"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}, {"refs": [{"id": "ref-for-ruby-base-range\u2462"}], "title": "2.4. \nThe rtc element"}], "external": false};
-window.dfnpanelData['ruby-annotation-range'] = {"dfnID": "ruby-annotation-range", "url": "#ruby-annotation-range", "dfnText": "ruby annotation range", "refSections": [{"refs": [{"id": "ref-for-ruby-annotation-range"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-ruby-annotation-range\u2460"}, {"id": "ref-for-ruby-annotation-range\u2461"}, {"id": "ref-for-ruby-annotation-range\u2462"}, {"id": "ref-for-ruby-annotation-range\u2463"}, {"id": "ref-for-ruby-annotation-range\u2464"}, {"id": "ref-for-ruby-annotation-range\u2465"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}, {"refs": [{"id": "ref-for-ruby-annotation-range\u2466"}, {"id": "ref-for-ruby-annotation-range\u2467"}], "title": "2.4. \nThe rtc element"}], "external": false};
+window.dfnpanelData['ruby-annotation-range'] = {"dfnID": "ruby-annotation-range", "url": "#ruby-annotation-range", "dfnText": "ruby annotation range", "refSections": [{"refs": [{"id": "ref-for-ruby-annotation-range"}, {"id": "ref-for-ruby-annotation-range\u2460"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-ruby-annotation-range\u2461"}, {"id": "ref-for-ruby-annotation-range\u2462"}, {"id": "ref-for-ruby-annotation-range\u2463"}, {"id": "ref-for-ruby-annotation-range\u2464"}, {"id": "ref-for-ruby-annotation-range\u2465"}, {"id": "ref-for-ruby-annotation-range\u2466"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}, {"refs": [{"id": "ref-for-ruby-annotation-range\u2467"}, {"id": "ref-for-ruby-annotation-range\u2468"}], "title": "2.4. \nThe rtc element"}], "external": false};
 window.dfnpanelData['ruby-segment'] = {"dfnID": "ruby-segment", "url": "#ruby-segment", "dfnText": "ruby segment", "refSections": [{"refs": [{"id": "ref-for-ruby-segment"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-ruby-segment\u2460"}, {"id": "ref-for-ruby-segment\u2461"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}], "external": false};
 window.dfnpanelData['ruby-base-units'] = {"dfnID": "ruby-base-units", "url": "#ruby-base-units", "dfnText": "ruby base units", "refSections": [{"refs": [{"id": "ref-for-ruby-base-units"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-ruby-base-units\u2460"}, {"id": "ref-for-ruby-base-units\u2461"}, {"id": "ref-for-ruby-base-units\u2462"}, {"id": "ref-for-ruby-base-units\u2463"}, {"id": "ref-for-ruby-base-units\u2464"}, {"id": "ref-for-ruby-base-units\u2465"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}, {"refs": [{"id": "ref-for-ruby-base-units\u2466"}, {"id": "ref-for-ruby-base-units\u2467"}], "title": "2.1.2. \nMarkup Patterns for Multi-Character Ruby"}, {"refs": [{"id": "ref-for-ruby-base-units\u2468"}], "title": "2.2. \nThe rb element"}, {"refs": [{"id": "ref-for-ruby-base-units\u2460\u24ea"}], "title": "2.3. \nThe rt element"}, {"refs": [{"id": "ref-for-ruby-base-units\u2460\u2460"}], "title": "2.4. \nThe rtc element"}], "external": false};
 window.dfnpanelData['ruby-annotation-units'] = {"dfnID": "ruby-annotation-units", "url": "#ruby-annotation-units", "dfnText": "ruby annotation units", "refSections": [{"refs": [{"id": "ref-for-ruby-annotation-units"}, {"id": "ref-for-ruby-annotation-units\u2460"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-ruby-annotation-units\u2461"}, {"id": "ref-for-ruby-annotation-units\u2462"}, {"id": "ref-for-ruby-annotation-units\u2463"}, {"id": "ref-for-ruby-annotation-units\u2464"}, {"id": "ref-for-ruby-annotation-units\u2465"}, {"id": "ref-for-ruby-annotation-units\u2466"}, {"id": "ref-for-ruby-annotation-units\u2467"}, {"id": "ref-for-ruby-annotation-units\u2468"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}, {"refs": [{"id": "ref-for-ruby-annotation-units\u2460\u24ea"}], "title": "2.3. \nThe rt element"}, {"refs": [{"id": "ref-for-ruby-annotation-units\u2460\u2460"}], "title": "2.4. \nThe rtc element"}, {"refs": [{"id": "ref-for-ruby-annotation-units\u2460\u2461"}, {"id": "ref-for-ruby-annotation-units\u2460\u2462"}], "title": "2.5. \nThe rp element"}, {"refs": [{"id": "ref-for-ruby-annotation-units\u2460\u2463"}], "title": "\nAppendix A:\nEditorial Tweaks to HTML"}], "external": false};
