@@ -8,7 +8,7 @@
   <meta content="Bikeshed version 82ce88815, updated Thu Sep 7 16:33:55 2023 -0700" name="generator">
   <link href="https://w3c.github.io/html-ruby/" rel="canonical">
   <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
-  <meta content="230d0b37781ea17913758a09f30541a911af06fb" name="document-revision">
+  <meta content="8c180a930e075261e70f7eda853d3f80b0f5fb62" name="document-revision">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
@@ -850,37 +850,28 @@ Comparison With The HTML Standard</a> summarizes the main differences,
 					relative to the kanji it annotates." height="75" src="images/composition.png" width="280"> </figure>
    </div>
    <p>The content model of <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby①">ruby</a></code> elements consists of
-	one or more <a data-link-type="dfn" href="#ruby-segment" id="ref-for-ruby-segment">ruby segment</a> sequences.
-	Ignoring <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#inter-element-whitespace" id="ref-for-inter-element-whitespace">inter-element whitespace</a> and <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp">rp</a></code> elements,
-	each <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="ruby-segment">ruby segment</dfn> consists of:</p>
+	one or more of the following <a data-link-type="dfn" href="#ruby-segment" id="ref-for-ruby-segment">ruby segment</a> sequences:</p>
    <ol>
-    <li> One <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="ruby-base-range">ruby base range</dfn>, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#represents" id="ref-for-represents①">representing</a> the base-level content being annotated.
-			It consists of
-			zero or more <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#phrasing-content-2" id="ref-for-phrasing-content-2②">phrasing content</a> nodes
+    <li> One or more <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#phrasing-content-2" id="ref-for-phrasing-content-2②">phrasing content</a> nodes
 			or <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb">rb</a></code> elements
-			(or a combination).
-			The <a data-link-type="dfn" href="#ruby-base-range" id="ref-for-ruby-base-range">ruby base range</a> is further parcelled into a sequence of
-			zero or more <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="ruby-base-units">ruby base units</dfn>,
-			each of which is either a DOM range containing a single child <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb①">rb</a></code> element
-			or a maximal DOM range of child content
-			that does not contain a child <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb②">rb</a></code> element. 
-    <li> Zero or more <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="ruby-annotation-ranges">ruby annotation ranges</dfn>,
-			each <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#represents" id="ref-for-represents②">representing</a> one independent level of annotation.
-			A <a data-link-type="dfn" href="#ruby-annotation-ranges" id="ref-for-ruby-annotation-ranges">ruby annotation range</a> consists of
-			a DOM range corresponding to either
-			a single <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc">rtc</a></code> element
-			or to a maximal sequence of consecutive <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt">rt</a></code> elements.
-			The <a data-link-type="dfn" href="#ruby-annotation-ranges" id="ref-for-ruby-annotation-ranges①">ruby annotation range</a> is further parcelled
-			into a sequence of <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="ruby-annotation-units">ruby annotation units</dfn>:
-			if it consists of a sequence of <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt①">rt</a></code> elements,
-			then each such element is an individual <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units">ruby annotation unit</a>;
-			if it consists of an <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc①">rtc</a></code> element,
-			then each of its child <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②">rt</a></code> elements
-			and each maximal DOM range of non-<code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt③">rt</a></code> child content
-			is a <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units①">ruby annotation unit</a>. 
+			(or a combination) <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#represents" id="ref-for-represents①">representing</a> the base-level content being annotated
+			(the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="ruby-base-range">ruby base range</dfn>). 
+    <li> One or more <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt">rt</a></code> or <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc">rtc</a></code> elements
+			(or a combination) <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#represents" id="ref-for-represents②">representing</a> any annotations associated
+			with the preceding base content,
+			where each <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc①">rtc</a></code> element or sequence of <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt①">rt</a></code> elements <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#represents" id="ref-for-represents③">represents</a> one independent level of annotation
+			(a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="ruby-annotation-range">ruby annotation range</dfn>).
+			Each [annotation range=],
+			and <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units">annotation units</a> within each range,
+			and can optionally be preceded by / followed by / interleaved with
+			individual <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp">rp</a></code> elements.
+			(The optional <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp①">rp</a></code> element can be used
+			to add presentational content such as parentheses,
+			which can be useful when rendering annotations inline,
+			including as a fallback when ruby layout is not supported.) 
    </ol>
    <p class="note" role="note"><span class="marker">Note:</span> For authoring convenience,
-	the internal ruby elements <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb③">rb</a></code>, <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt④">rt</a></code>, <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc②">rtc</a></code>, and <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp①">rp</a></code> have <a class="allow-2119" href="#optional-tags">optional end tags</a>.</p>
+	the internal ruby elements <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb①">rb</a></code>, <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②">rt</a></code>, <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc②">rtc</a></code>, and <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp②">rp</a></code> have <a class="allow-2119" href="#optional-tags">optional end tags</a>.</p>
    <div class="example" id="ruby-optional-tag-ex">
     <a class="self-link" href="#ruby-optional-tag-ex"></a> In Taiwan,
 		phonetic annotations for Chinese text are typically provided
@@ -899,11 +890,11 @@ Comparison With The HTML Standard</a> summarizes the main differences,
     <ul>
      <li>End tags can be omitted. 
      <li> Text contained directly by a <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby②">ruby</a></code> element
-				implicitly represents a <a data-link-type="dfn" href="#ruby-base-units" id="ref-for-ruby-base-units">ruby base unit</a> (as if it were contained in an <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb④">rb</a></code> element). 
-     <li> Consecutive <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt⑤">rt</a></code> children of a <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby③">ruby</a></code> element
-				are implicitly grouped into a <a data-link-type="dfn" href="#ruby-annotation-ranges" id="ref-for-ruby-annotation-ranges②">ruby annotation range</a> (as if they were contained in an <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc③">rtc</a></code> element). 
+				implicitly represents a <a data-link-type="dfn" href="#ruby-base-units" id="ref-for-ruby-base-units">ruby base unit</a> (as if it were contained in an <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb②">rb</a></code> element). 
+     <li> Consecutive <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt③">rt</a></code> children of a <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby③">ruby</a></code> element
+				are implicitly grouped into a <a data-link-type="dfn" href="#ruby-annotation-range" id="ref-for-ruby-annotation-range">ruby annotation range</a> (as if they were contained in an <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc③">rtc</a></code> element). 
      <li> Text contained directly by an <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc④">rtc</a></code> element
-				implicity represents a <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units②">ruby annotation unit</a>. 
+				implicity represents a <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units①">ruby annotation unit</a>. 
     </ul>
     <p>In effect,
 		the above example is equivalent
@@ -912,51 +903,6 @@ Comparison With The HTML Standard</a> summarizes the main differences,
 <pre><code class="highlight"><c- p>&lt;</c-><c- f>ruby</c-> <c- e>lang</c-><c- o>=</c-><c- s>zh-TW</c-><c- p>></c->
   美<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->ㄇㄟˇ<c- p>&lt;</c-><c- f>rtc</c-> <c- e>lang</c-><c- o>=</c-><c- s>zh-Latn</c-><c- p>></c->měi
 <c- p>&lt;/</c-><c- f>ruby</c-><c- p>></c->
-</code></pre>
-   </div>
-   <p>Additionally,
-	within each <a data-link-type="dfn" href="#ruby-annotation-ranges" id="ref-for-ruby-annotation-ranges③">ruby annotation range</a>,
-	each <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units③">ruby annotation unit</a> can optionally be preceded by and/or followed by
-	an <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp②">rp</a></code> element. <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp③">rp</a></code> elements can be used
-	to add presentational content such as parentheses,
-	which are useful when rendering annotations inline,
-	including as a fallback when ruby layout is not supported.</p>
-   <div class="example" id="ruby-inlining">
-    <a class="self-link" href="#ruby-inlining"></a> In some contexts,
-		for example when the font size or line height are too small
-		for interlinear ruby to be readable,
-		it is desirable to inline the ruby annotation
-		such that it appears in parentheses after the text it annotates.
-		This also provides an appropriate fallback rendering
-		for user agents that do not support ruby layout. 
-    <p>However,
-		for compound words in Japanese particularly,
-		per-character inlined phonetics are awkward.
-		Instead,
-		the more natural rendering
-		is to place the annotation of an entire word
-		together after its base text.
-		For example,
-		when typeset inline, <span lang="ja">京都市</span> (“Kyoto City”)
-		is expected to be rendered as
-		“<span lang="ja">京都市（きょうとし）</span>”,
-		not “<span lang="ja">京（きょう）都（と）市（し）</span>”.
-		This can be marked up using consecutive <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb⑤">rb</a></code> elements followed by consecutive <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt⑥">rt</a></code> elements:</p>
-<pre><code class="highlight"><c- p>&lt;</c-><c- f>ruby</c-><c- p>>&lt;</c-><c- f>rb</c-><c- p>></c->京<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->都<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->市<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->きょう<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->と<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->し<c- p>&lt;</c-><c- f>ruby</c-><c- p>></c->
-</code></pre>
-    <p>If each base character was immediately followed by its annotation in the markup
-		(each base-annotation pair forming its own segment),
-		inlining would result in the undesirable and awkward
-		“<span lang="ja">京（きょう）都（と）市（し）</span>”.</p>
-    <p>Note that the markup above does not automatically provide the parentheses.
-		Parentheses can be inserted using CSS generated content
-		when intentionally typesetting inline,
-		however they would be missing
-		when a UA that does not support ruby
-		falls back to inline layout automatically from interlinear layout.
-		The <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp④">rp</a></code> element can be inserted
-		to provide the appropriate punctuation for when ruby is not supported:</p>
-<pre><code class="highlight"><c- p>&lt;</c-><c- f>ruby</c-><c- p>>&lt;</c-><c- f>rb</c-><c- p>></c->京<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->都<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->市<c- p>&lt;</c-><c- f>rp</c-><c- p>></c->（<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->きょう<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->と<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->し<c- p>&lt;</c-><c- f>rp</c-><c- p>></c->）<c- p>&lt;</c-><c- f>ruby</c-><c- p>></c->
 </code></pre>
    </div>
    <p class="note" role="note"><span class="marker">Note:</span> The <a data-biblio-display="inline" data-link-type="biblio" href="https://drafts.csswg.org/css-ruby-1/"><cite>CSS Ruby Annotation Layout Module Level 1</cite></a> enables authors
@@ -998,39 +944,94 @@ Comparison With The HTML Standard</a> summarizes the main differences,
 </code></pre>
    </div>
    <h4 class="heading settled" data-level="2.1.1" id="ruby-pairing"><span class="secno">2.1.1. </span><span class="content"> Ruby Segmentation and Pairing</span><a class="self-link" href="#ruby-pairing"></a></h4>
-   <p>The process of <dfn data-dfn-type="dfn" data-export data-lt="ruby segmentation" id="ruby-segmentation">segmentation<a class="self-link" href="#ruby-segmentation"></a></dfn> associates <a data-link-type="dfn" href="#ruby-annotation-ranges" id="ref-for-ruby-annotation-ranges④">ruby annotation ranges</a> with <a data-link-type="dfn" href="#ruby-base-range" id="ref-for-ruby-base-range①">ruby base ranges</a>:
-	Within a <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby⑤">ruby</a></code> element,
-	each <a data-link-type="dfn" href="#ruby-base-range" id="ref-for-ruby-base-range②">ruby base range</a> is associated with
-	all the subsequent <a data-link-type="dfn" href="#ruby-annotation-ranges" id="ref-for-ruby-annotation-ranges⑤">ruby annotation ranges</a>,
-	in document order,
-	until the next <a data-link-type="dfn" href="#ruby-base-range" id="ref-for-ruby-base-range③">ruby base range</a>—<wbr>if any—<wbr>which starts the following <a data-link-type="dfn" href="#ruby-segment" id="ref-for-ruby-segment①">ruby segment</a>.</p>
+   <p>Within a ruby element,
+	content is parcelled into a series of ruby segments.
+	Ignoring <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#inter-element-whitespace" id="ref-for-inter-element-whitespace">inter-element whitespace</a> and <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp③">rp</a></code> elements,
+	each <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="ruby-segment">ruby segment</dfn> consists of:</p>
+   <ul>
+    <li> One <a data-link-type="dfn" href="#ruby-base-range" id="ref-for-ruby-base-range">ruby base range</a>:
+			zero or more <dfn class="dfn-paneled" data-dfn-type="dfn" data-local-lt="base unit" data-noexport id="ruby-base-units">ruby base units</dfn>,
+			each of which is either a DOM range containing a single child <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb③">rb</a></code> element
+			or a maximal DOM range of child content
+			that does not contain a child <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb④">rb</a></code> element. 
+    <li> Zero or more <a data-link-type="dfn" href="#ruby-annotation-range" id="ref-for-ruby-annotation-range①">ruby annotation ranges</a>,
+			each a DOM range corresponding to either
+			a single <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc⑤">rtc</a></code> element
+			or to a maximal sequence of consecutive <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt④">rt</a></code> elements.
+			The <a data-link-type="dfn" href="#ruby-annotation-range" id="ref-for-ruby-annotation-range②">ruby annotation range</a> is further parcelled
+			into a sequence of <dfn class="dfn-paneled" data-dfn-type="dfn" data-local-lt="annotation unit" data-noexport id="ruby-annotation-units">ruby annotation units</dfn>:
+			if it consists of a sequence of <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt⑤">rt</a></code> elements,
+			then each such element is an individual <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units②">ruby annotation unit</a>;
+			if it consists of an <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc⑥">rtc</a></code> element,
+			then each of its child <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt⑥">rt</a></code> elements
+			and each maximal DOM range of non-<code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt⑦">rt</a></code> child content
+			is a <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units③">ruby annotation unit</a>. 
+   </ul>
    <div class="example" id="ruby-combine-ex">
     <a class="self-link" href="#ruby-combine-ex"></a> Annotating text character by character is also typical in Chinese.
 		In this example,
-		each character is individually annotated in its own <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby⑥">ruby</a></code> element: 
+		each character is individually annotated in its own <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby⑤">ruby</a></code> element: 
     <p><code class="highlight" lang="zh"> <c- p>&lt;</c-><c- f>ruby</c-><c- p>></c->千<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->qiān<c- p>&lt;/</c-><c- f>ruby</c-><c- p>>&lt;</c-><c- f>ruby</c-><c- p>></c->里<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->lǐ<c- p>&lt;/</c-><c- f>ruby</c-><c- p>>&lt;</c-><c- f>ruby</c-><c- p>></c->之<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->zhī<c- p>&lt;/</c-><c- f>ruby</c-><c- p>>&lt;</c-><c- f>ruby</c-><c- p>></c->行<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->xíng<c- p>&lt;/</c-><c- f>ruby</c-><c- p>></c->﹐<c- p>&lt;</c-><c- f>ruby</c-><c- p>></c->始<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->shǐ<c- p>&lt;/</c-><c- f>ruby</c-><c- p>>&lt;</c-><c- f>ruby</c-><c- p>></c->於<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->yú<c- p>&lt;/</c-><c- f>ruby</c-><c- p>>&lt;</c-><c- f>ruby</c-><c- p>></c->足<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->zú<c- p>&lt;/</c-><c- f>ruby</c-><c- p>>&lt;</c-><c- f>ruby</c-><c- p>></c->下<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->xià<c- p>&lt;/</c-><c- f>ruby</c-><c- p>></c->。 </code></p>
     <figure> <img alt="A Chinese phrase,
 				with each character phonetically annotated with a pinyin syllable" height="75" src="images/ruby-pinyin.png" width="365"> </figure>
-    <p>Multiple adjacent ruby segments can also be combined into the same <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby⑦">ruby</a></code> parent:</p>
+    <p>Multiple adjacent ruby segments can also be combined into the same <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby⑥">ruby</a></code> parent:</p>
     <p><code class="highlight" lang="zh"> <c- p>&lt;</c-><c- f>ruby</c-><c- p>></c->千<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->qiān<c- p>&lt;/</c-><c- f>rt</c-><c- p>></c->里<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->lǐ<c- p>&lt;/</c-><c- f>rt</c-><c- p>></c->之<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->zhī<c- p>&lt;/</c-><c- f>rt</c-><c- p>></c->行<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->xíng<c- p>&lt;/</c-><c- f>ruby</c-><c- p>></c->﹐<c- p>&lt;</c-><c- f>ruby</c-><c- p>></c->始<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->shǐ<c- p>&lt;/</c-><c- f>rt</c-><c- p>></c->於<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->yú<c- p>&lt;/</c-><c- f>rt</c-><c- p>></c->足<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->zú<c- p>&lt;/</c-><c- f>rt</c-><c- p>></c->下<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->xià<c- p>&lt;/</c-><c- f>ruby</c-><c- p>></c->。 </code></p>
    </div>
    <p>The process of <dfn data-dfn-type="dfn" data-export id="annotation-pairing">annotation pairing<a class="self-link" href="#annotation-pairing"></a></dfn> associates <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units④">ruby annotation units</a> with <a data-link-type="dfn" href="#ruby-base-units" id="ref-for-ruby-base-units①">ruby base units</a>.
-	Within each <a data-link-type="dfn" href="#ruby-segment" id="ref-for-ruby-segment②">ruby segment</a>,
-	each <a data-link-type="dfn" href="#ruby-base-units" id="ref-for-ruby-base-units②">ruby base unit</a> is paired with a <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units⑤">ruby annotation unit</a> from each <a data-link-type="dfn" href="#ruby-annotation-ranges" id="ref-for-ruby-annotation-ranges⑥">ruby annotation range</a>.
-	If a <a data-link-type="dfn" href="#ruby-annotation-ranges" id="ref-for-ruby-annotation-ranges⑦">ruby annotation range</a> consists of an <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc⑤">rtc</a></code> element
-	that contains no <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt⑦">rt</a></code> elements,
+	Within each <a data-link-type="dfn" href="#ruby-segment" id="ref-for-ruby-segment①">ruby segment</a>,
+	each <a data-link-type="dfn" href="#ruby-base-units" id="ref-for-ruby-base-units②">ruby base unit</a> is paired with a <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units⑤">ruby annotation unit</a> from each <a data-link-type="dfn" href="#ruby-annotation-range" id="ref-for-ruby-annotation-range③">ruby annotation range</a>.
+	If a <a data-link-type="dfn" href="#ruby-annotation-range" id="ref-for-ruby-annotation-range④">ruby annotation range</a> consists of an <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc⑦">rtc</a></code> element
+	that contains no <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt⑧">rt</a></code> elements,
 	the single <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units⑥">ruby annotation unit</a> represented by its contents spans
 	(is paired with)
-	every <a data-link-type="dfn" href="#ruby-base-units" id="ref-for-ruby-base-units③">ruby base unit</a> in the <a data-link-type="dfn" href="#ruby-segment" id="ref-for-ruby-segment③">ruby segment</a>.
+	every <a data-link-type="dfn" href="#ruby-base-units" id="ref-for-ruby-base-units③">ruby base unit</a> in the <a data-link-type="dfn" href="#ruby-segment" id="ref-for-ruby-segment②">ruby segment</a>.
 	Otherwise,
-	each <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units⑦">ruby annotation unit</a> in the <a data-link-type="dfn" href="#ruby-annotation-ranges" id="ref-for-ruby-annotation-ranges⑧">ruby annotation range</a> is paired,
+	each <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units⑦">ruby annotation unit</a> in the <a data-link-type="dfn" href="#ruby-annotation-range" id="ref-for-ruby-annotation-range⑤">ruby annotation range</a> is paired,
 	in order,
-	with the corresponding <a data-link-type="dfn" href="#ruby-base-units" id="ref-for-ruby-base-units④">ruby base unit</a> in the segment’s <a data-link-type="dfn" href="#ruby-base-range" id="ref-for-ruby-base-range④">ruby base range</a>. <span class="w-nodev"> If there are not enough <a data-link-type="dfn" href="#ruby-base-units" id="ref-for-ruby-base-units⑤">ruby base units</a>,
+	with the corresponding <a data-link-type="dfn" href="#ruby-base-units" id="ref-for-ruby-base-units④">ruby base unit</a> in the segment’s <a data-link-type="dfn" href="#ruby-base-range" id="ref-for-ruby-base-range①">ruby base range</a>. <span class="w-nodev"> If there are not enough <a data-link-type="dfn" href="#ruby-base-units" id="ref-for-ruby-base-units⑤">ruby base units</a>,
 		any remaining <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units⑧">ruby annotation units</a> are assumed to be associated
 		with empty, hypothetical bases
-		inserted at the end of the <a data-link-type="dfn" href="#ruby-base-range" id="ref-for-ruby-base-range⑤">ruby base range</a>.
-		If there are not enough <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units⑨">ruby annotation units</a> in a <a data-link-type="dfn" href="#ruby-annotation-ranges" id="ref-for-ruby-annotation-ranges⑨">ruby annotation range</a>,
+		inserted at the end of the <a data-link-type="dfn" href="#ruby-base-range" id="ref-for-ruby-base-range②">ruby base range</a>.
+		If there are not enough <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units⑨">ruby annotation units</a> in a <a data-link-type="dfn" href="#ruby-annotation-range" id="ref-for-ruby-annotation-range⑥">ruby annotation range</a>,
 		the remaining <a data-link-type="dfn" href="#ruby-base-units" id="ref-for-ruby-base-units⑥">ruby base units</a> are assumed to not have an annotation from that annotation level. </span></p>
+   <div class="example" id="ruby-inlining">
+    <a class="self-link" href="#ruby-inlining"></a> In some contexts,
+		for example when the font size or line height are too small
+		for interlinear ruby to be readable,
+		it is desirable to inline the ruby annotation
+		such that it appears in parentheses after the text it annotates.
+		This also provides an appropriate fallback rendering
+		for user agents that do not support ruby layout. 
+    <p>However,
+		for compound words in Japanese particularly,
+		per-character inlined phonetics are awkward.
+		Instead,
+		the more natural rendering
+		is to place the annotation of an entire word
+		together after its base text.
+		For example,
+		when typeset inline, <span lang="ja">京都市</span> (“Kyoto City”)
+		is expected to be rendered as
+		“<span lang="ja">京都市（きょうとし）</span>”,
+		not “<span lang="ja">京（きょう）都（と）市（し）</span>”.
+		This can be marked up using consecutive <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb⑤">rb</a></code> elements followed by consecutive <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt⑨">rt</a></code> elements:</p>
+<pre><code class="highlight"><c- p>&lt;</c-><c- f>ruby</c-><c- p>>&lt;</c-><c- f>rb</c-><c- p>></c->京<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->都<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->市<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->きょう<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->と<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->し<c- p>&lt;</c-><c- f>ruby</c-><c- p>></c->
+</code></pre>
+    <p>If each base character was immediately followed by its annotation in the markup
+		(each base-annotation pair forming its own segment),
+		inlining would result in the undesirable and awkward
+		“<span lang="ja">京（きょう）都（と）市（し）</span>”.</p>
+    <p>Note that the markup above does not automatically provide the parentheses.
+		Parentheses can be inserted using CSS generated content
+		when intentionally typesetting inline,
+		however they would be missing
+		when a UA that does not support ruby
+		falls back to inline layout automatically from interlinear layout.
+		The <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp④">rp</a></code> element can be inserted
+		to provide the appropriate punctuation for when ruby is not supported:</p>
+<pre><code class="highlight"><c- p>&lt;</c-><c- f>ruby</c-><c- p>>&lt;</c-><c- f>rb</c-><c- p>></c->京<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->都<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->市<c- p>&lt;</c-><c- f>rp</c-><c- p>></c->（<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->きょう<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->と<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->し<c- p>&lt;</c-><c- f>rp</c-><c- p>></c->）<c- p>&lt;</c-><c- f>ruby</c-><c- p>></c->
+</code></pre>
+   </div>
    <h4 class="non-normative heading settled" data-level="2.1.2" id="ruby-compound"><span class="secno">2.1.2. </span><span class="content"> Markup Patterns for Multi-Character Ruby</span><a class="self-link" href="#ruby-compound"></a></h4>
    <p><i>This section is non-normative</i></p>
    <p>In the simplest examples,
@@ -1161,7 +1162,7 @@ Comparison With The HTML Standard</a> summarizes the main differences,
 </code></pre>
     <p>Correct “jukugo ruby” is not be possible
 		if all the base characters are part of a single <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb⑥">rb</a></code> element
-		and all the annotation text in a single <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt⑧">rt</a></code> element,
+		and all the annotation text in a single <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt①⓪">rt</a></code> element,
 		as their individual pairings would be lost.</p>
    </div>
    <p class="note" role="note"><span class="marker">Note:</span> For more details on Japanese and Chinese ruby usage and rendering,
@@ -1172,7 +1173,7 @@ Comparison With The HTML Standard</a> summarizes the main differences,
     <dt><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#concept-element-categories" id="ref-for-concept-element-categories①">Categories</a>: 
     <dd>None. 
     <dt><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#concept-element-contexts" id="ref-for-concept-element-contexts①">Contexts in which this element can be used</a>: 
-    <dd>As a child of a <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby⑧">ruby</a></code> element. 
+    <dd>As a child of a <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby⑦">ruby</a></code> element. 
     <dt><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#concept-element-content-model" id="ref-for-concept-element-content-model①">Content model</a>: 
     <dd><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#phrasing-content-2" id="ref-for-phrasing-content-2③">Phrasing content</a>. 
     <dt><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#concept-element-attributes" id="ref-for-concept-element-attributes①">Content attributes</a>: 
@@ -1180,10 +1181,10 @@ Comparison With The HTML Standard</a> summarizes the main differences,
     <dt><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#concept-element-dom" id="ref-for-concept-element-dom①">DOM interface</a>: 
     <dd>Uses <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/dom.html#htmlelement" id="ref-for-htmlelement①">HTMLElement</a></code>. 
    </dl>
-   <p>An <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb⑦">rb</a></code> (“ruby base”) element <span class="w-nodev">that is the child of a <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby⑨">ruby</a></code> element</span> <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#represents" id="ref-for-represents③">represents</a> a <a data-link-type="dfn" href="#ruby-base-units" id="ref-for-ruby-base-units⑨">ruby base unit</a>:
+   <p>An <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb⑦">rb</a></code> (“ruby base”) element <span class="w-nodev">that is the child of a <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby⑧">ruby</a></code> element</span> <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#represents" id="ref-for-represents④">represents</a> a <a data-link-type="dfn" href="#ruby-base-units" id="ref-for-ruby-base-units⑨">ruby base unit</a>:
 	a unitary component of base-level text
 	annotated by any ruby annotation(s) to which it is paired.</p>
-   <p class="w-nodev"> An <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb⑧">rb</a></code> element that is not a child of a <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby①⓪">ruby</a></code> element <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#represents" id="ref-for-represents④">represents</a> the same thing as its children. </p>
+   <p class="w-nodev"> An <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb⑧">rb</a></code> element that is not a child of a <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby⑨">ruby</a></code> element <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#represents" id="ref-for-represents⑤">represents</a> the same thing as its children. </p>
    <div class="example" id="rb-ex">
     <a class="self-link" href="#rb-ex"></a> When no <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb⑨">rb</a></code> element is used, the base is implied: 
 <pre><code class="highlight"><c- p>&lt;</c-><c- f>ruby</c-><c- p>></c->base<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->annotation<c- p>&lt;/</c-><c- f>ruby</c-><c- p>></c->
@@ -1204,7 +1205,7 @@ Comparison With The HTML Standard</a> summarizes the main differences,
     <dt><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#concept-element-categories" id="ref-for-concept-element-categories②">Categories</a>: 
     <dd>None. 
     <dt><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#concept-element-contexts" id="ref-for-concept-element-contexts②">Contexts in which this element can be used</a>: 
-    <dd> As a child of a <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby①①">ruby</a></code> or of an <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc⑥">rtc</a></code> element. 
+    <dd> As a child of a <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby①⓪">ruby</a></code> or of an <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc⑧">rtc</a></code> element. 
     <dt><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#concept-element-content-model" id="ref-for-concept-element-content-model②">Content model</a>: 
     <dd><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#phrasing-content-2" id="ref-for-phrasing-content-2④">Phrasing content</a>. 
     <dt><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#concept-element-attributes" id="ref-for-concept-element-attributes②">Content attributes</a>: 
@@ -1215,36 +1216,36 @@ Comparison With The HTML Standard</a> summarizes the main differences,
     <dt><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#concept-element-dom" id="ref-for-concept-element-dom②">DOM interface</a>: 
     <dd>Uses <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/dom.html#htmlelement" id="ref-for-htmlelement②">HTMLElement</a></code>. 
    </dl>
-   <p>An <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt⑨">rt</a></code> (“ruby text”) element <span class="w-nodev">that is the child of a <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby①②">ruby</a></code> element
-	or of an <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc⑦">rtc</a></code> element
-	that is itself the child of a <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby①③">ruby</a></code> element</span> <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#represents" id="ref-for-represents⑤">represents</a> a <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units①⓪">ruby annotation unit</a>:
+   <p>An <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt①①">rt</a></code> (“ruby text”) element <span class="w-nodev">that is the child of a <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby①①">ruby</a></code> element
+	or of an <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc⑨">rtc</a></code> element
+	that is itself the child of a <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby①②">ruby</a></code> element</span> <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#represents" id="ref-for-represents⑥">represents</a> a <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units①⓪">ruby annotation unit</a>:
 	a unitary annotation of the <a data-link-type="dfn" href="#ruby-base-units" id="ref-for-ruby-base-units①⓪">ruby base unit</a> to which it is paired.</p>
-   <p class="w-nodev"> An <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt①⓪">rt</a></code> element that is not a child of a <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby①④">ruby</a></code> element
-	nor of an <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc⑧">rtc</a></code> element
-	that is itself the child of a <code>ruby</code> element <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#represents" id="ref-for-represents⑥">represents</a> the same thing as its children. </p>
+   <p class="w-nodev"> An <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt①②">rt</a></code> element that is not a child of a <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby①③">ruby</a></code> element
+	nor of an <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc①⓪">rtc</a></code> element
+	that is itself the child of a <code>ruby</code> element <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#represents" id="ref-for-represents⑦">represents</a> the same thing as its children. </p>
    <h3 class="heading settled" data-level="2.4" id="the-rtc-element"><span class="secno">2.4. </span><span class="content"> The <dfn class="dfn-paneled" data-dfn-type="element" data-export id="elementdef-rtc"><code>rtc</code></dfn> element</span><a class="self-link" href="#the-rtc-element"></a></h3>
    <dl class="def">
     <dt><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#concept-element-categories" id="ref-for-concept-element-categories③">Categories</a>: 
     <dd>None. 
     <dt><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#concept-element-contexts" id="ref-for-concept-element-contexts③">Contexts in which this element can be used</a>: 
-    <dd> As a child of a <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby①⑤">ruby</a></code> element. 
+    <dd> As a child of a <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby①④">ruby</a></code> element. 
     <dt><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#concept-element-content-model" id="ref-for-concept-element-content-model③">Content model</a>: 
-    <dd> Either <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#phrasing-content-2" id="ref-for-phrasing-content-2⑤">phrasing content</a> or a sequence of <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt①①">rt</a></code> elements;
+    <dd> Either <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#phrasing-content-2" id="ref-for-phrasing-content-2⑤">phrasing content</a> or a sequence of <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt①③">rt</a></code> elements;
 			optionally preceded, interleaved with, or followed by individual <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp⑤">rp</a></code> elements. 
     <dt><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#concept-element-attributes" id="ref-for-concept-element-attributes③">Content attributes</a>: 
     <dd><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#global-attributes" id="ref-for-global-attributes③">Global attributes</a> 
     <dt><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#concept-element-dom" id="ref-for-concept-element-dom③">DOM interface</a>: 
     <dd>Uses <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/dom.html#htmlelement" id="ref-for-htmlelement③">HTMLElement</a></code>. 
    </dl>
-   <p>An <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc⑨">rtc</a></code> (“ruby text container”) element <span class="w-nodev">that is the child of a <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby①⑥">ruby</a></code> element</span> <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#represents" id="ref-for-represents⑦">represents</a> one level of annotation
-	(a <a data-link-type="dfn" href="#ruby-annotation-ranges" id="ref-for-ruby-annotation-ranges①⓪">ruby annotation range</a>)
+   <p>An <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc①①">rtc</a></code> (“ruby text container”) element <span class="w-nodev">that is the child of a <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby①⑤">ruby</a></code> element</span> <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#represents" id="ref-for-represents⑧">represents</a> one level of annotation
+	(a <a data-link-type="dfn" href="#ruby-annotation-range" id="ref-for-ruby-annotation-range⑦">ruby annotation range</a>)
 	for the preceding sequence of <a data-link-type="dfn" href="#ruby-base-units" id="ref-for-ruby-base-units①①">ruby base units</a> (its <span>ruby base range</span>).</p>
-   <p class="note" role="note"><span class="marker">Note:</span> In simple cases, <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc①⓪">rtc</a></code> elements can be omitted
-	as a <a data-link-type="dfn" href="#ruby-annotation-ranges" id="ref-for-ruby-annotation-ranges①①">ruby annotation range</a> is implied
-	by consecutive <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt①②">rt</a></code> elements.
+   <p class="note" role="note"><span class="marker">Note:</span> In simple cases, <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc①②">rtc</a></code> elements can be omitted
+	as a <a data-link-type="dfn" href="#ruby-annotation-range" id="ref-for-ruby-annotation-range⑧">ruby annotation range</a> is implied
+	by consecutive <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt①④">rt</a></code> elements.
 	However, they are necessary
 	in order to associate multiple levels of annotation
-	with a single <a data-link-type="dfn" href="#ruby-base-range" id="ref-for-ruby-base-range⑥">ruby base range</a>,
+	with a single <a data-link-type="dfn" href="#ruby-base-range" id="ref-for-ruby-base-range③">ruby base range</a>,
 	for example to provide both phonetic and semantic information,
 	phonetic information in different scripts,
 	or semantic information in different languages.</p>
@@ -1263,8 +1264,8 @@ Comparison With The HTML Standard</a> summarizes the main differences,
 <c- p>&lt;/</c-><c- f>ruby</c-><c- p>></c->
 </code></pre>
    </div>
-   <p class="note" role="note"><span class="marker">Note:</span> Text that is a direct child of the <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc①①">rtc</a></code> element
-	implicitly represents a <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units①①">ruby annotation unit</a> as if it were contained in an <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt①③">rt</a></code> element,
+   <p class="note" role="note"><span class="marker">Note:</span> Text that is a direct child of the <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc①③">rtc</a></code> element
+	implicitly represents a <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units①①">ruby annotation unit</a> as if it were contained in an <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt①⑤">rt</a></code> element,
 	except that this annotation spans all the bases in the segment.</p>
    <div class="example" id="rtc-ex">
     <a class="self-link" href="#rtc-ex"></a> In this example, the Chinese word for San Francisco
@@ -1283,18 +1284,18 @@ Comparison With The HTML Standard</a> summarizes the main differences,
     <p>Here, a single base run of three base characters
 		is annotated with three pinyin ruby text segments
 		in a first (implicit) container,
-		and an <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc①②">rtc</a></code> element is introduced
+		and an <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc①④">rtc</a></code> element is introduced
 		in order to provide a second single ruby annotation
 		being the city’s English name.</p>
    </div>
-   <p class="w-nodev"> An <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc①③">rtc</a></code> element that is not a child of a <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby①⑦">ruby</a></code> element <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#represents" id="ref-for-represents⑧">represents</a> the same thing as its children. </p>
+   <p class="w-nodev"> An <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc①⑤">rtc</a></code> element that is not a child of a <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby①⑥">ruby</a></code> element <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#represents" id="ref-for-represents⑨">represents</a> the same thing as its children. </p>
    <h3 class="heading settled" data-level="2.5" id="the-rp-element"><span class="secno">2.5. </span><span class="content"> The <dfn class="dfn-paneled" data-dfn-type="element" data-export id="elementdef-rp"><code>rp</code></dfn> element</span><a class="self-link" href="#the-rp-element"></a></h3>
    <dl class="def">
     <dt><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#concept-element-categories" id="ref-for-concept-element-categories④">Categories</a>: 
     <dd>None. 
     <dt><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#concept-element-contexts" id="ref-for-concept-element-contexts④">Contexts in which this element can be used</a>: 
-    <dd> As a child of a <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby①⑧">ruby</a></code> or <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc①④">rtc</a></code> element,
-			either immediately before after a <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units①②">ruby annotation unit</a>. 
+    <dd> As a child of a <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby①⑦">ruby</a></code> or <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc①⑥">rtc</a></code> element,
+			either immediately before or immediately after an <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc①⑦">rtc</a></code> element or a <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units①②">ruby annotation unit</a>. 
     <dt><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#concept-element-content-model" id="ref-for-concept-element-content-model④">Content model</a>: 
     <dd><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#text-content" id="ref-for-text-content">Text</a>. 
     <dt><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#concept-element-attributes" id="ref-for-concept-element-attributes④">Content attributes</a>: 
@@ -1305,7 +1306,7 @@ Comparison With The HTML Standard</a> summarizes the main differences,
     <dt><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#concept-element-dom" id="ref-for-concept-element-dom④">DOM interface</a>: 
     <dd>Uses <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/dom.html#htmlelement" id="ref-for-htmlelement④">HTMLElement</a></code>. 
    </dl>
-   <p>The <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp⑥">rp</a></code> (“ruby parenthetical”) element <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#represents" id="ref-for-represents⑨">represents</a> nothing.
+   <p>The <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp⑥">rp</a></code> (“ruby parenthetical”) element <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#represents" id="ref-for-represents①⓪">represents</a> nothing.
 	It is used to provide presentational content
 	(such as parentheses)
 	around <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units①③">ruby annotation units</a>,
@@ -1342,23 +1343,23 @@ Comparison With The HTML Standard</a> summarizes the main differences,
    </div>
    <h2 class="non-normative heading settled" data-level="3" id="optional-tags"><span class="secno">3. </span><span class="content"> Optional Tags</span><a class="self-link" href="#optional-tags"></a></h2>
    <div class="advisement"> This section extends the <a href="https://html.spec.whatwg.org/multipage/syntax.html#optional-tags"><cite>HTML</cite> § 13.1.2.4 Optional tags</a> section of the <a data-biblio-display="inline" data-link-type="biblio" href="https://html.spec.whatwg.org/multipage/"><cite>HTML Standard</cite></a>,
-		replacing the paragraphs of that section about <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt①④">rt</a></code> and <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp⑨">rp</a></code>,
-		and adding two more for <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb①①">rb</a></code> and <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc①⑤">rtc</a></code>. </div>
+		replacing the paragraphs of that section about <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt①⑥">rt</a></code> and <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp⑨">rp</a></code>,
+		and adding two more for <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb①①">rb</a></code> and <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc①⑧">rtc</a></code>. </div>
    <p>An <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb①②">rb</a></code> element’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/syntax.html#syntax-end-tag" id="ref-for-syntax-end-tag">end tag</a> may be omitted
 	if the <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb①③">rb</a></code> element is immediately followed by
-	an <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb①④">rb</a></code>, <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt①⑤">rt</a></code>, <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc①⑥">rtc</a></code> or <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp①⓪">rp</a></code> element,
+	an <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb①④">rb</a></code>, <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt①⑦">rt</a></code>, <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc①⑨">rtc</a></code> or <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp①⓪">rp</a></code> element,
 	or if there is no more content in the parent element.</p>
-   <p>An <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt①⑥">rt</a></code> element’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/syntax.html#syntax-end-tag" id="ref-for-syntax-end-tag①">end tag</a> may be omitted
-	if the <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt①⑦">rt</a></code> element is immediately followed by
-	an <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb①⑤">rb</a></code>, <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt①⑧">rt</a></code>, <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc①⑦">rtc</a></code> or <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp①①">rp</a></code> element,
+   <p>An <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt①⑧">rt</a></code> element’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/syntax.html#syntax-end-tag" id="ref-for-syntax-end-tag①">end tag</a> may be omitted
+	if the <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt①⑨">rt</a></code> element is immediately followed by
+	an <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb①⑤">rb</a></code>, <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②⓪">rt</a></code>, <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc②⓪">rtc</a></code> or <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp①①">rp</a></code> element,
 	or if there is no more content in the parent element.</p>
-   <p>An <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc①⑧">rtc</a></code> element’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/syntax.html#syntax-end-tag" id="ref-for-syntax-end-tag②">end tag</a> may be omitted
-	if the <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc①⑨">rtc</a></code> element is immediately followed by
-	an <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb①⑥">rb</a></code> or <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc②⓪">rtc</a></code> element,
+   <p>An <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc②①">rtc</a></code> element’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/syntax.html#syntax-end-tag" id="ref-for-syntax-end-tag②">end tag</a> may be omitted
+	if the <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc②②">rtc</a></code> element is immediately followed by
+	an <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb①⑥">rb</a></code> or <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc②③">rtc</a></code> element,
 	or if there is no more content in the parent element.</p>
    <p>An <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp①②">rp</a></code> element’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/syntax.html#syntax-end-tag" id="ref-for-syntax-end-tag③">end tag</a> may be omitted
 	if the <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp①③">rp</a></code> element is immediately followed by
-	an <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb①⑦">rb</a></code>, <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt①⑨">rt</a></code>, <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc②①">rtc</a></code> or <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp①④">rp</a></code> element,
+	an <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb①⑦">rb</a></code>, <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②①">rt</a></code>, <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc②④">rtc</a></code> or <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp①④">rp</a></code> element,
 	or if there is no more content in the parent element.</p>
    <h2 class="heading settled" data-level="4" id="rendering"><span class="secno">4. </span><span class="content"> Rendering</span><a class="self-link" href="#rendering"></a></h2>
    <div class="advisement"> This section completes the <a href="https://html.spec.whatwg.org/multipage/rendering.html#non-replaced-elements"><cite>HTML</cite> § 15.3 Non-replaced elements</a> section of the <a data-biblio-display="inline" data-link-type="biblio" href="https://html.spec.whatwg.org/multipage/"><cite>HTML Standard</cite></a>,
@@ -1389,7 +1390,7 @@ rtc<c- nf>:lang</c-><c- p>(</c->zh-TW<c- p>),</c-> <c- nf>:not</c-><c- p>(</c->r
   <c- p>}</c->
 </code></pre>
    <h2 class="heading settled" data-level="5" id="conforming-features"><span class="secno">5. </span><span class="content"> Conforming Features </span><a class="self-link" href="#conforming-features"></a></h2>
-   <div class="advisement"> Even though <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb①⑧">rb</a></code> and <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc②②">rtc</a></code> are included
+   <div class="advisement"> Even though <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb①⑧">rb</a></code> and <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc②⑤">rtc</a></code> are included
 		in the list of “entirely obsolete” elements
 		which “must not be used by authors”
 		in <a href="https://html.spec.whatwg.org/multipage/obsolete.html#non-conforming-features"><cite>HTML</cite> § 16.2 Non-conforming features</a>,
@@ -1409,9 +1410,9 @@ Editorial Tweaks to HTML</span><a class="self-link" href="#html-tweaks"></a></h2
      <blockquote class="non-normative">
        For the purposes of the CSS ruby model, 
       <del>
-       runs of children of <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby①⑨">ruby</a></code> elements
-				that are not <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②⓪">rt</a></code>
-       <ins>, <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc②③">rtc</a></code>,</ins>
+       runs of children of <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby①⑧">ruby</a></code> elements
+				that are not <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②②">rt</a></code>
+       <ins>, <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc②⑥">rtc</a></code>,</ins>
         or <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp①⑤">rp</a></code> elements
       </del>
       <ins><a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units①④">ruby annotation units</a> not established by <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb①⑨">rb</a></code> elements</ins>
@@ -1429,8 +1430,8 @@ Editorial Tweaks to HTML</span><a class="self-link" href="#html-tweaks"></a></h2
       <del>
        <p class="note" role="note"><span class="marker">Note:</span> When it becomes possible to do so,
 					the preceding requirement will be updated to be expressed in terms of CSS ruby.
-					(Currently, CSS ruby does not handle nested <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby②⓪">ruby</a></code> elements
-					or multiple sequential <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②①">rt</a></code> elements,
+					(Currently, CSS ruby does not handle nested <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby①⑨">ruby</a></code> elements
+					or multiple sequential <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②③">rt</a></code> elements,
 					which is how this semantic is expressed.)</p>
       </del>
       <ins>
@@ -1441,7 +1442,7 @@ Editorial Tweaks to HTML</span><a class="self-link" href="#html-tweaks"></a></h2
       </ins>
      </blockquote>
     <li>
-      Replacing the <q><code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby②①">ruby</a></code>, <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②②">rt</a></code>, <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp①⑥">rp</a></code></q> row of the table in <a href="https://html.spec.whatwg.org/multipage/text-level-semantics.html#usage-summary"><cite>HTML</cite> § 4.5.29 Usage summary</a>,
+      Replacing the <q><code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby②⓪">ruby</a></code>, <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②④">rt</a></code>, <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp①⑥">rp</a></code></q> row of the table in <a href="https://html.spec.whatwg.org/multipage/text-level-semantics.html#usage-summary"><cite>HTML</cite> § 4.5.29 Usage summary</a>,
 			with the following: 
      <table class="data complex">
       <thead>
@@ -1451,13 +1452,13 @@ Editorial Tweaks to HTML</span><a class="self-link" href="#html-tweaks"></a></h2
         <th>Example 
       <tbody>
        <tr>
-        <td><code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby②②">ruby</a></code>, <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb②⓪">rb</a></code>, <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②③">rt</a></code>, <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc②④">rtc</a></code>, <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp①⑦">rp</a></code> 
+        <td><code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby②①">ruby</a></code>, <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb②⓪">rb</a></code>, <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②⑤">rt</a></code>, <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc②⑦">rtc</a></code>, <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp①⑦">rp</a></code> 
         <td>Ruby annotations 
         <td><code class="highlight"> <c- p>&lt;</c-><c- f>ruby</c-><c- p>y</c-><wbr><c- p>&lt;</c-><c- f>rb</c-><c- p>></c-><wbr>旧<c- p>&lt;</c-><c- f>rb</c-><c- p>></c-><wbr>金<c- p>&lt;</c-><c- f>rb</c-><c- p>></c-><wbr>山<c- p>&lt;</c-><c- f>rp</c-><c- p>></c-><wbr> (<c- p>&lt;</c-><c- f>rt</c-><c- p>></c-><wbr>jiù<c- p>&lt;</c-><c- f>rt</c-><c- p>></c-><wbr>jīn<c- p>&lt;</c-><c- f>rt</c-><c- p>></c-><wbr>shān<c- p>&lt;</c-><c- f>rtc</c-><c- p>c</c-><wbr><c- p>&lt;</c-><c- f>rp</c-><c- p>></c-><wbr>: <c- p>&lt;/</c-><c- f>rp</c-><c- p>></c-><wbr>San Francisco<c- p>&lt;/</c-><c- f>rtc</c-><c- p>c</c-><wbr><c- p>&lt;</c-><c- f>rp</c-><c- p>></c-><wbr>)<c- p>&lt;/</c-><c- f>ruby</c-><c- p>></c-><wbr> </code> 
      </table>
     <li>
-      Updating the table at <a href="https://html.spec.whatwg.org/multipage/indices.html#elements-3"><cite>HTML</cite> §  Elements</a> to add rows for <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb②①">rb</a></code> and <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc②⑤">rtc</a></code>,
-			and to replace the rows for <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp①⑧">rp</a></code>, <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②④">rt</a></code>, and <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby②③">ruby</a></code>,
+      Updating the table at <a href="https://html.spec.whatwg.org/multipage/indices.html#elements-3"><cite>HTML</cite> §  Elements</a> to add rows for <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb②①">rb</a></code> and <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc②⑧">rtc</a></code>,
+			and to replace the rows for <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp①⑧">rp</a></code>, <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②⑥">rt</a></code>, and <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby②②">ruby</a></code>,
 			as follows: 
      <table class="data complex">
       <thead>
@@ -1474,7 +1475,7 @@ Editorial Tweaks to HTML</span><a class="self-link" href="#html-tweaks"></a></h2
         <th><code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb②②">rb</a></code> 
         <td>Ruby base 
         <td>none 
-        <td><code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby②④">ruby</a></code> 
+        <td><code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby②③">ruby</a></code> 
         <td><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#phrasing-content-2" id="ref-for-phrasing-content-2⑥">phrasing</a> 
         <td><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#global-attributes" id="ref-for-global-attributes⑤">globals</a> 
         <td><code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/dom.html#htmlelement" id="ref-for-htmlelement⑤">HTMLElement</a></code> 
@@ -1482,32 +1483,32 @@ Editorial Tweaks to HTML</span><a class="self-link" href="#html-tweaks"></a></h2
         <th><code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp①⑨">rp</a></code> 
         <td>Parenthesis for ruby annotation text 
         <td>none 
-        <td><code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby②⑤">ruby</a></code>; <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc②⑥">rtc</a></code> 
+        <td><code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby②④">ruby</a></code>; <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc②⑨">rtc</a></code> 
         <td><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#text-content" id="ref-for-text-content①">text</a> 
         <td><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#global-attributes" id="ref-for-global-attributes⑥">globals</a> 
         <td><code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/dom.html#htmlelement" id="ref-for-htmlelement⑥">HTMLElement</a></code> 
        <tr>
-        <th><code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②⑤">rt</a></code> 
+        <th><code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②⑦">rt</a></code> 
         <td>Ruby annotation text 
         <td>none 
-        <td> <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby②⑥">ruby</a></code>; <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc②⑦">rtc</a></code> 
+        <td> <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby②⑤">ruby</a></code>; <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc③⓪">rtc</a></code> 
         <td><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#phrasing-content-2" id="ref-for-phrasing-content-2⑦">phrasing</a> 
         <td><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#global-attributes" id="ref-for-global-attributes⑦">globals</a> 
         <td><code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/dom.html#htmlelement" id="ref-for-htmlelement⑦">HTMLElement</a></code> 
        <tr>
-        <th><code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc②⑧">rtc</a></code> 
+        <th><code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc③①">rtc</a></code> 
         <td>Ruby annotation container 
         <td>none 
-        <td> <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby②⑦">ruby</a></code> 
-        <td> <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#phrasing-content-2" id="ref-for-phrasing-content-2⑧">phrasing</a>; <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②⑥">rt</a></code>; <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp②⓪">rp</a></code> 
+        <td> <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby②⑥">ruby</a></code> 
+        <td> <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#phrasing-content-2" id="ref-for-phrasing-content-2⑧">phrasing</a>; <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②⑧">rt</a></code>; <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp②⓪">rp</a></code> 
         <td><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#global-attributes" id="ref-for-global-attributes⑧">globals</a> 
         <td><code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/dom.html#htmlelement" id="ref-for-htmlelement⑧">HTMLElement</a></code> 
        <tr>
-        <th><code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby②⑧">ruby</a></code> 
+        <th><code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby②⑦">ruby</a></code> 
         <td>Ruby annotation(s) 
         <td> <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#flow-content-2" id="ref-for-flow-content-2①">flow</a>; <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#phrasing-content-2" id="ref-for-phrasing-content-2⑨">phrasing</a>; <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#palpable-content-2" id="ref-for-palpable-content-2①">palpable</a> 
         <td><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#phrasing-content-2" id="ref-for-phrasing-content-2①⓪">phrasing</a> 
-        <td> <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#phrasing-content-2" id="ref-for-phrasing-content-2①①">phrasing</a>; <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb②③">rb</a></code>; <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②⑦">rt</a></code>; <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc②⑨">rtc</a></code>; <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp②①">rp</a></code>* 
+        <td> <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#phrasing-content-2" id="ref-for-phrasing-content-2①①">phrasing</a>; <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb②③">rb</a></code>; <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②⑨">rt</a></code>; <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc③②">rtc</a></code>; <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp②①">rp</a></code>* 
         <td><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#global-attributes" id="ref-for-global-attributes⑨">globals</a> 
         <td><code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/dom.html#htmlelement" id="ref-for-htmlelement⑨">HTMLElement</a></code> 
      </table>
@@ -1523,7 +1524,7 @@ Editorial Tweaks to HTML</span><a class="self-link" href="#html-tweaks"></a></h2
         <td><code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb②④">rb</a></code> 
         <td><code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/dom.html#htmlelement" id="ref-for-htmlelement①⓪">HTMLElement</a></code> 
        <tr>
-        <td><code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc③⓪">rtc</a></code> 
+        <td><code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc③③">rtc</a></code> 
         <td><code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/dom.html#htmlelement" id="ref-for-htmlelement①①">HTMLElement</a></code> 
      </table>
      <h2 class="no-num heading settled" id="diff-html"><span class="content"> Appendix B:
@@ -1534,7 +1535,7 @@ Comparison With The HTML Standard</span><a class="self-link" href="#diff-html"><
 	or otherwise evolves its handling of ruby,
 	this section is expected to be updated accordingly,
 	but there could be a delay before this happens.</p>
-     <p>While this specification reintroduces the previously obsoleted <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb②⑤">rb</a></code> and <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc③①">rtc</a></code> elements,
+     <p>While this specification reintroduces the previously obsoleted <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb②⑤">rb</a></code> and <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc③④">rtc</a></code> elements,
 	it makes no changes to <a href="https://html.spec.whatwg.org/multipage/parsing.html#parsing"><cite>HTML</cite> § 13.2 Parsing HTML documents</a>:
 	these elements are handled there already,
 	including their optional end tags.</p>
@@ -1542,7 +1543,7 @@ Comparison With The HTML Standard</span><a class="self-link" href="#diff-html"><
 	the two essential ones being:</p>
      <ol>
       <li>
-        In addition to the ability to interleave <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②⑧">rt</a></code> elements between anonymous ruby bases,
+        In addition to the ability to interleave <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt③⓪">rt</a></code> elements between anonymous ruby bases,
 			the previously obsoleted <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb②⑥">rb</a></code> element is restored,
 			enabling the so-called <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="tabular-markup">tabular markup</dfn> pattern
 			where several consecutive bases are followed
@@ -1556,7 +1557,7 @@ Comparison With The HTML Standard</span><a class="self-link" href="#diff-html"><
 			in order to have the individual base/annotation pairing
 			necessary to correct handle
 			the various possible presentations of ruby on <a href="#jukugo-ruby">compound words</a>,
-			interleaving the <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②⑨">rt</a></code> elements between segments of base text would be required.
+			interleaving the <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt③①">rt</a></code> elements between segments of base text would be required.
 			However, such this markup would not enable correct <a href="#ruby-inlining">ruby inlining</a>.</p>
        <p>Moreover, interleaved markup is also a source of issues
 			with operations like
@@ -1568,22 +1569,22 @@ Comparison With The HTML Standard</span><a class="self-link" href="#diff-html"><
         This document defines a different model for handling multiple levels of annotations: 
        <ul>
         <li>
-          The ability to associate multiple consecutive <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt③⓪">rt</a></code> elements with the preceding base text segment
+          The ability to associate multiple consecutive <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt③②">rt</a></code> elements with the preceding base text segment
 					without using explicit annotation containers
 					is dropped.
 					This pattern does not have interoperable implementations with the semantics intended by the <a data-biblio-display="inline" data-link-type="biblio" href="https://html.spec.whatwg.org/multipage/"><cite>HTML Standard</cite></a>,
 					and is in tension with <a data-link-type="dfn" href="#tabular-markup" id="ref-for-tabular-markup①">tabular markup</a>. 
-         <p>Instead, the previously obsoleted <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc③②">rtc</a></code> element is restored,
+         <p>Instead, the previously obsoleted <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc③⑤">rtc</a></code> element is restored,
 					providing the ability to indicate multiple annotation ranges over the same base(s),
 					using either interleaved or <a data-link-type="dfn" href="#tabular-markup" id="ref-for-tabular-markup②">tabular markup</a> patterns.</p>
         <li>
           While the ability to nest ruby is retained,
 					specialized semantics for nested ruby are dropped.
 					That markup pattern is strictly less expressive
-					than using <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc③③">rtc</a></code> for additional levels of annotations,
+					than using <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc③⑥">rtc</a></code> for additional levels of annotations,
 					since it does not allow pairing individual annotations in the outer ruby
 					with individual bases in the inner ruby.
-					The <a href="#ruby-rtc-ex">example about “上手”</a> can therefore be realized using <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc③④">rtc</a></code> but could not be with nested ruby. 
+					The <a href="#ruby-rtc-ex">example about “上手”</a> can therefore be realized using <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc③⑦">rtc</a></code> but could not be with nested ruby. 
          <p>Nested ruby as defined in the <a data-biblio-display="inline" data-link-type="biblio" href="https://html.spec.whatwg.org/multipage/"><cite>HTML Standard</cite></a> also does not have interoperable implementations
 					beyond the ordinary semantics of nesting,
 					and is at odds with the layout model of <a data-biblio-display="inline" data-link-type="biblio" href="https://drafts.csswg.org/css-ruby-1/"><cite>CSS Ruby Annotation Layout Module Level 1</cite></a>.</p>
@@ -1666,18 +1667,19 @@ Changes</span><a class="self-link" href="#changes"></a></h2>
   <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="index">
    <li><a href="#annotation-pairing">annotation pairing</a><span>, in § 2.1.1</span>
+   <li><a href="#ruby-annotation-units">annotation unit</a><span>, in § 2.1.1</span>
+   <li><a href="#ruby-base-units">base unit</a><span>, in § 2.1.1</span>
    <li><a href="#elementdef-rb">rb</a><span>, in § 2.2</span>
    <li><a href="#elementdef-rp">rp</a><span>, in § 2.5</span>
    <li><a href="#elementdef-rt">rt</a><span>, in § 2.3</span>
    <li><a href="#elementdef-rtc">rtc</a><span>, in § 2.4</span>
    <li><a href="#ruby">Ruby</a><span>, in § 1</span>
    <li><a href="#elementdef-ruby">ruby</a><span>, in § 2.1</span>
-   <li><a href="#ruby-annotation-ranges">ruby annotation ranges</a><span>, in § 2.1</span>
-   <li><a href="#ruby-annotation-units">ruby annotation units</a><span>, in § 2.1</span>
+   <li><a href="#ruby-annotation-range">ruby annotation range</a><span>, in § 2.1</span>
+   <li><a href="#ruby-annotation-units">ruby annotation units</a><span>, in § 2.1.1</span>
    <li><a href="#ruby-base-range">ruby base range</a><span>, in § 2.1</span>
-   <li><a href="#ruby-base-units">ruby base units</a><span>, in § 2.1</span>
-   <li><a href="#ruby-segment">ruby segment</a><span>, in § 2.1</span>
-   <li><a href="#ruby-segmentation">ruby segmentation</a><span>, in § 2.1.1</span>
+   <li><a href="#ruby-base-units">ruby base units</a><span>, in § 2.1.1</span>
+   <li><a href="#ruby-segment">ruby segment</a><span>, in § 2.1.1</span>
    <li><a href="#tabular-markup">tabular markup</a><span>, in § Unnumbered section</span>
   </ul>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
@@ -2063,21 +2065,21 @@ window.dfnpanelData['317acf49'] = {"dfnID": "317acf49", "url": "https://html.spe
 window.dfnpanelData['2ffaee93'] = {"dfnID": "2ffaee93", "url": "https://html.spec.whatwg.org/multipage/syntax.html#syntax-end-tag", "dfnText": "end tags", "refSections": [{"refs": [{"id": "ref-for-syntax-end-tag"}, {"id": "ref-for-syntax-end-tag\u2460"}, {"id": "ref-for-syntax-end-tag\u2461"}, {"id": "ref-for-syntax-end-tag\u2462"}], "title": "3. \nOptional Tags"}], "external": true};
 window.dfnpanelData['1236ac1a'] = {"dfnID": "1236ac1a", "url": "https://html.spec.whatwg.org/multipage/dom.html#flow-content-2", "dfnText": "flow content", "refSections": [{"refs": [{"id": "ref-for-flow-content-2"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-flow-content-2\u2460"}], "title": "\nAppendix A:\nEditorial Tweaks to HTML"}], "external": true};
 window.dfnpanelData['8fc74046'] = {"dfnID": "8fc74046", "url": "https://html.spec.whatwg.org/multipage/dom.html#global-attributes", "dfnText": "global attributes", "refSections": [{"refs": [{"id": "ref-for-global-attributes"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-global-attributes\u2460"}], "title": "2.2. \nThe rb element"}, {"refs": [{"id": "ref-for-global-attributes\u2461"}], "title": "2.3. \nThe rt element"}, {"refs": [{"id": "ref-for-global-attributes\u2462"}], "title": "2.4. \nThe rtc element"}, {"refs": [{"id": "ref-for-global-attributes\u2463"}], "title": "2.5. \nThe rp element"}, {"refs": [{"id": "ref-for-global-attributes\u2464"}, {"id": "ref-for-global-attributes\u2465"}, {"id": "ref-for-global-attributes\u2466"}, {"id": "ref-for-global-attributes\u2467"}, {"id": "ref-for-global-attributes\u2468"}], "title": "\nAppendix A:\nEditorial Tweaks to HTML"}], "external": true};
-window.dfnpanelData['cb3fd7c7'] = {"dfnID": "cb3fd7c7", "url": "https://html.spec.whatwg.org/multipage/dom.html#inter-element-whitespace", "dfnText": "inter-element whitespace", "refSections": [{"refs": [{"id": "ref-for-inter-element-whitespace"}], "title": "2.1. \nThe ruby element"}], "external": true};
+window.dfnpanelData['cb3fd7c7'] = {"dfnID": "cb3fd7c7", "url": "https://html.spec.whatwg.org/multipage/dom.html#inter-element-whitespace", "dfnText": "inter-element whitespace", "refSections": [{"refs": [{"id": "ref-for-inter-element-whitespace"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}], "external": true};
 window.dfnpanelData['d54eeea2'] = {"dfnID": "d54eeea2", "url": "https://html.spec.whatwg.org/multipage/dom.html#palpable-content-2", "dfnText": "palpable content", "refSections": [{"refs": [{"id": "ref-for-palpable-content-2"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-palpable-content-2\u2460"}], "title": "\nAppendix A:\nEditorial Tweaks to HTML"}], "external": true};
 window.dfnpanelData['e5a7e26c'] = {"dfnID": "e5a7e26c", "url": "https://html.spec.whatwg.org/multipage/dom.html#phrasing-content-2", "dfnText": "phrasing content", "refSections": [{"refs": [{"id": "ref-for-phrasing-content-2"}, {"id": "ref-for-phrasing-content-2\u2460"}, {"id": "ref-for-phrasing-content-2\u2461"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-phrasing-content-2\u2462"}], "title": "2.2. \nThe rb element"}, {"refs": [{"id": "ref-for-phrasing-content-2\u2463"}], "title": "2.3. \nThe rt element"}, {"refs": [{"id": "ref-for-phrasing-content-2\u2464"}], "title": "2.4. \nThe rtc element"}, {"refs": [{"id": "ref-for-phrasing-content-2\u2465"}, {"id": "ref-for-phrasing-content-2\u2466"}, {"id": "ref-for-phrasing-content-2\u2467"}, {"id": "ref-for-phrasing-content-2\u2468"}, {"id": "ref-for-phrasing-content-2\u2460\u24ea"}, {"id": "ref-for-phrasing-content-2\u2460\u2460"}], "title": "\nAppendix A:\nEditorial Tweaks to HTML"}], "external": true};
-window.dfnpanelData['073cf09c'] = {"dfnID": "073cf09c", "url": "https://html.spec.whatwg.org/multipage/dom.html#represents", "dfnText": "represent", "refSections": [{"refs": [{"id": "ref-for-represents"}, {"id": "ref-for-represents\u2460"}, {"id": "ref-for-represents\u2461"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-represents\u2462"}, {"id": "ref-for-represents\u2463"}], "title": "2.2. \nThe rb element"}, {"refs": [{"id": "ref-for-represents\u2464"}, {"id": "ref-for-represents\u2465"}], "title": "2.3. \nThe rt element"}, {"refs": [{"id": "ref-for-represents\u2466"}, {"id": "ref-for-represents\u2467"}], "title": "2.4. \nThe rtc element"}, {"refs": [{"id": "ref-for-represents\u2468"}], "title": "2.5. \nThe rp element"}], "external": true};
+window.dfnpanelData['073cf09c'] = {"dfnID": "073cf09c", "url": "https://html.spec.whatwg.org/multipage/dom.html#represents", "dfnText": "represent", "refSections": [{"refs": [{"id": "ref-for-represents"}, {"id": "ref-for-represents\u2460"}, {"id": "ref-for-represents\u2461"}, {"id": "ref-for-represents\u2462"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-represents\u2463"}, {"id": "ref-for-represents\u2464"}], "title": "2.2. \nThe rb element"}, {"refs": [{"id": "ref-for-represents\u2465"}, {"id": "ref-for-represents\u2466"}], "title": "2.3. \nThe rt element"}, {"refs": [{"id": "ref-for-represents\u2467"}, {"id": "ref-for-represents\u2468"}], "title": "2.4. \nThe rtc element"}, {"refs": [{"id": "ref-for-represents\u2460\u24ea"}], "title": "2.5. \nThe rp element"}], "external": true};
 window.dfnpanelData['62ac5b1c'] = {"dfnID": "62ac5b1c", "url": "https://html.spec.whatwg.org/multipage/dom.html#text-content", "dfnText": "text", "refSections": [{"refs": [{"id": "ref-for-text-content"}], "title": "2.5. \nThe rp element"}, {"refs": [{"id": "ref-for-text-content\u2460"}], "title": "\nAppendix A:\nEditorial Tweaks to HTML"}], "external": true};
-window.dfnpanelData['elementdef-ruby'] = {"dfnID": "elementdef-ruby", "url": "#elementdef-ruby", "dfnText": "ruby", "refSections": [{"refs": [{"id": "ref-for-elementdef-ruby"}, {"id": "ref-for-elementdef-ruby\u2460"}, {"id": "ref-for-elementdef-ruby\u2461"}, {"id": "ref-for-elementdef-ruby\u2462"}, {"id": "ref-for-elementdef-ruby\u2463"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-elementdef-ruby\u2464"}, {"id": "ref-for-elementdef-ruby\u2465"}, {"id": "ref-for-elementdef-ruby\u2466"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}, {"refs": [{"id": "ref-for-elementdef-ruby\u2467"}, {"id": "ref-for-elementdef-ruby\u2468"}, {"id": "ref-for-elementdef-ruby\u2460\u24ea"}], "title": "2.2. \nThe rb element"}, {"refs": [{"id": "ref-for-elementdef-ruby\u2460\u2460"}, {"id": "ref-for-elementdef-ruby\u2460\u2461"}, {"id": "ref-for-elementdef-ruby\u2460\u2462"}, {"id": "ref-for-elementdef-ruby\u2460\u2463"}], "title": "2.3. \nThe rt element"}, {"refs": [{"id": "ref-for-elementdef-ruby\u2460\u2464"}, {"id": "ref-for-elementdef-ruby\u2460\u2465"}, {"id": "ref-for-elementdef-ruby\u2460\u2466"}], "title": "2.4. \nThe rtc element"}, {"refs": [{"id": "ref-for-elementdef-ruby\u2460\u2467"}], "title": "2.5. \nThe rp element"}, {"refs": [{"id": "ref-for-elementdef-ruby\u2460\u2468"}, {"id": "ref-for-elementdef-ruby\u2461\u24ea"}, {"id": "ref-for-elementdef-ruby\u2461\u2460"}, {"id": "ref-for-elementdef-ruby\u2461\u2461"}, {"id": "ref-for-elementdef-ruby\u2461\u2462"}, {"id": "ref-for-elementdef-ruby\u2461\u2463"}, {"id": "ref-for-elementdef-ruby\u2461\u2464"}, {"id": "ref-for-elementdef-ruby\u2461\u2465"}, {"id": "ref-for-elementdef-ruby\u2461\u2466"}, {"id": "ref-for-elementdef-ruby\u2461\u2467"}], "title": "\nAppendix A:\nEditorial Tweaks to HTML"}], "external": false};
-window.dfnpanelData['ruby-segment'] = {"dfnID": "ruby-segment", "url": "#ruby-segment", "dfnText": "ruby segment", "refSections": [{"refs": [{"id": "ref-for-ruby-segment"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-ruby-segment\u2460"}, {"id": "ref-for-ruby-segment\u2461"}, {"id": "ref-for-ruby-segment\u2462"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}], "external": false};
-window.dfnpanelData['ruby-base-range'] = {"dfnID": "ruby-base-range", "url": "#ruby-base-range", "dfnText": "ruby base range", "refSections": [{"refs": [{"id": "ref-for-ruby-base-range"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-ruby-base-range\u2460"}, {"id": "ref-for-ruby-base-range\u2461"}, {"id": "ref-for-ruby-base-range\u2462"}, {"id": "ref-for-ruby-base-range\u2463"}, {"id": "ref-for-ruby-base-range\u2464"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}, {"refs": [{"id": "ref-for-ruby-base-range\u2465"}], "title": "2.4. \nThe rtc element"}], "external": false};
+window.dfnpanelData['elementdef-ruby'] = {"dfnID": "elementdef-ruby", "url": "#elementdef-ruby", "dfnText": "ruby", "refSections": [{"refs": [{"id": "ref-for-elementdef-ruby"}, {"id": "ref-for-elementdef-ruby\u2460"}, {"id": "ref-for-elementdef-ruby\u2461"}, {"id": "ref-for-elementdef-ruby\u2462"}, {"id": "ref-for-elementdef-ruby\u2463"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-elementdef-ruby\u2464"}, {"id": "ref-for-elementdef-ruby\u2465"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}, {"refs": [{"id": "ref-for-elementdef-ruby\u2466"}, {"id": "ref-for-elementdef-ruby\u2467"}, {"id": "ref-for-elementdef-ruby\u2468"}], "title": "2.2. \nThe rb element"}, {"refs": [{"id": "ref-for-elementdef-ruby\u2460\u24ea"}, {"id": "ref-for-elementdef-ruby\u2460\u2460"}, {"id": "ref-for-elementdef-ruby\u2460\u2461"}, {"id": "ref-for-elementdef-ruby\u2460\u2462"}], "title": "2.3. \nThe rt element"}, {"refs": [{"id": "ref-for-elementdef-ruby\u2460\u2463"}, {"id": "ref-for-elementdef-ruby\u2460\u2464"}, {"id": "ref-for-elementdef-ruby\u2460\u2465"}], "title": "2.4. \nThe rtc element"}, {"refs": [{"id": "ref-for-elementdef-ruby\u2460\u2466"}], "title": "2.5. \nThe rp element"}, {"refs": [{"id": "ref-for-elementdef-ruby\u2460\u2467"}, {"id": "ref-for-elementdef-ruby\u2460\u2468"}, {"id": "ref-for-elementdef-ruby\u2461\u24ea"}, {"id": "ref-for-elementdef-ruby\u2461\u2460"}, {"id": "ref-for-elementdef-ruby\u2461\u2461"}, {"id": "ref-for-elementdef-ruby\u2461\u2462"}, {"id": "ref-for-elementdef-ruby\u2461\u2463"}, {"id": "ref-for-elementdef-ruby\u2461\u2464"}, {"id": "ref-for-elementdef-ruby\u2461\u2465"}, {"id": "ref-for-elementdef-ruby\u2461\u2466"}], "title": "\nAppendix A:\nEditorial Tweaks to HTML"}], "external": false};
+window.dfnpanelData['ruby-base-range'] = {"dfnID": "ruby-base-range", "url": "#ruby-base-range", "dfnText": "ruby base range", "refSections": [{"refs": [{"id": "ref-for-ruby-base-range"}, {"id": "ref-for-ruby-base-range\u2460"}, {"id": "ref-for-ruby-base-range\u2461"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}, {"refs": [{"id": "ref-for-ruby-base-range\u2462"}], "title": "2.4. \nThe rtc element"}], "external": false};
+window.dfnpanelData['ruby-annotation-range'] = {"dfnID": "ruby-annotation-range", "url": "#ruby-annotation-range", "dfnText": "ruby annotation range", "refSections": [{"refs": [{"id": "ref-for-ruby-annotation-range"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-ruby-annotation-range\u2460"}, {"id": "ref-for-ruby-annotation-range\u2461"}, {"id": "ref-for-ruby-annotation-range\u2462"}, {"id": "ref-for-ruby-annotation-range\u2463"}, {"id": "ref-for-ruby-annotation-range\u2464"}, {"id": "ref-for-ruby-annotation-range\u2465"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}, {"refs": [{"id": "ref-for-ruby-annotation-range\u2466"}, {"id": "ref-for-ruby-annotation-range\u2467"}], "title": "2.4. \nThe rtc element"}], "external": false};
+window.dfnpanelData['ruby-segment'] = {"dfnID": "ruby-segment", "url": "#ruby-segment", "dfnText": "ruby segment", "refSections": [{"refs": [{"id": "ref-for-ruby-segment"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-ruby-segment\u2460"}, {"id": "ref-for-ruby-segment\u2461"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}], "external": false};
 window.dfnpanelData['ruby-base-units'] = {"dfnID": "ruby-base-units", "url": "#ruby-base-units", "dfnText": "ruby base units", "refSections": [{"refs": [{"id": "ref-for-ruby-base-units"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-ruby-base-units\u2460"}, {"id": "ref-for-ruby-base-units\u2461"}, {"id": "ref-for-ruby-base-units\u2462"}, {"id": "ref-for-ruby-base-units\u2463"}, {"id": "ref-for-ruby-base-units\u2464"}, {"id": "ref-for-ruby-base-units\u2465"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}, {"refs": [{"id": "ref-for-ruby-base-units\u2466"}, {"id": "ref-for-ruby-base-units\u2467"}], "title": "2.1.2. \nMarkup Patterns for Multi-Character Ruby"}, {"refs": [{"id": "ref-for-ruby-base-units\u2468"}], "title": "2.2. \nThe rb element"}, {"refs": [{"id": "ref-for-ruby-base-units\u2460\u24ea"}], "title": "2.3. \nThe rt element"}, {"refs": [{"id": "ref-for-ruby-base-units\u2460\u2460"}], "title": "2.4. \nThe rtc element"}], "external": false};
-window.dfnpanelData['ruby-annotation-ranges'] = {"dfnID": "ruby-annotation-ranges", "url": "#ruby-annotation-ranges", "dfnText": "ruby annotation ranges", "refSections": [{"refs": [{"id": "ref-for-ruby-annotation-ranges"}, {"id": "ref-for-ruby-annotation-ranges\u2460"}, {"id": "ref-for-ruby-annotation-ranges\u2461"}, {"id": "ref-for-ruby-annotation-ranges\u2462"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-ruby-annotation-ranges\u2463"}, {"id": "ref-for-ruby-annotation-ranges\u2464"}, {"id": "ref-for-ruby-annotation-ranges\u2465"}, {"id": "ref-for-ruby-annotation-ranges\u2466"}, {"id": "ref-for-ruby-annotation-ranges\u2467"}, {"id": "ref-for-ruby-annotation-ranges\u2468"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}, {"refs": [{"id": "ref-for-ruby-annotation-ranges\u2460\u24ea"}, {"id": "ref-for-ruby-annotation-ranges\u2460\u2460"}], "title": "2.4. \nThe rtc element"}], "external": false};
-window.dfnpanelData['ruby-annotation-units'] = {"dfnID": "ruby-annotation-units", "url": "#ruby-annotation-units", "dfnText": "ruby annotation units", "refSections": [{"refs": [{"id": "ref-for-ruby-annotation-units"}, {"id": "ref-for-ruby-annotation-units\u2460"}, {"id": "ref-for-ruby-annotation-units\u2461"}, {"id": "ref-for-ruby-annotation-units\u2462"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-ruby-annotation-units\u2463"}, {"id": "ref-for-ruby-annotation-units\u2464"}, {"id": "ref-for-ruby-annotation-units\u2465"}, {"id": "ref-for-ruby-annotation-units\u2466"}, {"id": "ref-for-ruby-annotation-units\u2467"}, {"id": "ref-for-ruby-annotation-units\u2468"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}, {"refs": [{"id": "ref-for-ruby-annotation-units\u2460\u24ea"}], "title": "2.3. \nThe rt element"}, {"refs": [{"id": "ref-for-ruby-annotation-units\u2460\u2460"}], "title": "2.4. \nThe rtc element"}, {"refs": [{"id": "ref-for-ruby-annotation-units\u2460\u2461"}, {"id": "ref-for-ruby-annotation-units\u2460\u2462"}], "title": "2.5. \nThe rp element"}, {"refs": [{"id": "ref-for-ruby-annotation-units\u2460\u2463"}], "title": "\nAppendix A:\nEditorial Tweaks to HTML"}], "external": false};
-window.dfnpanelData['elementdef-rb'] = {"dfnID": "elementdef-rb", "url": "#elementdef-rb", "dfnText": "rb", "refSections": [{"refs": [{"id": "ref-for-elementdef-rb"}, {"id": "ref-for-elementdef-rb\u2460"}, {"id": "ref-for-elementdef-rb\u2461"}, {"id": "ref-for-elementdef-rb\u2462"}, {"id": "ref-for-elementdef-rb\u2463"}, {"id": "ref-for-elementdef-rb\u2464"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-elementdef-rb\u2465"}], "title": "2.1.2. \nMarkup Patterns for Multi-Character Ruby"}, {"refs": [{"id": "ref-for-elementdef-rb\u2466"}, {"id": "ref-for-elementdef-rb\u2467"}, {"id": "ref-for-elementdef-rb\u2468"}, {"id": "ref-for-elementdef-rb\u2460\u24ea"}], "title": "2.2. \nThe rb element"}, {"refs": [{"id": "ref-for-elementdef-rb\u2460\u2460"}, {"id": "ref-for-elementdef-rb\u2460\u2461"}, {"id": "ref-for-elementdef-rb\u2460\u2462"}, {"id": "ref-for-elementdef-rb\u2460\u2463"}, {"id": "ref-for-elementdef-rb\u2460\u2464"}, {"id": "ref-for-elementdef-rb\u2460\u2465"}, {"id": "ref-for-elementdef-rb\u2460\u2466"}], "title": "3. \nOptional Tags"}, {"refs": [{"id": "ref-for-elementdef-rb\u2460\u2467"}], "title": "5. \nConforming Features "}, {"refs": [{"id": "ref-for-elementdef-rb\u2460\u2468"}, {"id": "ref-for-elementdef-rb\u2461\u24ea"}, {"id": "ref-for-elementdef-rb\u2461\u2460"}, {"id": "ref-for-elementdef-rb\u2461\u2461"}, {"id": "ref-for-elementdef-rb\u2461\u2462"}, {"id": "ref-for-elementdef-rb\u2461\u2463"}], "title": "\nAppendix A:\nEditorial Tweaks to HTML"}, {"refs": [{"id": "ref-for-elementdef-rb\u2461\u2464"}, {"id": "ref-for-elementdef-rb\u2461\u2465"}, {"id": "ref-for-elementdef-rb\u2461\u2466"}], "title": "\nAppendix B:\nComparison With The HTML Standard"}], "external": false};
-window.dfnpanelData['elementdef-rt'] = {"dfnID": "elementdef-rt", "url": "#elementdef-rt", "dfnText": "rt", "refSections": [{"refs": [{"id": "ref-for-elementdef-rt"}, {"id": "ref-for-elementdef-rt\u2460"}, {"id": "ref-for-elementdef-rt\u2461"}, {"id": "ref-for-elementdef-rt\u2462"}, {"id": "ref-for-elementdef-rt\u2463"}, {"id": "ref-for-elementdef-rt\u2464"}, {"id": "ref-for-elementdef-rt\u2465"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-elementdef-rt\u2466"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}, {"refs": [{"id": "ref-for-elementdef-rt\u2467"}], "title": "2.1.2. \nMarkup Patterns for Multi-Character Ruby"}, {"refs": [{"id": "ref-for-elementdef-rt\u2468"}, {"id": "ref-for-elementdef-rt\u2460\u24ea"}], "title": "2.3. \nThe rt element"}, {"refs": [{"id": "ref-for-elementdef-rt\u2460\u2460"}, {"id": "ref-for-elementdef-rt\u2460\u2461"}, {"id": "ref-for-elementdef-rt\u2460\u2462"}], "title": "2.4. \nThe rtc element"}, {"refs": [{"id": "ref-for-elementdef-rt\u2460\u2463"}, {"id": "ref-for-elementdef-rt\u2460\u2464"}, {"id": "ref-for-elementdef-rt\u2460\u2465"}, {"id": "ref-for-elementdef-rt\u2460\u2466"}, {"id": "ref-for-elementdef-rt\u2460\u2467"}, {"id": "ref-for-elementdef-rt\u2460\u2468"}], "title": "3. \nOptional Tags"}, {"refs": [{"id": "ref-for-elementdef-rt\u2461\u24ea"}, {"id": "ref-for-elementdef-rt\u2461\u2460"}, {"id": "ref-for-elementdef-rt\u2461\u2461"}, {"id": "ref-for-elementdef-rt\u2461\u2462"}, {"id": "ref-for-elementdef-rt\u2461\u2463"}, {"id": "ref-for-elementdef-rt\u2461\u2464"}, {"id": "ref-for-elementdef-rt\u2461\u2465"}, {"id": "ref-for-elementdef-rt\u2461\u2466"}], "title": "\nAppendix A:\nEditorial Tweaks to HTML"}, {"refs": [{"id": "ref-for-elementdef-rt\u2461\u2467"}, {"id": "ref-for-elementdef-rt\u2461\u2468"}, {"id": "ref-for-elementdef-rt\u2462\u24ea"}], "title": "\nAppendix B:\nComparison With The HTML Standard"}], "external": false};
-window.dfnpanelData['elementdef-rtc'] = {"dfnID": "elementdef-rtc", "url": "#elementdef-rtc", "dfnText": "rtc", "refSections": [{"refs": [{"id": "ref-for-elementdef-rtc"}, {"id": "ref-for-elementdef-rtc\u2460"}, {"id": "ref-for-elementdef-rtc\u2461"}, {"id": "ref-for-elementdef-rtc\u2462"}, {"id": "ref-for-elementdef-rtc\u2463"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-elementdef-rtc\u2464"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}, {"refs": [{"id": "ref-for-elementdef-rtc\u2465"}, {"id": "ref-for-elementdef-rtc\u2466"}, {"id": "ref-for-elementdef-rtc\u2467"}], "title": "2.3. \nThe rt element"}, {"refs": [{"id": "ref-for-elementdef-rtc\u2468"}, {"id": "ref-for-elementdef-rtc\u2460\u24ea"}, {"id": "ref-for-elementdef-rtc\u2460\u2460"}, {"id": "ref-for-elementdef-rtc\u2460\u2461"}, {"id": "ref-for-elementdef-rtc\u2460\u2462"}], "title": "2.4. \nThe rtc element"}, {"refs": [{"id": "ref-for-elementdef-rtc\u2460\u2463"}], "title": "2.5. \nThe rp element"}, {"refs": [{"id": "ref-for-elementdef-rtc\u2460\u2464"}, {"id": "ref-for-elementdef-rtc\u2460\u2465"}, {"id": "ref-for-elementdef-rtc\u2460\u2466"}, {"id": "ref-for-elementdef-rtc\u2460\u2467"}, {"id": "ref-for-elementdef-rtc\u2460\u2468"}, {"id": "ref-for-elementdef-rtc\u2461\u24ea"}, {"id": "ref-for-elementdef-rtc\u2461\u2460"}], "title": "3. \nOptional Tags"}, {"refs": [{"id": "ref-for-elementdef-rtc\u2461\u2461"}], "title": "5. \nConforming Features "}, {"refs": [{"id": "ref-for-elementdef-rtc\u2461\u2462"}, {"id": "ref-for-elementdef-rtc\u2461\u2463"}, {"id": "ref-for-elementdef-rtc\u2461\u2464"}, {"id": "ref-for-elementdef-rtc\u2461\u2465"}, {"id": "ref-for-elementdef-rtc\u2461\u2466"}, {"id": "ref-for-elementdef-rtc\u2461\u2467"}, {"id": "ref-for-elementdef-rtc\u2461\u2468"}, {"id": "ref-for-elementdef-rtc\u2462\u24ea"}], "title": "\nAppendix A:\nEditorial Tweaks to HTML"}, {"refs": [{"id": "ref-for-elementdef-rtc\u2462\u2460"}, {"id": "ref-for-elementdef-rtc\u2462\u2461"}, {"id": "ref-for-elementdef-rtc\u2462\u2462"}, {"id": "ref-for-elementdef-rtc\u2462\u2463"}], "title": "\nAppendix B:\nComparison With The HTML Standard"}], "external": false};
-window.dfnpanelData['elementdef-rp'] = {"dfnID": "elementdef-rp", "url": "#elementdef-rp", "dfnText": "rp", "refSections": [{"refs": [{"id": "ref-for-elementdef-rp"}, {"id": "ref-for-elementdef-rp\u2460"}, {"id": "ref-for-elementdef-rp\u2461"}, {"id": "ref-for-elementdef-rp\u2462"}, {"id": "ref-for-elementdef-rp\u2463"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-elementdef-rp\u2464"}], "title": "2.4. \nThe rtc element"}, {"refs": [{"id": "ref-for-elementdef-rp\u2465"}, {"id": "ref-for-elementdef-rp\u2466"}, {"id": "ref-for-elementdef-rp\u2467"}], "title": "2.5. \nThe rp element"}, {"refs": [{"id": "ref-for-elementdef-rp\u2468"}, {"id": "ref-for-elementdef-rp\u2460\u24ea"}, {"id": "ref-for-elementdef-rp\u2460\u2460"}, {"id": "ref-for-elementdef-rp\u2460\u2461"}, {"id": "ref-for-elementdef-rp\u2460\u2462"}, {"id": "ref-for-elementdef-rp\u2460\u2463"}], "title": "3. \nOptional Tags"}, {"refs": [{"id": "ref-for-elementdef-rp\u2460\u2464"}, {"id": "ref-for-elementdef-rp\u2460\u2465"}, {"id": "ref-for-elementdef-rp\u2460\u2466"}, {"id": "ref-for-elementdef-rp\u2460\u2467"}, {"id": "ref-for-elementdef-rp\u2460\u2468"}, {"id": "ref-for-elementdef-rp\u2461\u24ea"}, {"id": "ref-for-elementdef-rp\u2461\u2460"}], "title": "\nAppendix A:\nEditorial Tweaks to HTML"}], "external": false};
+window.dfnpanelData['ruby-annotation-units'] = {"dfnID": "ruby-annotation-units", "url": "#ruby-annotation-units", "dfnText": "ruby annotation units", "refSections": [{"refs": [{"id": "ref-for-ruby-annotation-units"}, {"id": "ref-for-ruby-annotation-units\u2460"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-ruby-annotation-units\u2461"}, {"id": "ref-for-ruby-annotation-units\u2462"}, {"id": "ref-for-ruby-annotation-units\u2463"}, {"id": "ref-for-ruby-annotation-units\u2464"}, {"id": "ref-for-ruby-annotation-units\u2465"}, {"id": "ref-for-ruby-annotation-units\u2466"}, {"id": "ref-for-ruby-annotation-units\u2467"}, {"id": "ref-for-ruby-annotation-units\u2468"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}, {"refs": [{"id": "ref-for-ruby-annotation-units\u2460\u24ea"}], "title": "2.3. \nThe rt element"}, {"refs": [{"id": "ref-for-ruby-annotation-units\u2460\u2460"}], "title": "2.4. \nThe rtc element"}, {"refs": [{"id": "ref-for-ruby-annotation-units\u2460\u2461"}, {"id": "ref-for-ruby-annotation-units\u2460\u2462"}], "title": "2.5. \nThe rp element"}, {"refs": [{"id": "ref-for-ruby-annotation-units\u2460\u2463"}], "title": "\nAppendix A:\nEditorial Tweaks to HTML"}], "external": false};
+window.dfnpanelData['elementdef-rb'] = {"dfnID": "elementdef-rb", "url": "#elementdef-rb", "dfnText": "rb", "refSections": [{"refs": [{"id": "ref-for-elementdef-rb"}, {"id": "ref-for-elementdef-rb\u2460"}, {"id": "ref-for-elementdef-rb\u2461"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-elementdef-rb\u2462"}, {"id": "ref-for-elementdef-rb\u2463"}, {"id": "ref-for-elementdef-rb\u2464"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}, {"refs": [{"id": "ref-for-elementdef-rb\u2465"}], "title": "2.1.2. \nMarkup Patterns for Multi-Character Ruby"}, {"refs": [{"id": "ref-for-elementdef-rb\u2466"}, {"id": "ref-for-elementdef-rb\u2467"}, {"id": "ref-for-elementdef-rb\u2468"}, {"id": "ref-for-elementdef-rb\u2460\u24ea"}], "title": "2.2. \nThe rb element"}, {"refs": [{"id": "ref-for-elementdef-rb\u2460\u2460"}, {"id": "ref-for-elementdef-rb\u2460\u2461"}, {"id": "ref-for-elementdef-rb\u2460\u2462"}, {"id": "ref-for-elementdef-rb\u2460\u2463"}, {"id": "ref-for-elementdef-rb\u2460\u2464"}, {"id": "ref-for-elementdef-rb\u2460\u2465"}, {"id": "ref-for-elementdef-rb\u2460\u2466"}], "title": "3. \nOptional Tags"}, {"refs": [{"id": "ref-for-elementdef-rb\u2460\u2467"}], "title": "5. \nConforming Features "}, {"refs": [{"id": "ref-for-elementdef-rb\u2460\u2468"}, {"id": "ref-for-elementdef-rb\u2461\u24ea"}, {"id": "ref-for-elementdef-rb\u2461\u2460"}, {"id": "ref-for-elementdef-rb\u2461\u2461"}, {"id": "ref-for-elementdef-rb\u2461\u2462"}, {"id": "ref-for-elementdef-rb\u2461\u2463"}], "title": "\nAppendix A:\nEditorial Tweaks to HTML"}, {"refs": [{"id": "ref-for-elementdef-rb\u2461\u2464"}, {"id": "ref-for-elementdef-rb\u2461\u2465"}, {"id": "ref-for-elementdef-rb\u2461\u2466"}], "title": "\nAppendix B:\nComparison With The HTML Standard"}], "external": false};
+window.dfnpanelData['elementdef-rt'] = {"dfnID": "elementdef-rt", "url": "#elementdef-rt", "dfnText": "rt", "refSections": [{"refs": [{"id": "ref-for-elementdef-rt"}, {"id": "ref-for-elementdef-rt\u2460"}, {"id": "ref-for-elementdef-rt\u2461"}, {"id": "ref-for-elementdef-rt\u2462"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-elementdef-rt\u2463"}, {"id": "ref-for-elementdef-rt\u2464"}, {"id": "ref-for-elementdef-rt\u2465"}, {"id": "ref-for-elementdef-rt\u2466"}, {"id": "ref-for-elementdef-rt\u2467"}, {"id": "ref-for-elementdef-rt\u2468"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}, {"refs": [{"id": "ref-for-elementdef-rt\u2460\u24ea"}], "title": "2.1.2. \nMarkup Patterns for Multi-Character Ruby"}, {"refs": [{"id": "ref-for-elementdef-rt\u2460\u2460"}, {"id": "ref-for-elementdef-rt\u2460\u2461"}], "title": "2.3. \nThe rt element"}, {"refs": [{"id": "ref-for-elementdef-rt\u2460\u2462"}, {"id": "ref-for-elementdef-rt\u2460\u2463"}, {"id": "ref-for-elementdef-rt\u2460\u2464"}], "title": "2.4. \nThe rtc element"}, {"refs": [{"id": "ref-for-elementdef-rt\u2460\u2465"}, {"id": "ref-for-elementdef-rt\u2460\u2466"}, {"id": "ref-for-elementdef-rt\u2460\u2467"}, {"id": "ref-for-elementdef-rt\u2460\u2468"}, {"id": "ref-for-elementdef-rt\u2461\u24ea"}, {"id": "ref-for-elementdef-rt\u2461\u2460"}], "title": "3. \nOptional Tags"}, {"refs": [{"id": "ref-for-elementdef-rt\u2461\u2461"}, {"id": "ref-for-elementdef-rt\u2461\u2462"}, {"id": "ref-for-elementdef-rt\u2461\u2463"}, {"id": "ref-for-elementdef-rt\u2461\u2464"}, {"id": "ref-for-elementdef-rt\u2461\u2465"}, {"id": "ref-for-elementdef-rt\u2461\u2466"}, {"id": "ref-for-elementdef-rt\u2461\u2467"}, {"id": "ref-for-elementdef-rt\u2461\u2468"}], "title": "\nAppendix A:\nEditorial Tweaks to HTML"}, {"refs": [{"id": "ref-for-elementdef-rt\u2462\u24ea"}, {"id": "ref-for-elementdef-rt\u2462\u2460"}, {"id": "ref-for-elementdef-rt\u2462\u2461"}], "title": "\nAppendix B:\nComparison With The HTML Standard"}], "external": false};
+window.dfnpanelData['elementdef-rtc'] = {"dfnID": "elementdef-rtc", "url": "#elementdef-rtc", "dfnText": "rtc", "refSections": [{"refs": [{"id": "ref-for-elementdef-rtc"}, {"id": "ref-for-elementdef-rtc\u2460"}, {"id": "ref-for-elementdef-rtc\u2461"}, {"id": "ref-for-elementdef-rtc\u2462"}, {"id": "ref-for-elementdef-rtc\u2463"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-elementdef-rtc\u2464"}, {"id": "ref-for-elementdef-rtc\u2465"}, {"id": "ref-for-elementdef-rtc\u2466"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}, {"refs": [{"id": "ref-for-elementdef-rtc\u2467"}, {"id": "ref-for-elementdef-rtc\u2468"}, {"id": "ref-for-elementdef-rtc\u2460\u24ea"}], "title": "2.3. \nThe rt element"}, {"refs": [{"id": "ref-for-elementdef-rtc\u2460\u2460"}, {"id": "ref-for-elementdef-rtc\u2460\u2461"}, {"id": "ref-for-elementdef-rtc\u2460\u2462"}, {"id": "ref-for-elementdef-rtc\u2460\u2463"}, {"id": "ref-for-elementdef-rtc\u2460\u2464"}], "title": "2.4. \nThe rtc element"}, {"refs": [{"id": "ref-for-elementdef-rtc\u2460\u2465"}, {"id": "ref-for-elementdef-rtc\u2460\u2466"}], "title": "2.5. \nThe rp element"}, {"refs": [{"id": "ref-for-elementdef-rtc\u2460\u2467"}, {"id": "ref-for-elementdef-rtc\u2460\u2468"}, {"id": "ref-for-elementdef-rtc\u2461\u24ea"}, {"id": "ref-for-elementdef-rtc\u2461\u2460"}, {"id": "ref-for-elementdef-rtc\u2461\u2461"}, {"id": "ref-for-elementdef-rtc\u2461\u2462"}, {"id": "ref-for-elementdef-rtc\u2461\u2463"}], "title": "3. \nOptional Tags"}, {"refs": [{"id": "ref-for-elementdef-rtc\u2461\u2464"}], "title": "5. \nConforming Features "}, {"refs": [{"id": "ref-for-elementdef-rtc\u2461\u2465"}, {"id": "ref-for-elementdef-rtc\u2461\u2466"}, {"id": "ref-for-elementdef-rtc\u2461\u2467"}, {"id": "ref-for-elementdef-rtc\u2461\u2468"}, {"id": "ref-for-elementdef-rtc\u2462\u24ea"}, {"id": "ref-for-elementdef-rtc\u2462\u2460"}, {"id": "ref-for-elementdef-rtc\u2462\u2461"}, {"id": "ref-for-elementdef-rtc\u2462\u2462"}], "title": "\nAppendix A:\nEditorial Tweaks to HTML"}, {"refs": [{"id": "ref-for-elementdef-rtc\u2462\u2463"}, {"id": "ref-for-elementdef-rtc\u2462\u2464"}, {"id": "ref-for-elementdef-rtc\u2462\u2465"}, {"id": "ref-for-elementdef-rtc\u2462\u2466"}], "title": "\nAppendix B:\nComparison With The HTML Standard"}], "external": false};
+window.dfnpanelData['elementdef-rp'] = {"dfnID": "elementdef-rp", "url": "#elementdef-rp", "dfnText": "rp", "refSections": [{"refs": [{"id": "ref-for-elementdef-rp"}, {"id": "ref-for-elementdef-rp\u2460"}, {"id": "ref-for-elementdef-rp\u2461"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-elementdef-rp\u2462"}, {"id": "ref-for-elementdef-rp\u2463"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}, {"refs": [{"id": "ref-for-elementdef-rp\u2464"}], "title": "2.4. \nThe rtc element"}, {"refs": [{"id": "ref-for-elementdef-rp\u2465"}, {"id": "ref-for-elementdef-rp\u2466"}, {"id": "ref-for-elementdef-rp\u2467"}], "title": "2.5. \nThe rp element"}, {"refs": [{"id": "ref-for-elementdef-rp\u2468"}, {"id": "ref-for-elementdef-rp\u2460\u24ea"}, {"id": "ref-for-elementdef-rp\u2460\u2460"}, {"id": "ref-for-elementdef-rp\u2460\u2461"}, {"id": "ref-for-elementdef-rp\u2460\u2462"}, {"id": "ref-for-elementdef-rp\u2460\u2463"}], "title": "3. \nOptional Tags"}, {"refs": [{"id": "ref-for-elementdef-rp\u2460\u2464"}, {"id": "ref-for-elementdef-rp\u2460\u2465"}, {"id": "ref-for-elementdef-rp\u2460\u2466"}, {"id": "ref-for-elementdef-rp\u2460\u2467"}, {"id": "ref-for-elementdef-rp\u2460\u2468"}, {"id": "ref-for-elementdef-rp\u2461\u24ea"}, {"id": "ref-for-elementdef-rp\u2461\u2460"}], "title": "\nAppendix A:\nEditorial Tweaks to HTML"}], "external": false};
 window.dfnpanelData['tabular-markup'] = {"dfnID": "tabular-markup", "url": "#tabular-markup", "dfnText": "tabular markup", "refSections": [{"refs": [{"id": "ref-for-tabular-markup"}, {"id": "ref-for-tabular-markup\u2460"}, {"id": "ref-for-tabular-markup\u2461"}], "title": "\nAppendix B:\nComparison With The HTML Standard"}], "external": false};
 </script>
 <script>/* Boilerplate: script-dom-helper */
