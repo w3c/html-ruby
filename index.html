@@ -8,7 +8,7 @@
   <meta content="Bikeshed version 82ce88815, updated Thu Sep 7 16:33:55 2023 -0700" name="generator">
   <link href="https://w3c.github.io/html-ruby/" rel="canonical">
   <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
-  <meta content="7bd8ea3279505db6ca39cf0770a4cef560fe19d9" name="document-revision">
+  <meta content="230d0b37781ea17913758a09f30541a911af06fb" name="document-revision">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
@@ -680,15 +680,19 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
 	Its publication here does not imply endorsement of its contents by W3C.
 	Don’t cite this document other than as work in progress. </p>
    <p></p>
-   <p>This document is developped
+   <p>This document is developed
 
-pursuant to the terms of the <a href="https://www.w3.org/2022/02/ruby-agreement">Agreement on HTML Ruby Markup</a> entered into between W3C and the WHATWG.</p>
+under the terms of the <a href="https://www.w3.org/2022/02/ruby-agreement">Agreement on HTML Ruby Markup</a> between W3C and the WHATWG.</p>
   </div>
   <div data-fill-with="at-risk"></div>
   <nav data-fill-with="table-of-contents" id="toc">
    <h2 class="no-num no-toc no-ref" id="contents">Table of Contents</h2>
    <ol class="toc" role="directory">
-    <li><a href="#intro"><span class="secno">1</span> <span class="content"> Introduction</span></a>
+    <li>
+     <a href="#intro"><span class="secno">1</span> <span class="content"> Introduction</span></a>
+     <ol class="toc">
+      <li><a href="#relations"><span class="secno">1.1</span> <span class="content"> Background and Relation to the <span data-biblio-display="inline"><cite>HTML Standard</cite></span></span></a>
+     </ol>
     <li>
      <a href="#elements"><span class="secno">2</span> <span class="content"> HTML Elements for Ruby</span></a>
      <ol class="toc">
@@ -716,7 +720,7 @@ Acknowledgements</span></a>
      <a href="#changes"><span class="secno"></span> <span class="content"> Appendix D:
 Changes</span></a>
      <ol class="toc">
-      <li><a href="#changes-since-2014"><span class="secno"></span> <span class="content"> Changes since <span>the 04 February 2014 <cite>W3C HTML Ruby Markup Extensions</cite> Working Group Note</span> </span></a>
+      <li><a href="#changes-since-2014"><span class="secno"></span> <span class="content"> Changes since the 04 February 2014 <cite>W3C HTML Ruby Markup Extensions</cite> Working Group Note </span></a>
      </ol>
     <li>
      <a href="#w3c-conformance"><span class="secno"></span> <span class="content">Conformance</span></a>
@@ -765,31 +769,32 @@ Changes</span></a>
 				Their pronunciation is indicated by 6 hiragana characters
 				placed immediately above.
 				The annotation is half the font size of the base it annotates." height="70" src="images/ruby-shinkansen.png" width="320"> </figure>
-   <p>In web content,
-	how to display ruby is covered by CSS in the <a data-biblio-display="inline" data-link-type="biblio" href="https://drafts.csswg.org/css-ruby-1/"><cite>CSS Ruby Annotation Layout Module Level 1</cite></a>,
-	which describes the general layout mechanism
-	and options necessary to cover frequently desired variations.
-	However, styling alone is not sufficient,
-	and specialized markup is required to define the association
-	between base text and annotation.</p>
+   <p>Specialized markup, as defined in this document, is necessary
+	to describe the semantic associations between the base text and its annotations,
+	to enable its various visual layouts
+	as well as correct non-visual presentation and processing.</p>
+   <p class="note" role="note"><span class="marker">Note:</span> <a data-biblio-display="inline" data-link-type="biblio" href="https://drafts.csswg.org/css-ruby-1/"><cite>CSS Ruby Annotation Layout Module Level 1</cite></a> defines the ruby layout model in CSS,
+	enabling the ruby presentation described above
+	and frequently desired variations.</p>
+   <h3 class="heading settled" data-level="1.1" id="relations"><span class="secno">1.1. </span><span class="content"> Background and Relation to the <a data-biblio-display="inline" data-link-type="biblio" href="https://html.spec.whatwg.org/multipage/"><cite>HTML Standard</cite></a></span><a class="self-link" href="#relations"></a></h3>
    <p>A set of HTML elements to markup ruby has evolved over the years in multiple specifications,
 	starting from the 2001 <a data-biblio-display="inline" data-link-type="biblio" href="https://www.w3.org/TR/ruby/"><cite>Ruby Annotation</cite></a> specification
 	all the way to the current <a data-biblio-display="inline" data-link-type="biblio" href="https://html.spec.whatwg.org/multipage/"><cite>HTML Standard</cite></a>,
 	with different incarnations varying in flexibility, complexity, or verbosity.</p>
    <p>While concise and effective in simple cases,
 	the ruby model described in the <a data-biblio-display="inline" data-link-type="biblio" href="https://html.spec.whatwg.org/multipage/"><cite>HTML Standard</cite></a> (at the time of writing this document)
-	is insufficiently flexible to handle all use cases well.
-	Moreover, some aspects of it are also not interoperably implemented,
-	yet implementing them would not completely address the remaining use cases,
-	and besides, these aspects are at odds the CSS layout model.</p>
-   <p>This document is written to promote—<wbr>and guide implementations of—<wbr>an alternative model for ruby,
-	in order to more completely address the needs of ruby on the web platform.
-	This is undertaken with the <a href="https://www.w3.org/2022/02/ruby-agreement">agreement of W3C and the WHATWG</a>.</p>
+	is insufficiently expressive to handle all use cases well.
+	Moreover, some aspects of it are also not interoperably implemented;
+	yet implementing them would not completely address the remaining use cases.
+	Additionally, these aspects are at odds with the CSS layout model.</p>
+   <p>This specification is written to promote—<wbr>and guide implementations of—<wbr>an revised and extended model for ruby,
+	in order to more completely address the needs of ruby on the Web platform.
+	This effort is undertaken with the <a href="https://www.w3.org/2022/02/ruby-agreement">agreement of W3C and the WHATWG</a>.</p>
    <p><a href="#diff-html">Appendix B:
-Comparison With The HTML Standard</a> gives a summary of the main differences,
-	as well as a brief overview of why these differences are desirable.</p>
+Comparison With The HTML Standard</a> summarizes the main differences,
+	and provides a brief overview of why these differences are desirable.</p>
    <p>Note that the semantics of the subset of the <a data-biblio-display="inline" data-link-type="biblio" href="https://html.spec.whatwg.org/multipage/"><cite>HTML Standard</cite></a> that is interoperably implemented
-	are unchanged in this document,
+	remain unchanged in this extension specification,
 	making the ruby model described here
 	backwards compatible
 	with any ruby content
@@ -798,8 +803,8 @@ Comparison With The HTML Standard</a> gives a summary of the main differences,
 		advisement blocks like this one
 		indicate how normative parts of the document
 		relate to and replace various part of the <a data-biblio-display="inline" data-link-type="biblio" href="https://html.spec.whatwg.org/multipage/"><cite>HTML Standard</cite></a>. </div>
-   <p>It is hoped that the changes proposed here will in time
-	be adopted by the WHAT-WG
+   <p>It is hoped that the changes described here will in time
+	be adopted by the WHATWG
 	and integrated into the <a data-biblio-display="inline" data-link-type="biblio" href="https://html.spec.whatwg.org/multipage/"><cite>HTML Standard</cite></a>,
 	reducing the delta between the two documents.</p>
    <h2 class="heading settled" data-level="2" id="elements"><span class="secno">2. </span><span class="content"> HTML Elements for Ruby</span><a class="self-link" href="#elements"></a></h2>
@@ -1531,10 +1536,9 @@ Comparison With The HTML Standard</span><a class="self-link" href="#diff-html"><
 	but there could be a delay before this happens.</p>
      <p>While this specification reintroduces the previously obsoleted <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb②⑤">rb</a></code> and <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc③①">rtc</a></code> elements,
 	it makes no changes to <a href="https://html.spec.whatwg.org/multipage/parsing.html#parsing"><cite>HTML</cite> § 13.2 Parsing HTML documents</a>:
-	these elements were handled already,
-	including their optional end tags.
-	The syntax is therefore unchanged.</p>
-     <p>There are, however, differences in how the various ruby related elements are used,
+	these elements are handled there already,
+	including their optional end tags.</p>
+     <p>There are, however, differences in how the various ruby related elements can be used,
 	the two essential ones being:</p>
      <ol>
       <li>
@@ -1619,9 +1623,9 @@ Acknowledgements</span><a class="self-link" href="#ack"></a></h2>
      <h2 class="no-num heading settled" id="changes"><span class="content"> Appendix D:
 Changes</span><a class="self-link" href="#changes"></a></h2>
      <p><i>This section is non-normative</i></p>
-     <h3 class="heading settled" id="changes-since-2014"><span class="content"> Changes since <a href="https://www.w3.org/TR/2014/NOTE-html-ruby-extensions-20140204/">the 04 February 2014 <cite>W3C HTML Ruby Markup Extensions</cite> Working Group Note</a> </span><a class="self-link" href="#changes-since-2014"></a></h3>
+     <h3 class="heading settled" id="changes-since-2014"><span class="content"> Changes since the 04 February 2014 <cite>W3C HTML Ruby Markup Extensions</cite> Working Group Note </span><a class="self-link" href="#changes-since-2014"></a></h3>
      <p>The markup model described here
-	is substantially the same as the one established by the 2014 Working Group Note,
+	is substantially the same as the one established by the <a href="https://www.w3.org/TR/2014/NOTE-html-ruby-extensions-20140204/">2014 Working Group Note</a>,
 	though the text describing it,
 	as well as the examples,
 	has been extensively reworked.</p>
