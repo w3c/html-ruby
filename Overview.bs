@@ -21,7 +21,6 @@ Status Text:
 	This document is developed
 	under the terms of the <a href="https://www.w3.org/2022/02/ruby-agreement">Agreement on HTML Ruby Markup</a>
 	between W3C and the WHATWG.
-Local Boilerplate: copyright yes, status yes
 </pre>
 
 <pre class="anchors">
