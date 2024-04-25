@@ -1120,7 +1120,7 @@ Editorial Tweaks to HTML</h2>
 						<td><{ruby}>, <{rb}>, <{rt}>, <{rtc}>, <{rp}>
 						<td>Ruby annotations
 						<td><code highlight="html">
-						&lt;ruby<wbr>>&lt;rb<wbr>>旧&lt;rb<wbr>>金&lt;rb<wbr>>山&lt;rp<wbr>> (&lt;rt<wbr>>jiù&lt;rt<wbr>>jīn&lt;rt<wbr>>shān&lt;rtc<wbr>>&lt;rp<wbr>>: &lt;/rp<wbr>>San Francisco&lt;/rtc<wbr>>&lt;rp<wbr>>)&lt;/ruby<wbr>>
+						&lt;ruby><wbr>&lt;rb><wbr>旧&lt;rb><wbr>金&lt;rb><wbr>山&lt;rp><wbr> (&lt;rt><wbr>jiù&lt;rt><wbr>jīn&lt;rt><wbr>shān&lt;rtc><wbr>&lt;rp><wbr>: &lt;/rp><wbr>San Francisco&lt;/rtc><wbr>&lt;rp><wbr>)&lt;/ruby>
 						</code>
 			</table>
 
