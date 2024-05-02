@@ -1311,7 +1311,7 @@ Acknowledgements</h2>
 	This document derives from several sources (which to some degree also derive from each other).
 	We would like to thank the contributors to all these sources, notably:
 	* The many <a href="https://html.spec.whatwg.org/multipage/acknowledgements.html#ipr">editors and contributors</a> of the [[HTML inline]]
-	* Robin Berjon, the editor of previous version of <a href="https://www.w3.org/TR/2014/NOTE-html-ruby-extensions-20140204/">W3C HTML Ruby Markup Extensions</a>
+	* Robin Berjon, editor of the previous version of <a href="https://www.w3.org/TR/2014/NOTE-html-ruby-extensions-20140204/">W3C HTML Ruby Markup Extensions</a>
 	* The editors and <a href="https://www.w3.org/TR/ruby/#ack">contributors</a> of [[RUBY inline]]
 
 	In addition,
