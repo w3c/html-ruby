@@ -8,7 +8,7 @@
   <meta content="Bikeshed version 82ce88815, updated Thu Sep 7 16:33:55 2023 -0700" name="generator">
   <link href="https://www.w3.org/TR/html-ruby-extensions/" rel="canonical">
   <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
-  <meta content="410ca77bbebe2592782f0b89b16a403b789eaafe" name="document-revision">
+  <meta content="bb461dfcefb5e287f993062fbac327231dc67f42" name="document-revision">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
@@ -642,7 +642,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">HTML Ruby Markup Extensions</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2024-05-02">2 May 2024</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2024-05-03">3 May 2024</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -1017,7 +1017,7 @@ Comparison With The HTML Standard</a> summarizes the main differences,
 		“<span lang="ja">京都市（きょうとし）</span>”,
 		not “<span lang="ja">京（きょう）都（と）市（し）</span>”.
 		This can be marked up using consecutive <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb⑤">rb</a></code> elements followed by consecutive <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt⑨">rt</a></code> elements:</p>
-<pre><code class="highlight"><c- p>&lt;</c-><c- f>ruby</c-><c- p>>&lt;</c-><c- f>rb</c-><c- p>></c->京<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->都<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->市<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->きょう<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->と<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->し<c- p>&lt;</c-><c- f>ruby</c-><c- p>></c->
+<pre><code class="highlight"><c- p>&lt;</c-><c- f>ruby</c-><c- p>>&lt;</c-><c- f>rb</c-><c- p>></c->京<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->都<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->市<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->きょう<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->と<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->し<c- p>&lt;/</c-><c- f>ruby</c-><c- p>></c->
 </code></pre>
     <p>If each base character was immediately followed by its annotation in the markup
 		(each base-annotation pair forming its own segment),
@@ -1031,7 +1031,7 @@ Comparison With The HTML Standard</a> summarizes the main differences,
 		falls back to inline layout automatically from interlinear layout.
 		The <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp④">rp</a></code> element can be inserted
 		to provide the appropriate punctuation for when ruby is not supported:</p>
-<pre><code class="highlight"><c- p>&lt;</c-><c- f>ruby</c-><c- p>>&lt;</c-><c- f>rb</c-><c- p>></c->京<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->都<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->市<c- p>&lt;</c-><c- f>rp</c-><c- p>></c->（<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->きょう<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->と<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->し<c- p>&lt;</c-><c- f>rp</c-><c- p>></c->）<c- p>&lt;</c-><c- f>ruby</c-><c- p>></c->
+<pre><code class="highlight"><c- p>&lt;</c-><c- f>ruby</c-><c- p>>&lt;</c-><c- f>rb</c-><c- p>></c->京<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->都<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->市<c- p>&lt;</c-><c- f>rp</c-><c- p>></c->（<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->きょう<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->と<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->し<c- p>&lt;</c-><c- f>rp</c-><c- p>></c->）<c- p>&lt;/</c-><c- f>ruby</c-><c- p>></c->
 </code></pre>
    </div>
    <h4 class="non-normative heading settled" data-level="2.1.2" id="ruby-compound"><span class="secno">2.1.2. </span><span class="content"> Markup Patterns for Multi-Character Ruby</span><a class="self-link" href="#ruby-compound"></a></h4>
@@ -1160,7 +1160,7 @@ Comparison With The HTML Standard</a> summarizes the main differences,
     <p>Since choosing to render as “jukugo ruby” or not is a stylistic choice,
 		the same markup needs to enable both—<wbr>and it needs to encode both the pairing information within the word
 		as well as the grouping of these pairs as a single word:</p>
-<pre><code class="highlight"><c- p>&lt;</c-><c- f>ruby</c-><c- p>>&lt;</c-><c- f>rb</c-><c- p>></c->京<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->都<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->市<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->きょう<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->と<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->し<c- p>&lt;</c-><c- f>ruby</c-><c- p>></c->
+<pre><code class="highlight"><c- p>&lt;</c-><c- f>ruby</c-><c- p>>&lt;</c-><c- f>rb</c-><c- p>></c->京<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->都<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->市<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->きょう<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->と<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->し<c- p>&lt;/</c-><c- f>ruby</c-><c- p>></c->
 </code></pre>
     <p>Correct “jukugo ruby” is not be possible
 		if all the base characters are part of a single <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb⑥">rb</a></code> element
