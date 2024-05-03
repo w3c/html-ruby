@@ -470,7 +470,7 @@ Ruby Segmentation and Pairing</h4>
 		This can be marked up using consecutive <{rb}> elements followed by consecutive <{rt}> elements:
 
 		<pre><code highlight="html">
-			&lt;ruby>&lt;rb>京&lt;rb>都&lt;rb>市&lt;rt>きょう&lt;rt>と&lt;rt>し&lt;ruby>
+			&lt;ruby>&lt;rb>京&lt;rb>都&lt;rb>市&lt;rt>きょう&lt;rt>と&lt;rt>し&lt;/ruby>
 		</code></pre>
 
 		If each base character was immediately followed by its annotation in the markup
@@ -488,7 +488,7 @@ Ruby Segmentation and Pairing</h4>
 		to provide the appropriate punctuation for when ruby is not supported:
 
 		<pre><code highlight="html">
-			&lt;ruby>&lt;rb>京&lt;rb>都&lt;rb>市&lt;rp>（&lt;rt>きょう&lt;rt>と&lt;rt>し&lt;rp>）&lt;ruby>
+			&lt;ruby>&lt;rb>京&lt;rb>都&lt;rb>市&lt;rp>（&lt;rt>きょう&lt;rt>と&lt;rt>し&lt;rp>）&lt;/ruby>
 		</code></pre>
 	</div>
 
@@ -683,7 +683,7 @@ Markup Patterns for Multi-Character Ruby</h4>
 		as well as the grouping of these pairs as a single word:
 
 		<pre><code highlight="html">
-			&lt;ruby>&lt;rb>京&lt;rb>都&lt;rb>市&lt;rt>きょう&lt;rt>と&lt;rt>し&lt;ruby>
+			&lt;ruby>&lt;rb>京&lt;rb>都&lt;rb>市&lt;rt>きょう&lt;rt>と&lt;rt>し&lt;/ruby>
 		</code></pre>
 
 		Correct “jukugo ruby” is not be possible
