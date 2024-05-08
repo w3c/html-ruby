@@ -5,8 +5,8 @@ on:
   push:
     branches: [main]
 jobs:
-  main:
-    name: Build, Validate and Deploy
+  ed:
+    name: Build, Validate and Deploy Editor's Draft
     runs-on: ubuntu-20.04
     permissions:
       contents: write
@@ -18,5 +18,16 @@ jobs:
           GH_PAGES_BRANCH: gh-pages
           SOURCE: Overview.bs
           DESTINATION: index.html
-
-
+  tr:
+    name: Build, Validate and Deploy on TR
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: w3c/spec-prod@v2
+        with:
+          W3C_WG_DECISION_URL: https://github.com/w3c/htmlwg/issues/26#issuecomment-2088100459
+          TOOLCHAIN: bikeshed
+          SOURCE: Overview.bs
+          W3C_ECHIDNA_TOKEN: ${{ secrets.ECHIDNA_TOKEN }}
+          W3C_BUILD_OVERRIDE: |
+            Status: w3c/WD
