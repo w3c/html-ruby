@@ -1,7 +1,7 @@
 <pre class='metadata'>
 Title: HTML Ruby Markup Extensions
 Shortname: html-ruby-extensions
-Level: 1
+Level: None
 Status: w3c/ED
 Group: htmlwg
 Repository: w3c/html-ruby
