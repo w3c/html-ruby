@@ -1300,9 +1300,24 @@ Comparison With The HTML Standard</h2>
 	A [[UNIFIED-RUBY inline|2011 blog post by fantasai]] explains in more details
 	these requirements and resulting design choices.
 
+<h2 class=no-num id=sec>
+Appendix C:
+Security Considerations</h2>
+
+	<i>This section is non-normative</i>
+
+	This specification has no known security implication.
+
+<h2 class=no-num id=priv>
+Appendix D:
+Privacy Considerations</h2>
+
+	<i>This section is non-normative</i>
+
+	This specification has no known privacy implication.
 
 <h2 class=no-num id=ack>
-Appendix C:
+Appendix E:
 Acknowledgements</h2>
 
 	<i>This section is non-normative</i>
@@ -1326,7 +1341,7 @@ Acknowledgements</h2>
 
 
 <h2 class=no-num id=changes>
-Appendix D:
+Appendix F:
 Changes</h2>
 
 	<i>This section is non-normative</i>
