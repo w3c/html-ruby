@@ -5,10 +5,12 @@
   <title>HTML Ruby Markup Extensions</title>
   <meta content="w3c/ED" name="w3c-status">
   <link href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED" rel="stylesheet">
-  <meta content="Bikeshed version 82ce88815, updated Thu Sep 7 16:33:55 2023 -0700" name="generator">
+  <meta content="Bikeshed version d765c696b, updated Fri Mar 8 15:58:52 2024 -0800" name="generator">
   <link href="https://www.w3.org/TR/html-ruby-extensions/" rel="canonical">
   <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
-  <meta content="032b5b69be1df4c6d1e0800888bdb00d94914ca6" name="document-revision">
+  <meta content="13ad959f26cf52e2af7deaa71fb283e939289d06" name="revision">
+  <meta content="dark light" name="color-scheme">
+  <link href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
@@ -80,7 +82,6 @@ pre .property::before, pre .property::after {
 }
 </style>
 <style>/* Boilerplate: style-colors */
-
 /* Any --*-text not paired with a --*-bg is assumed to have a transparent bg */
 :root {
     color-scheme: light dark;
@@ -334,11 +335,15 @@ figcaption:not(.no-marker)::before {
 :root {
     --dfnpanel-bg: #ddd;
     --dfnpanel-text: var(--text);
+    --dfnpanel-target-bg: #ffc;
+    --dfnpanel-target-outline: orange;
 }
 @media (prefers-color-scheme: dark) {
     :root {
         --dfnpanel-bg: #222;
         --dfnpanel-text: var(--text);
+        --dfnpanel-target-bg: #333;
+        --dfnpanel-target-outline: silver;
     }
 }
 .dfn-panel {
@@ -361,11 +366,13 @@ figcaption:not(.no-marker)::before {
 .dfn-panel > b { display: block; }
 .dfn-panel a { color: var(--dfnpanel-text); }
 .dfn-panel a:not(:hover) { text-decoration: none !important; border-bottom: none !important; }
+.dfn-panel a:focus {
+    outline: 5px auto Highlight;
+    outline: 5px auto -webkit-focus-ring-color;
+}
 .dfn-panel > b + b { margin-top: 0.25em; }
 .dfn-panel ul { padding: 0 0 0 1em; list-style: none; }
 .dfn-panel li a {
-    white-space: pre;
-    display: inline-block;
     max-width: calc(300px - 1.5em - 1em);
     overflow: hidden;
     text-overflow: ellipsis;
@@ -374,67 +381,79 @@ figcaption:not(.no-marker)::before {
 .dfn-panel.activated {
     display: inline-block;
     position: fixed;
-    left: .5em;
+    left: 8px;
     bottom: 2em;
     margin: 0 auto;
     max-width: calc(100vw - 1.5em - .4em - .5em);
     max-height: 30vh;
+    transition: left 1s ease-out, bottom 1s ease-out;
 }
 
-.dfn-paneled[role="button"] { cursor: pointer; }
-</style>
-<style>/* Boilerplate: style-dfn-panel */
-:root {
-    --dfnpanel-bg: #ddd;
-    --dfnpanel-text: var(--text);
+.dfn-panel .link-item:hover {
+    text-decoration: underline;
 }
-@media (prefers-color-scheme: dark) {
-    :root {
-        --dfnpanel-bg: #222;
-        --dfnpanel-text: var(--text);
+.dfn-panel .link-item .copy-icon {
+    opacity: 0;
+}
+.dfn-panel .link-item:hover .copy-icon,
+.dfn-panel .link-item .copy-icon:focus {
+    opacity: 1;
+}
+
+.dfn-panel .copy-icon {
+    display: inline-block;
+    margin-right: 0.5em;
+    width: 0.85em;
+    height: 1em;
+    border-radius: 3px;
+    background-color: #ccc;
+    cursor: pointer;
+}
+
+.dfn-panel .copy-icon .icon {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.dfn-panel .copy-icon .icon::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+    background-color: #ccc;
+    opacity: 0.25;
+    transform: translate(3px, -3px);
+}
+
+.dfn-panel .copy-icon:active .icon::before {
+    opacity: 1;
+}
+
+.dfn-paneled[role="button"] { cursor: help; }
+
+.highlighted {
+    animation: target-fade 3s;
+}
+
+@keyframes target-fade {
+    from {
+        background-color: var(--dfnpanel-target-bg);
+        outline: 5px solid var(--dfnpanel-target-outline);
+    }
+    to {
+        color: var(--a-normal-text);
+        background-color: transparent;
+        outline: transparent;
     }
 }
-.dfn-panel {
-    position: absolute;
-    z-index: 35;
-    width: 20em;
-    width: 300px;
-    height: auto;
-    max-height: 500px;
-    overflow: auto;
-    padding: 0.5em 0.75em;
-    font: small Helvetica Neue, sans-serif, Droid Sans Fallback;
-    background: var(--dfnpanel-bg);
-    color: var(--dfnpanel-text);
-    border: outset 0.2em;
-    white-space: normal; /* in case it's moved into a pre */
-}
-.dfn-panel:not(.on) { display: none; }
-.dfn-panel * { margin: 0; padding: 0; text-indent: 0; }
-.dfn-panel > b { display: block; }
-.dfn-panel a { color: var(--dfnpanel-text); }
-.dfn-panel a:not(:hover) { text-decoration: none !important; border-bottom: none !important; }
-.dfn-panel > b + b { margin-top: 0.25em; }
-.dfn-panel ul { padding: 0 0 0 1em; list-style: none; }
-.dfn-panel li a {
-    white-space: pre;
-    display: inline-block;
-    max-width: calc(300px - 1.5em - 1em);
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.dfn-panel.activated {
-    display: inline-block;
-    position: fixed;
-    left: .5em;
-    bottom: 2em;
-    margin: 0 auto;
-    max-width: calc(100vw - 1.5em - .4em - .5em);
-    max-height: 30vh;
-}
-
-.dfn-paneled[role="button"] { cursor: pointer; }
 </style>
 <style>/* Boilerplate: style-issues */
 a[href].issue-return {
@@ -455,8 +474,40 @@ a[href].issue-return {
     margin-bottom: 0;
 }
 </style>
-<style>/* Boilerplate: style-selflinks */
+<style>/* Boilerplate: style-ref-hints */
+:root {
+    --ref-hint-bg: #ddd;
+    --ref-hint-text: var(--text);
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --ref-hint-bg: #222;
+        --ref-hint-text: var(--text);
+    }
+}
 
+.ref-hint {
+    display: inline-block;
+    position: absolute;
+    z-index: 35;
+    width: 20em;
+    width: 300px;
+    height: auto;
+    max-height: 500px;
+    overflow: auto;
+    padding: 0.5em 0.5em;
+    font: small Helvetica Neue, sans-serif, Droid Sans Fallback;
+    background: var(--ref-hint-bg);
+    color: var(--ref-hint-text);
+    border: outset 0.2em;
+    white-space: normal; /* in case it's moved into a pre */
+}
+
+.ref-hint * { margin: 0; padding: 0; text-indent: 0; }
+
+.ref-hint ul { padding: 0 0 0 1em; list-style: none; }
+</style>
+<style>/* Boilerplate: style-selflinks */
 :root {
     --selflink-text: white;
     --selflink-bg: gray;
@@ -516,7 +567,6 @@ a.self-link::before            { content: "¶"; }
 dfn > a.self-link::before      { content: "#"; }
 </style>
 <style>/* Boilerplate: style-syntax-highlighting */
-
 code.highlight { padding: .1em; border-radius: .3em; }
 pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em 0; overflow: auto; border-radius: 0; }
 
@@ -573,7 +623,6 @@ c-[vc] { color: #0077aa } /* Name.Variable.Class */
 c-[vg] { color: #0077aa } /* Name.Variable.Global */
 c-[vi] { color: #0077aa } /* Name.Variable.Instance */
 c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
-
 
 @media (prefers-color-scheme: dark) {
     .highlight:not(.idl) { background: rgba(255, 255, 255, .05); }
@@ -665,10 +714,9 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="p-summary" data-fill-with="abstract">
    <h2 class="no-num no-toc no-ref heading settled" id="abstract"><span class="content">Abstract</span></h2>
    <p>Ruby, a form of interlinear annotation,
-
-	are short runs of text alongside the base text.
-	They are typically used in East Asian documents
-	to indicate pronunciation or to provide a short annotation.</p>
+are short runs of text alongside the base text.
+They are typically used in East Asian documents
+to indicate pronunciation or to provide a short annotation.</p>
    <p>This specification revises and extends the markup model established by HTML to express ruby.</p>
   </div>
   <h2 class="no-num no-toc no-ref heading settled" id="sotd"><span class="content">Status of this document</span></h2>
@@ -680,7 +728,6 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <p>This document is governed by the <a href="https://www.w3.org/2023/Process-20231103/" id="w3c_process_revision">03 November 2023 W3C Process Document</a>. </p>
    <p></p>
    <p>This document is developed
-
 under the terms of the <a href="https://www.w3.org/2022/02/ruby-agreement">Agreement on HTML Ruby Markup</a> between W3C and the WHATWG.</p>
   </div>
   <div data-fill-with="at-risk"></div>
@@ -749,7 +796,7 @@ Changes</span></a>
   <main>
    <h2 class="heading settled" data-level="1" id="intro"><span class="secno">1. </span><span class="content"> Introduction</span><a class="self-link" href="#intro"></a></h2>
    <p><i>This section is non-normative</i></p>
-   <p><dfn data-dfn-type="dfn" data-export id="ruby">Ruby<a class="self-link" href="#ruby"></a></dfn> is a name for small annotations that are rendered alongside base text.
+   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="ruby">Ruby</dfn> is a name for small annotations that are rendered alongside base text.
 	This is especially useful for Japanese and other East Asian content
 	(ruby may be called <i>furigana</i> in Japanese).
 	It is most often used to provide a reading (pronunciation guide).</p>
@@ -792,7 +839,7 @@ Changes</span></a>
 	Moreover, some aspects of it are also not interoperably implemented;
 	yet implementing them would not completely address the remaining use cases.
 	Additionally, these aspects are at odds with the CSS layout model.</p>
-   <p>This specification is written to promote—<wbr>and guide implementations of—<wbr>an revised and extended model for ruby,
+   <p>This specification is written to promote—​and guide implementations of—​an revised and extended model for ruby,
 	in order to more completely address the needs of ruby on the Web platform.
 	This effort is undertaken with the <a href="https://www.w3.org/2022/02/ruby-agreement">agreement of W3C and the WHATWG</a>.</p>
    <p><a href="#diff-html">Appendix B:
@@ -982,7 +1029,7 @@ Comparison With The HTML Standard</a> summarizes the main differences,
     <p>Multiple adjacent ruby segments can also be combined into the same <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby⑥">ruby</a></code> parent:</p>
     <p><code class="highlight" lang="zh"> <c- p>&lt;</c-><c- f>ruby</c-><c- p>></c->千<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->qiān<c- p>&lt;/</c-><c- f>rt</c-><c- p>></c->里<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->lǐ<c- p>&lt;/</c-><c- f>rt</c-><c- p>></c->之<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->zhī<c- p>&lt;/</c-><c- f>rt</c-><c- p>></c->行<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->xíng<c- p>&lt;/</c-><c- f>ruby</c-><c- p>></c->﹐<c- p>&lt;</c-><c- f>ruby</c-><c- p>></c->始<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->shǐ<c- p>&lt;/</c-><c- f>rt</c-><c- p>></c->於<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->yú<c- p>&lt;/</c-><c- f>rt</c-><c- p>></c->足<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->zú<c- p>&lt;/</c-><c- f>rt</c-><c- p>></c->下<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->xià<c- p>&lt;/</c-><c- f>ruby</c-><c- p>></c->。 </code></p>
    </div>
-   <p>The process of <dfn data-dfn-type="dfn" data-export id="annotation-pairing">annotation pairing<a class="self-link" href="#annotation-pairing"></a></dfn> associates <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units④">ruby annotation units</a> with <a data-link-type="dfn" href="#ruby-base-units" id="ref-for-ruby-base-units①">ruby base units</a>.
+   <p>The process of <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="annotation-pairing">annotation pairing</dfn> associates <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units④">ruby annotation units</a> with <a data-link-type="dfn" href="#ruby-base-units" id="ref-for-ruby-base-units①">ruby base units</a>.
 	Within each <a data-link-type="dfn" href="#ruby-segment" id="ref-for-ruby-segment①">ruby segment</a>,
 	each <a data-link-type="dfn" href="#ruby-base-units" id="ref-for-ruby-base-units②">ruby base unit</a> is paired with a <a data-link-type="dfn" href="#ruby-annotation-units" id="ref-for-ruby-annotation-units⑤">ruby annotation unit</a> from each <a data-link-type="dfn" href="#ruby-annotation-range" id="ref-for-ruby-annotation-range④">ruby annotation range</a>.
 	If a <a data-link-type="dfn" href="#ruby-annotation-range" id="ref-for-ruby-annotation-range⑤">ruby annotation range</a> consists of an <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc⑦">rtc</a></code> element
@@ -1146,7 +1193,7 @@ Comparison With The HTML Standard</a> summarizes the main differences,
       <img alt="“Kyoto City” written in horizontal Japanese,
 					with phonetic annotations over each of the three characters.
 					At 50% of the base font size,
-					the first annotation doesn’t fit over its base character,
+					the first annotation doesn&apos;t fit over its base character,
 					so it merges with the second one.
 					The third remains separate." height="71" src="images/kyoto-50.png" width="120"> 
      <figcaption>Ruby sized at 50%</figcaption>
@@ -1155,13 +1202,13 @@ Comparison With The HTML Standard</a> summarizes the main differences,
       <img alt="“Kyoto City” written in horizontal Japanese,
 					with phonetic annotations over each of the three characters.
 					At 60% of the base font size,
-					the first annotation doesn’t fit over the first character,
+					the first annotation doesn&apos;t fit over the first character,
 					nor do the first and second together fit over the first two characters.
 					All three are merged and aligned together." height="75" src="images/kyoto-60.png" width="120"> 
      <figcaption>Ruby sized at 60%</figcaption>
     </figure>
     <p>Since choosing to render as “jukugo ruby” or not is a stylistic choice,
-		the same markup needs to enable both—<wbr>and it needs to encode both the pairing information within the word
+		the same markup needs to enable both—​and it needs to encode both the pairing information within the word
 		as well as the grouping of these pairs as a single word:</p>
 <pre><code class="highlight"><c- p>&lt;</c-><c- f>ruby</c-><c- p>>&lt;</c-><c- f>rb</c-><c- p>></c->京<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->都<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->市<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->きょう<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->と<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->し<c- p>&lt;/</c-><c- f>ruby</c-><c- p>></c->
 </code></pre>
@@ -1448,7 +1495,7 @@ Editorial Tweaks to HTML</span><a class="self-link" href="#html-tweaks"></a></h2
        <tr>
         <td><code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby②①">ruby</a></code>, <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb①⑨">rb</a></code>, <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②⑤">rt</a></code>, <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc②⑥">rtc</a></code>, <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp①⑦">rp</a></code> 
         <td>Ruby annotations 
-        <td><code class="highlight"> <c- p>&lt;</c-><c- f>ruby</c-><c- p>>&lt;</c-><wbr><c- f>rb</c-><c- p>></c->旧<wbr><c- p>&lt;</c-><c- f>rb</c-><c- p>></c->金<wbr><c- p>&lt;</c-><c- f>rb</c-><c- p>></c->山<wbr><c- p>&lt;</c-><c- f>rp</c-><c- p>></c->><wbr>(<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->><wbr>iù<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->><wbr>īn<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->><wbr>hān<c- p>&lt;</c-><c- f>rtc</c-><c- p>>&lt;</c-><wbr><c- f>rp</c-><c- p>></c->><wbr> <c- p>&lt;/</c-><c- f>rp</c-><c- p>></c->><wbr>an Francisco<c- p>&lt;/</c-><c- f>rtc</c-><c- p>>&lt;</c-><wbr><c- f>rp</c-><c- p>></c->)<wbr><c- p>&lt;/</c-><c- f>ruby</c-><c- p>></c-> </code> 
+        <td><code class="highlight"> <c- p>&lt;</c-><c- f>ruby</c-><c- p>></c-><wbr><c- p>&lt;</c-><c- f>rb</c-><c- p>></c-><wbr>旧<c- p>&lt;</c-><c- f>rb</c-><c- p>></c-><wbr>金<c- p>&lt;</c-><c- f>rb</c-><c- p>></c-><wbr>山<c- p>&lt;</c-><c- f>rp</c-><c- p>></c-><wbr> (<c- p>&lt;</c-><c- f>rt</c-><c- p>></c-><wbr>jiù<c- p>&lt;</c-><c- f>rt</c-><c- p>></c-><wbr>jīn<c- p>&lt;</c-><c- f>rt</c-><c- p>></c-><wbr>shān<c- p>&lt;</c-><c- f>rtc</c-><c- p>></c-><wbr><c- p>&lt;</c-><c- f>rp</c-><c- p>></c-><wbr>: <c- p>&lt;/</c-><c- f>rp</c-><c- p>></c-><wbr>San Francisco<c- p>&lt;/</c-><c- f>rtc</c-><c- p>></c-><wbr><c- p>&lt;</c-><c- f>rp</c-><c- p>></c-><wbr>)<c- p>&lt;/</c-><c- f>ruby</c-><c- p>></c-> </code> 
      </table>
     <li>
       Updating the table at <a href="https://html.spec.whatwg.org/multipage/indices.html#elements-3"><cite>HTML</cite> §  Elements</a> to add rows for <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb②⓪">rb</a></code> and <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc②⑦">rtc</a></code>,
@@ -1686,7 +1733,7 @@ Changes</span><a class="self-link" href="#changes"></a></h2>
     Implementers are encouraged to optimize. </p>
    </section>
   </div>
-<script src="https://www.w3.org/scripts/TR/2021/fixup.js"></script>
+  <script src="https://www.w3.org/scripts/TR/2021/fixup.js"></script>
   <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="index">
@@ -1769,346 +1816,8 @@ Changes</span><a class="self-link" href="#changes"></a></h2>
    <dt id="biblio-unified-ruby">[UNIFIED-RUBY]
    <dd>Elika J. Etemad. <a href="https://fantasai.inkedblade.net/weblog/2011/ruby/"><cite>Towards a Unified Ruby Model</cite></a>. URL: <a href="https://fantasai.inkedblade.net/weblog/2011/ruby/">https://fantasai.inkedblade.net/weblog/2011/ruby/</a>
   </dl>
-<script>/* Boilerplate: script-dfn-panel */
-"use strict";
-{
-    const dfnsJson = window.dfnsJson || {};
-
-    function genDfnPanel({dfnID, url, dfnText, refSections, external}) {
-        return mk.aside({
-            class: "dfn-panel",
-            id: `infopanel-for-${dfnID}`,
-            "data-for": dfnID,
-            "aria-labelled-by":`infopaneltitle-for-${dfnID}`,
-            },
-            mk.span({id:`infopaneltitle-for-${dfnID}`, style:"display:none"},
-                `Info about the '${dfnText}' ${external?"external":""} reference.`),
-            mk.a({href:url}, url),
-            mk.b({}, "Referenced in:"),
-            mk.ul({},
-                ...refSections.map(section=>
-                    mk.li({},
-                        ...section.refs.map((ref, refI)=>
-                            [
-                                mk.a({
-                                    href: `#${ref.id}`
-                                    },
-                                    (refI == 0) ? section.title : `(${refI + 1})`
-                                ),
-                                " ",
-                            ]
-                        ),
-                    ),
-                ),
-            ),
-        );
-    }
-
-    function genAllDfnPanels() {
-        for(const panelData of Object.values(window.dfnpanelData)) {
-            const dfnID = panelData.dfnID;
-            const dfn = document.getElementById(dfnID);
-            if(!dfn) {
-                console.log(`Can't find dfn#${dfnID}.`, panelData);
-            } else {
-                const panel = genDfnPanel(panelData);
-                append(document.body, panel);
-                insertDfnPopupAction(dfn, panel)
-            }
-        }
-    }
-
-    document.addEventListener("DOMContentLoaded", ()=>{
-        genAllDfnPanels();
-
-        // Add popup behavior to all dfns to show the corresponding dfn-panel.
-        var dfns = queryAll('.dfn-paneled');
-        for(let dfn of dfns) { ; }
-
-        document.body.addEventListener("click", (e) => {
-            // If not handled already, just hide all dfn panels.
-            hideAllDfnPanels();
-        });
-    })
-
-
-    function hideAllDfnPanels() {
-        // Turn off any currently "on" or "activated" panels.
-        queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(el=>hideDfnPanel(el));
-    }
-
-    function showDfnPanel(dfnPanel, dfn) {
-        hideAllDfnPanels(); // Only display one at this time.
-        dfn.setAttribute("aria-expanded", "true");
-        dfnPanel.classList.add("on");
-        dfnPanel.style.left = "5px";
-        dfnPanel.style.top = "0px";
-        const panelRect = dfnPanel.getBoundingClientRect();
-        const panelWidth = panelRect.right - panelRect.left;
-        if (panelRect.right > document.body.scrollWidth) {
-            // Panel's overflowing the screen.
-            // Just drop it below the dfn and flip it rightward instead.
-            // This still wont' fix things if the screen is *really* wide,
-            // but fixing that's a lot harder without 'anchor()'.
-            dfnPanel.style.top = "1.5em";
-            dfnPanel.style.left = "auto";
-            dfnPanel.style.right = "0px";
-        }
-    }
-
-    function pinDfnPanel(dfnPanel) {
-        // Switch it to "activated" state, which pins it.
-        dfnPanel.classList.add("activated");
-        dfnPanel.style.left = null;
-        dfnPanel.style.top = null;
-    }
-
-    function hideDfnPanel(dfnPanel, dfn) {
-        if(!dfn) {
-            dfn = document.getElementById(dfnPanel.getAttribute("data-for"));
-        }
-        dfn.setAttribute("aria-expanded", "false")
-        dfnPanel.classList.remove("on");
-        dfnPanel.classList.remove("activated");
-    }
-
-    function toggleDfnPanel(dfnPanel, dfn) {
-        if(dfnPanel.classList.contains("on")) {
-            hideDfnPanel(dfnPanel, dfn);
-        } else {
-            showDfnPanel(dfnPanel, dfn);
-        }
-    }
-
-    function insertDfnPopupAction(dfn, dfnPanel) {
-        // Find dfn panel
-        const panelWrapper = document.createElement('span');
-        panelWrapper.appendChild(dfnPanel);
-        panelWrapper.style.position = "relative";
-        panelWrapper.style.height = "0px";
-        dfn.insertAdjacentElement("afterend", panelWrapper);
-        dfn.setAttribute('role', 'button');
-        dfn.setAttribute('aria-expanded', 'false')
-        dfn.tabIndex = 0;
-        dfn.classList.add('has-dfn-panel');
-        dfn.addEventListener('click', (event) => {
-            showDfnPanel(dfnPanel, dfn);
-            event.stopPropagation();
-        });
-        dfn.addEventListener('keypress', (event) => {
-            const kc = event.keyCode;
-            // 32->Space, 13->Enter
-            if(kc == 32 || kc == 13) {
-                toggleDfnPanel(dfnPanel, dfn);
-                event.stopPropagation();
-                event.preventDefault();
-            }
-        });
-
-        dfnPanel.addEventListener('click', (event) => {
-            if (event.target.nodeName == 'A') {
-                pinDfnPanel(dfnPanel);
-            }
-            event.stopPropagation();
-        });
-
-        dfnPanel.addEventListener('keydown', (event) => {
-            if(event.keyCode == 27) { // Escape key
-                hideDfnPanel(dfnPanel, dfn);
-                event.stopPropagation();
-                event.preventDefault();
-            }
-        })
-    }
-}
-</script>
-<script>/* Boilerplate: script-dfn-panel */
-"use strict";
-{
-    const dfnsJson = window.dfnsJson || {};
-
-    function genDfnPanel({dfnID, url, dfnText, refSections, external}) {
-        return mk.aside({
-            class: "dfn-panel",
-            id: `infopanel-for-${dfnID}`,
-            "data-for": dfnID,
-            "aria-labelled-by":`infopaneltitle-for-${dfnID}`,
-            },
-            mk.span({id:`infopaneltitle-for-${dfnID}`, style:"display:none"},
-                `Info about the '${dfnText}' ${external?"external":""} reference.`),
-            mk.a({href:url}, url),
-            mk.b({}, "Referenced in:"),
-            mk.ul({},
-                ...refSections.map(section=>
-                    mk.li({},
-                        ...section.refs.map((ref, refI)=>
-                            [
-                                mk.a({
-                                    href: `#${ref.id}`
-                                    },
-                                    (refI == 0) ? section.title : `(${refI + 1})`
-                                ),
-                                " ",
-                            ]
-                        ),
-                    ),
-                ),
-            ),
-        );
-    }
-
-    function genAllDfnPanels() {
-        for(const panelData of Object.values(window.dfnpanelData)) {
-            const dfnID = panelData.dfnID;
-            const dfn = document.getElementById(dfnID);
-            if(!dfn) {
-                console.log(`Can't find dfn#${dfnID}.`, panelData);
-            } else {
-                const panel = genDfnPanel(panelData);
-                append(document.body, panel);
-                insertDfnPopupAction(dfn, panel)
-            }
-        }
-    }
-
-    document.addEventListener("DOMContentLoaded", ()=>{
-        genAllDfnPanels();
-
-        // Add popup behavior to all dfns to show the corresponding dfn-panel.
-        var dfns = queryAll('.dfn-paneled');
-        for(let dfn of dfns) { ; }
-
-        document.body.addEventListener("click", (e) => {
-            // If not handled already, just hide all dfn panels.
-            hideAllDfnPanels();
-        });
-    })
-
-
-    function hideAllDfnPanels() {
-        // Turn off any currently "on" or "activated" panels.
-        queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(el=>hideDfnPanel(el));
-    }
-
-    function showDfnPanel(dfnPanel, dfn) {
-        hideAllDfnPanels(); // Only display one at this time.
-        dfn.setAttribute("aria-expanded", "true");
-        dfnPanel.classList.add("on");
-        dfnPanel.style.left = "5px";
-        dfnPanel.style.top = "0px";
-        const panelRect = dfnPanel.getBoundingClientRect();
-        const panelWidth = panelRect.right - panelRect.left;
-        if (panelRect.right > document.body.scrollWidth) {
-            // Panel's overflowing the screen.
-            // Just drop it below the dfn and flip it rightward instead.
-            // This still wont' fix things if the screen is *really* wide,
-            // but fixing that's a lot harder without 'anchor()'.
-            dfnPanel.style.top = "1.5em";
-            dfnPanel.style.left = "auto";
-            dfnPanel.style.right = "0px";
-        }
-    }
-
-    function pinDfnPanel(dfnPanel) {
-        // Switch it to "activated" state, which pins it.
-        dfnPanel.classList.add("activated");
-        dfnPanel.style.left = null;
-        dfnPanel.style.top = null;
-    }
-
-    function hideDfnPanel(dfnPanel, dfn) {
-        if(!dfn) {
-            dfn = document.getElementById(dfnPanel.getAttribute("data-for"));
-        }
-        dfn.setAttribute("aria-expanded", "false")
-        dfnPanel.classList.remove("on");
-        dfnPanel.classList.remove("activated");
-    }
-
-    function toggleDfnPanel(dfnPanel, dfn) {
-        if(dfnPanel.classList.contains("on")) {
-            hideDfnPanel(dfnPanel, dfn);
-        } else {
-            showDfnPanel(dfnPanel, dfn);
-        }
-    }
-
-    function insertDfnPopupAction(dfn, dfnPanel) {
-        // Find dfn panel
-        const panelWrapper = document.createElement('span');
-        panelWrapper.appendChild(dfnPanel);
-        panelWrapper.style.position = "relative";
-        panelWrapper.style.height = "0px";
-        dfn.insertAdjacentElement("afterend", panelWrapper);
-        dfn.setAttribute('role', 'button');
-        dfn.setAttribute('aria-expanded', 'false')
-        dfn.tabIndex = 0;
-        dfn.classList.add('has-dfn-panel');
-        dfn.addEventListener('click', (event) => {
-            showDfnPanel(dfnPanel, dfn);
-            event.stopPropagation();
-        });
-        dfn.addEventListener('keypress', (event) => {
-            const kc = event.keyCode;
-            // 32->Space, 13->Enter
-            if(kc == 32 || kc == 13) {
-                toggleDfnPanel(dfnPanel, dfn);
-                event.stopPropagation();
-                event.preventDefault();
-            }
-        });
-
-        dfnPanel.addEventListener('click', (event) => {
-            if (event.target.nodeName == 'A') {
-                pinDfnPanel(dfnPanel);
-            }
-            event.stopPropagation();
-        });
-
-        dfnPanel.addEventListener('keydown', (event) => {
-            if(event.keyCode == 27) { // Escape key
-                hideDfnPanel(dfnPanel, dfn);
-                event.stopPropagation();
-                event.preventDefault();
-            }
-        })
-    }
-}
-</script>
-<script>/* Boilerplate: script-dfn-panel-json */
-window.dfnpanelData = {};
-window.dfnpanelData['e7f0dd6c'] = {"dfnID": "e7f0dd6c", "url": "https://drafts.csswg.org/css-display-4/#propdef-display", "dfnText": "display", "refSections": [{"refs": [{"id": "ref-for-propdef-display"}], "title": "\nAppendix A:\nEditorial Tweaks to HTML"}], "external": true};
-window.dfnpanelData['2cb0b95d'] = {"dfnID": "2cb0b95d", "url": "https://drafts.csswg.org/css-ruby-1/#valdef-ruby-position-alternate", "dfnText": "alternate", "refSections": [{"refs": [{"id": "ref-for-valdef-ruby-position-alternate"}], "title": "\nAppendix A:\nEditorial Tweaks to HTML"}], "external": true};
-window.dfnpanelData['19a86e72'] = {"dfnID": "19a86e72", "url": "https://drafts.csswg.org/css-ruby-1/#valdef-display-ruby-base", "dfnText": "ruby-base", "refSections": [{"refs": [{"id": "ref-for-valdef-display-ruby-base"}], "title": "\nAppendix A:\nEditorial Tweaks to HTML"}], "external": true};
-window.dfnpanelData['dd21c139'] = {"dfnID": "dd21c139", "url": "https://drafts.csswg.org/css-ruby-1/#propdef-ruby-position", "dfnText": "ruby-position", "refSections": [{"refs": [{"id": "ref-for-propdef-ruby-position"}], "title": "\nAppendix A:\nEditorial Tweaks to HTML"}], "external": true};
-window.dfnpanelData['b08d0bb2'] = {"dfnID": "b08d0bb2", "url": "https://html.spec.whatwg.org/multipage/dom.html#htmlelement", "dfnText": "HTMLElement", "refSections": [{"refs": [{"id": "ref-for-htmlelement"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-htmlelement\u2460"}], "title": "2.2. \nThe rb element"}, {"refs": [{"id": "ref-for-htmlelement\u2461"}], "title": "2.3. \nThe rt element"}, {"refs": [{"id": "ref-for-htmlelement\u2462"}], "title": "2.4. \nThe rtc element"}, {"refs": [{"id": "ref-for-htmlelement\u2463"}], "title": "2.5. \nThe rp element"}, {"refs": [{"id": "ref-for-htmlelement\u2464"}, {"id": "ref-for-htmlelement\u2465"}, {"id": "ref-for-htmlelement\u2466"}, {"id": "ref-for-htmlelement\u2467"}, {"id": "ref-for-htmlelement\u2468"}, {"id": "ref-for-htmlelement\u2460\u24ea"}, {"id": "ref-for-htmlelement\u2460\u2460"}], "title": "\nAppendix A:\nEditorial Tweaks to HTML"}], "external": true};
-window.dfnpanelData['5fd912e7'] = {"dfnID": "5fd912e7", "url": "https://html.spec.whatwg.org/multipage/dom.html#concept-element-accessibility-considerations", "dfnText": "accessibility considerations", "refSections": [{"refs": [{"id": "ref-for-concept-element-accessibility-considerations"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-concept-element-accessibility-considerations\u2460"}], "title": "2.3. \nThe rt element"}, {"refs": [{"id": "ref-for-concept-element-accessibility-considerations\u2461"}], "title": "2.5. \nThe rp element"}], "external": true};
-window.dfnpanelData['dfc4f7e7'] = {"dfnID": "dfc4f7e7", "url": "https://html.spec.whatwg.org/multipage/dom.html#concept-element-categories", "dfnText": "categories", "refSections": [{"refs": [{"id": "ref-for-concept-element-categories"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-concept-element-categories\u2460"}], "title": "2.2. \nThe rb element"}, {"refs": [{"id": "ref-for-concept-element-categories\u2461"}], "title": "2.3. \nThe rt element"}, {"refs": [{"id": "ref-for-concept-element-categories\u2462"}], "title": "2.4. \nThe rtc element"}, {"refs": [{"id": "ref-for-concept-element-categories\u2463"}], "title": "2.5. \nThe rp element"}], "external": true};
-window.dfnpanelData['68675e70'] = {"dfnID": "68675e70", "url": "https://html.spec.whatwg.org/multipage/dom.html#concept-element-attributes", "dfnText": "content attributes", "refSections": [{"refs": [{"id": "ref-for-concept-element-attributes"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-concept-element-attributes\u2460"}], "title": "2.2. \nThe rb element"}, {"refs": [{"id": "ref-for-concept-element-attributes\u2461"}], "title": "2.3. \nThe rt element"}, {"refs": [{"id": "ref-for-concept-element-attributes\u2462"}], "title": "2.4. \nThe rtc element"}, {"refs": [{"id": "ref-for-concept-element-attributes\u2463"}], "title": "2.5. \nThe rp element"}], "external": true};
-window.dfnpanelData['88766833'] = {"dfnID": "88766833", "url": "https://html.spec.whatwg.org/multipage/dom.html#concept-element-content-model", "dfnText": "content model", "refSections": [{"refs": [{"id": "ref-for-concept-element-content-model"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-concept-element-content-model\u2460"}], "title": "2.2. \nThe rb element"}, {"refs": [{"id": "ref-for-concept-element-content-model\u2461"}], "title": "2.3. \nThe rt element"}, {"refs": [{"id": "ref-for-concept-element-content-model\u2462"}], "title": "2.4. \nThe rtc element"}, {"refs": [{"id": "ref-for-concept-element-content-model\u2463"}], "title": "2.5. \nThe rp element"}], "external": true};
-window.dfnpanelData['3c915747'] = {"dfnID": "3c915747", "url": "https://html.spec.whatwg.org/multipage/dom.html#concept-element-contexts", "dfnText": "contexts in which this element can be used", "refSections": [{"refs": [{"id": "ref-for-concept-element-contexts"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-concept-element-contexts\u2460"}], "title": "2.2. \nThe rb element"}, {"refs": [{"id": "ref-for-concept-element-contexts\u2461"}], "title": "2.3. \nThe rt element"}, {"refs": [{"id": "ref-for-concept-element-contexts\u2462"}], "title": "2.4. \nThe rtc element"}, {"refs": [{"id": "ref-for-concept-element-contexts\u2463"}], "title": "2.5. \nThe rp element"}], "external": true};
-window.dfnpanelData['317acf49'] = {"dfnID": "317acf49", "url": "https://html.spec.whatwg.org/multipage/dom.html#concept-element-dom", "dfnText": "dom interface", "refSections": [{"refs": [{"id": "ref-for-concept-element-dom"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-concept-element-dom\u2460"}], "title": "2.2. \nThe rb element"}, {"refs": [{"id": "ref-for-concept-element-dom\u2461"}], "title": "2.3. \nThe rt element"}, {"refs": [{"id": "ref-for-concept-element-dom\u2462"}], "title": "2.4. \nThe rtc element"}, {"refs": [{"id": "ref-for-concept-element-dom\u2463"}], "title": "2.5. \nThe rp element"}], "external": true};
-window.dfnpanelData['2ffaee93'] = {"dfnID": "2ffaee93", "url": "https://html.spec.whatwg.org/multipage/syntax.html#syntax-end-tag", "dfnText": "end tags", "refSections": [{"refs": [{"id": "ref-for-syntax-end-tag"}, {"id": "ref-for-syntax-end-tag\u2460"}, {"id": "ref-for-syntax-end-tag\u2461"}, {"id": "ref-for-syntax-end-tag\u2462"}], "title": "3. \nOptional Tags"}], "external": true};
-window.dfnpanelData['1236ac1a'] = {"dfnID": "1236ac1a", "url": "https://html.spec.whatwg.org/multipage/dom.html#flow-content-2", "dfnText": "flow content", "refSections": [{"refs": [{"id": "ref-for-flow-content-2"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-flow-content-2\u2460"}], "title": "\nAppendix A:\nEditorial Tweaks to HTML"}], "external": true};
-window.dfnpanelData['8fc74046'] = {"dfnID": "8fc74046", "url": "https://html.spec.whatwg.org/multipage/dom.html#global-attributes", "dfnText": "global attributes", "refSections": [{"refs": [{"id": "ref-for-global-attributes"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-global-attributes\u2460"}], "title": "2.2. \nThe rb element"}, {"refs": [{"id": "ref-for-global-attributes\u2461"}], "title": "2.3. \nThe rt element"}, {"refs": [{"id": "ref-for-global-attributes\u2462"}], "title": "2.4. \nThe rtc element"}, {"refs": [{"id": "ref-for-global-attributes\u2463"}], "title": "2.5. \nThe rp element"}, {"refs": [{"id": "ref-for-global-attributes\u2464"}, {"id": "ref-for-global-attributes\u2465"}, {"id": "ref-for-global-attributes\u2466"}, {"id": "ref-for-global-attributes\u2467"}, {"id": "ref-for-global-attributes\u2468"}], "title": "\nAppendix A:\nEditorial Tweaks to HTML"}], "external": true};
-window.dfnpanelData['cb3fd7c7'] = {"dfnID": "cb3fd7c7", "url": "https://html.spec.whatwg.org/multipage/dom.html#inter-element-whitespace", "dfnText": "inter-element whitespace", "refSections": [{"refs": [{"id": "ref-for-inter-element-whitespace"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}], "external": true};
-window.dfnpanelData['d54eeea2'] = {"dfnID": "d54eeea2", "url": "https://html.spec.whatwg.org/multipage/dom.html#palpable-content-2", "dfnText": "palpable content", "refSections": [{"refs": [{"id": "ref-for-palpable-content-2"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-palpable-content-2\u2460"}], "title": "\nAppendix A:\nEditorial Tweaks to HTML"}], "external": true};
-window.dfnpanelData['e5a7e26c'] = {"dfnID": "e5a7e26c", "url": "https://html.spec.whatwg.org/multipage/dom.html#phrasing-content-2", "dfnText": "phrasing content", "refSections": [{"refs": [{"id": "ref-for-phrasing-content-2"}, {"id": "ref-for-phrasing-content-2\u2460"}, {"id": "ref-for-phrasing-content-2\u2461"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-phrasing-content-2\u2462"}], "title": "2.2. \nThe rb element"}, {"refs": [{"id": "ref-for-phrasing-content-2\u2463"}], "title": "2.3. \nThe rt element"}, {"refs": [{"id": "ref-for-phrasing-content-2\u2464"}], "title": "2.4. \nThe rtc element"}, {"refs": [{"id": "ref-for-phrasing-content-2\u2465"}, {"id": "ref-for-phrasing-content-2\u2466"}, {"id": "ref-for-phrasing-content-2\u2467"}, {"id": "ref-for-phrasing-content-2\u2468"}, {"id": "ref-for-phrasing-content-2\u2460\u24ea"}, {"id": "ref-for-phrasing-content-2\u2460\u2460"}], "title": "\nAppendix A:\nEditorial Tweaks to HTML"}], "external": true};
-window.dfnpanelData['073cf09c'] = {"dfnID": "073cf09c", "url": "https://html.spec.whatwg.org/multipage/dom.html#represents", "dfnText": "represent", "refSections": [{"refs": [{"id": "ref-for-represents"}, {"id": "ref-for-represents\u2460"}, {"id": "ref-for-represents\u2461"}, {"id": "ref-for-represents\u2462"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-represents\u2463"}, {"id": "ref-for-represents\u2464"}], "title": "2.2. \nThe rb element"}, {"refs": [{"id": "ref-for-represents\u2465"}, {"id": "ref-for-represents\u2466"}], "title": "2.3. \nThe rt element"}, {"refs": [{"id": "ref-for-represents\u2467"}, {"id": "ref-for-represents\u2468"}], "title": "2.4. \nThe rtc element"}, {"refs": [{"id": "ref-for-represents\u2460\u24ea"}], "title": "2.5. \nThe rp element"}], "external": true};
-window.dfnpanelData['62ac5b1c'] = {"dfnID": "62ac5b1c", "url": "https://html.spec.whatwg.org/multipage/dom.html#text-content", "dfnText": "text", "refSections": [{"refs": [{"id": "ref-for-text-content"}], "title": "2.5. \nThe rp element"}, {"refs": [{"id": "ref-for-text-content\u2460"}], "title": "\nAppendix A:\nEditorial Tweaks to HTML"}], "external": true};
-window.dfnpanelData['elementdef-ruby'] = {"dfnID": "elementdef-ruby", "url": "#elementdef-ruby", "dfnText": "ruby", "refSections": [{"refs": [{"id": "ref-for-elementdef-ruby"}, {"id": "ref-for-elementdef-ruby\u2460"}, {"id": "ref-for-elementdef-ruby\u2461"}, {"id": "ref-for-elementdef-ruby\u2462"}, {"id": "ref-for-elementdef-ruby\u2463"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-elementdef-ruby\u2464"}, {"id": "ref-for-elementdef-ruby\u2465"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}, {"refs": [{"id": "ref-for-elementdef-ruby\u2466"}, {"id": "ref-for-elementdef-ruby\u2467"}, {"id": "ref-for-elementdef-ruby\u2468"}], "title": "2.2. \nThe rb element"}, {"refs": [{"id": "ref-for-elementdef-ruby\u2460\u24ea"}, {"id": "ref-for-elementdef-ruby\u2460\u2460"}, {"id": "ref-for-elementdef-ruby\u2460\u2461"}, {"id": "ref-for-elementdef-ruby\u2460\u2462"}], "title": "2.3. \nThe rt element"}, {"refs": [{"id": "ref-for-elementdef-ruby\u2460\u2463"}, {"id": "ref-for-elementdef-ruby\u2460\u2464"}, {"id": "ref-for-elementdef-ruby\u2460\u2465"}], "title": "2.4. \nThe rtc element"}, {"refs": [{"id": "ref-for-elementdef-ruby\u2460\u2466"}], "title": "2.5. \nThe rp element"}, {"refs": [{"id": "ref-for-elementdef-ruby\u2460\u2467"}, {"id": "ref-for-elementdef-ruby\u2460\u2468"}, {"id": "ref-for-elementdef-ruby\u2461\u24ea"}, {"id": "ref-for-elementdef-ruby\u2461\u2460"}, {"id": "ref-for-elementdef-ruby\u2461\u2461"}, {"id": "ref-for-elementdef-ruby\u2461\u2462"}, {"id": "ref-for-elementdef-ruby\u2461\u2463"}, {"id": "ref-for-elementdef-ruby\u2461\u2464"}, {"id": "ref-for-elementdef-ruby\u2461\u2465"}, {"id": "ref-for-elementdef-ruby\u2461\u2466"}], "title": "\nAppendix A:\nEditorial Tweaks to HTML"}], "external": false};
-window.dfnpanelData['ruby-base-range'] = {"dfnID": "ruby-base-range", "url": "#ruby-base-range", "dfnText": "ruby base range", "refSections": [{"refs": [{"id": "ref-for-ruby-base-range"}, {"id": "ref-for-ruby-base-range\u2460"}, {"id": "ref-for-ruby-base-range\u2461"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}, {"refs": [{"id": "ref-for-ruby-base-range\u2462"}], "title": "2.4. \nThe rtc element"}], "external": false};
-window.dfnpanelData['ruby-annotation-range'] = {"dfnID": "ruby-annotation-range", "url": "#ruby-annotation-range", "dfnText": "ruby annotation range", "refSections": [{"refs": [{"id": "ref-for-ruby-annotation-range"}, {"id": "ref-for-ruby-annotation-range\u2460"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-ruby-annotation-range\u2461"}, {"id": "ref-for-ruby-annotation-range\u2462"}, {"id": "ref-for-ruby-annotation-range\u2463"}, {"id": "ref-for-ruby-annotation-range\u2464"}, {"id": "ref-for-ruby-annotation-range\u2465"}, {"id": "ref-for-ruby-annotation-range\u2466"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}, {"refs": [{"id": "ref-for-ruby-annotation-range\u2467"}, {"id": "ref-for-ruby-annotation-range\u2468"}], "title": "2.4. \nThe rtc element"}], "external": false};
-window.dfnpanelData['ruby-segment'] = {"dfnID": "ruby-segment", "url": "#ruby-segment", "dfnText": "ruby segment", "refSections": [{"refs": [{"id": "ref-for-ruby-segment"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-ruby-segment\u2460"}, {"id": "ref-for-ruby-segment\u2461"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}], "external": false};
-window.dfnpanelData['ruby-base-units'] = {"dfnID": "ruby-base-units", "url": "#ruby-base-units", "dfnText": "ruby base units", "refSections": [{"refs": [{"id": "ref-for-ruby-base-units"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-ruby-base-units\u2460"}, {"id": "ref-for-ruby-base-units\u2461"}, {"id": "ref-for-ruby-base-units\u2462"}, {"id": "ref-for-ruby-base-units\u2463"}, {"id": "ref-for-ruby-base-units\u2464"}, {"id": "ref-for-ruby-base-units\u2465"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}, {"refs": [{"id": "ref-for-ruby-base-units\u2466"}, {"id": "ref-for-ruby-base-units\u2467"}], "title": "2.1.2. \nMarkup Patterns for Multi-Character Ruby"}, {"refs": [{"id": "ref-for-ruby-base-units\u2468"}], "title": "2.2. \nThe rb element"}, {"refs": [{"id": "ref-for-ruby-base-units\u2460\u24ea"}], "title": "2.3. \nThe rt element"}, {"refs": [{"id": "ref-for-ruby-base-units\u2460\u2460"}], "title": "2.4. \nThe rtc element"}], "external": false};
-window.dfnpanelData['ruby-annotation-units'] = {"dfnID": "ruby-annotation-units", "url": "#ruby-annotation-units", "dfnText": "ruby annotation units", "refSections": [{"refs": [{"id": "ref-for-ruby-annotation-units"}, {"id": "ref-for-ruby-annotation-units\u2460"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-ruby-annotation-units\u2461"}, {"id": "ref-for-ruby-annotation-units\u2462"}, {"id": "ref-for-ruby-annotation-units\u2463"}, {"id": "ref-for-ruby-annotation-units\u2464"}, {"id": "ref-for-ruby-annotation-units\u2465"}, {"id": "ref-for-ruby-annotation-units\u2466"}, {"id": "ref-for-ruby-annotation-units\u2467"}, {"id": "ref-for-ruby-annotation-units\u2468"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}, {"refs": [{"id": "ref-for-ruby-annotation-units\u2460\u24ea"}], "title": "2.3. \nThe rt element"}, {"refs": [{"id": "ref-for-ruby-annotation-units\u2460\u2460"}], "title": "2.4. \nThe rtc element"}, {"refs": [{"id": "ref-for-ruby-annotation-units\u2460\u2461"}, {"id": "ref-for-ruby-annotation-units\u2460\u2462"}], "title": "2.5. \nThe rp element"}], "external": false};
-window.dfnpanelData['elementdef-rb'] = {"dfnID": "elementdef-rb", "url": "#elementdef-rb", "dfnText": "rb", "refSections": [{"refs": [{"id": "ref-for-elementdef-rb"}, {"id": "ref-for-elementdef-rb\u2460"}, {"id": "ref-for-elementdef-rb\u2461"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-elementdef-rb\u2462"}, {"id": "ref-for-elementdef-rb\u2463"}, {"id": "ref-for-elementdef-rb\u2464"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}, {"refs": [{"id": "ref-for-elementdef-rb\u2465"}], "title": "2.1.2. \nMarkup Patterns for Multi-Character Ruby"}, {"refs": [{"id": "ref-for-elementdef-rb\u2466"}, {"id": "ref-for-elementdef-rb\u2467"}, {"id": "ref-for-elementdef-rb\u2468"}, {"id": "ref-for-elementdef-rb\u2460\u24ea"}], "title": "2.2. \nThe rb element"}, {"refs": [{"id": "ref-for-elementdef-rb\u2460\u2460"}, {"id": "ref-for-elementdef-rb\u2460\u2461"}, {"id": "ref-for-elementdef-rb\u2460\u2462"}, {"id": "ref-for-elementdef-rb\u2460\u2463"}, {"id": "ref-for-elementdef-rb\u2460\u2464"}, {"id": "ref-for-elementdef-rb\u2460\u2465"}, {"id": "ref-for-elementdef-rb\u2460\u2466"}], "title": "3. \nOptional Tags"}, {"refs": [{"id": "ref-for-elementdef-rb\u2460\u2467"}], "title": "5. \nConforming Features "}, {"refs": [{"id": "ref-for-elementdef-rb\u2460\u2468"}, {"id": "ref-for-elementdef-rb\u2461\u24ea"}, {"id": "ref-for-elementdef-rb\u2461\u2460"}, {"id": "ref-for-elementdef-rb\u2461\u2461"}, {"id": "ref-for-elementdef-rb\u2461\u2462"}], "title": "\nAppendix A:\nEditorial Tweaks to HTML"}, {"refs": [{"id": "ref-for-elementdef-rb\u2461\u2463"}, {"id": "ref-for-elementdef-rb\u2461\u2464"}, {"id": "ref-for-elementdef-rb\u2461\u2465"}], "title": "\nAppendix B:\nComparison With The HTML Standard"}], "external": false};
-window.dfnpanelData['elementdef-rt'] = {"dfnID": "elementdef-rt", "url": "#elementdef-rt", "dfnText": "rt", "refSections": [{"refs": [{"id": "ref-for-elementdef-rt"}, {"id": "ref-for-elementdef-rt\u2460"}, {"id": "ref-for-elementdef-rt\u2461"}, {"id": "ref-for-elementdef-rt\u2462"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-elementdef-rt\u2463"}, {"id": "ref-for-elementdef-rt\u2464"}, {"id": "ref-for-elementdef-rt\u2465"}, {"id": "ref-for-elementdef-rt\u2466"}, {"id": "ref-for-elementdef-rt\u2467"}, {"id": "ref-for-elementdef-rt\u2468"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}, {"refs": [{"id": "ref-for-elementdef-rt\u2460\u24ea"}], "title": "2.1.2. \nMarkup Patterns for Multi-Character Ruby"}, {"refs": [{"id": "ref-for-elementdef-rt\u2460\u2460"}, {"id": "ref-for-elementdef-rt\u2460\u2461"}], "title": "2.3. \nThe rt element"}, {"refs": [{"id": "ref-for-elementdef-rt\u2460\u2462"}, {"id": "ref-for-elementdef-rt\u2460\u2463"}, {"id": "ref-for-elementdef-rt\u2460\u2464"}], "title": "2.4. \nThe rtc element"}, {"refs": [{"id": "ref-for-elementdef-rt\u2460\u2465"}, {"id": "ref-for-elementdef-rt\u2460\u2466"}, {"id": "ref-for-elementdef-rt\u2460\u2467"}, {"id": "ref-for-elementdef-rt\u2460\u2468"}, {"id": "ref-for-elementdef-rt\u2461\u24ea"}, {"id": "ref-for-elementdef-rt\u2461\u2460"}], "title": "3. \nOptional Tags"}, {"refs": [{"id": "ref-for-elementdef-rt\u2461\u2461"}, {"id": "ref-for-elementdef-rt\u2461\u2462"}, {"id": "ref-for-elementdef-rt\u2461\u2463"}, {"id": "ref-for-elementdef-rt\u2461\u2464"}, {"id": "ref-for-elementdef-rt\u2461\u2465"}, {"id": "ref-for-elementdef-rt\u2461\u2466"}, {"id": "ref-for-elementdef-rt\u2461\u2467"}, {"id": "ref-for-elementdef-rt\u2461\u2468"}], "title": "\nAppendix A:\nEditorial Tweaks to HTML"}, {"refs": [{"id": "ref-for-elementdef-rt\u2462\u24ea"}, {"id": "ref-for-elementdef-rt\u2462\u2460"}, {"id": "ref-for-elementdef-rt\u2462\u2461"}], "title": "\nAppendix B:\nComparison With The HTML Standard"}], "external": false};
-window.dfnpanelData['elementdef-rtc'] = {"dfnID": "elementdef-rtc", "url": "#elementdef-rtc", "dfnText": "rtc", "refSections": [{"refs": [{"id": "ref-for-elementdef-rtc"}, {"id": "ref-for-elementdef-rtc\u2460"}, {"id": "ref-for-elementdef-rtc\u2461"}, {"id": "ref-for-elementdef-rtc\u2462"}, {"id": "ref-for-elementdef-rtc\u2463"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-elementdef-rtc\u2464"}, {"id": "ref-for-elementdef-rtc\u2465"}, {"id": "ref-for-elementdef-rtc\u2466"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}, {"refs": [{"id": "ref-for-elementdef-rtc\u2467"}, {"id": "ref-for-elementdef-rtc\u2468"}, {"id": "ref-for-elementdef-rtc\u2460\u24ea"}], "title": "2.3. \nThe rt element"}, {"refs": [{"id": "ref-for-elementdef-rtc\u2460\u2460"}, {"id": "ref-for-elementdef-rtc\u2460\u2461"}, {"id": "ref-for-elementdef-rtc\u2460\u2462"}, {"id": "ref-for-elementdef-rtc\u2460\u2463"}, {"id": "ref-for-elementdef-rtc\u2460\u2464"}], "title": "2.4. \nThe rtc element"}, {"refs": [{"id": "ref-for-elementdef-rtc\u2460\u2465"}, {"id": "ref-for-elementdef-rtc\u2460\u2466"}], "title": "2.5. \nThe rp element"}, {"refs": [{"id": "ref-for-elementdef-rtc\u2460\u2467"}, {"id": "ref-for-elementdef-rtc\u2460\u2468"}, {"id": "ref-for-elementdef-rtc\u2461\u24ea"}, {"id": "ref-for-elementdef-rtc\u2461\u2460"}, {"id": "ref-for-elementdef-rtc\u2461\u2461"}, {"id": "ref-for-elementdef-rtc\u2461\u2462"}, {"id": "ref-for-elementdef-rtc\u2461\u2463"}], "title": "3. \nOptional Tags"}, {"refs": [{"id": "ref-for-elementdef-rtc\u2461\u2464"}], "title": "5. \nConforming Features "}, {"refs": [{"id": "ref-for-elementdef-rtc\u2461\u2465"}, {"id": "ref-for-elementdef-rtc\u2461\u2466"}, {"id": "ref-for-elementdef-rtc\u2461\u2467"}, {"id": "ref-for-elementdef-rtc\u2461\u2468"}, {"id": "ref-for-elementdef-rtc\u2462\u24ea"}, {"id": "ref-for-elementdef-rtc\u2462\u2460"}, {"id": "ref-for-elementdef-rtc\u2462\u2461"}], "title": "\nAppendix A:\nEditorial Tweaks to HTML"}, {"refs": [{"id": "ref-for-elementdef-rtc\u2462\u2462"}, {"id": "ref-for-elementdef-rtc\u2462\u2463"}, {"id": "ref-for-elementdef-rtc\u2462\u2464"}, {"id": "ref-for-elementdef-rtc\u2462\u2465"}], "title": "\nAppendix B:\nComparison With The HTML Standard"}], "external": false};
-window.dfnpanelData['elementdef-rp'] = {"dfnID": "elementdef-rp", "url": "#elementdef-rp", "dfnText": "rp", "refSections": [{"refs": [{"id": "ref-for-elementdef-rp"}, {"id": "ref-for-elementdef-rp\u2460"}, {"id": "ref-for-elementdef-rp\u2461"}], "title": "2.1. \nThe ruby element"}, {"refs": [{"id": "ref-for-elementdef-rp\u2462"}, {"id": "ref-for-elementdef-rp\u2463"}], "title": "2.1.1. \nRuby Segmentation and Pairing"}, {"refs": [{"id": "ref-for-elementdef-rp\u2464"}], "title": "2.4. \nThe rtc element"}, {"refs": [{"id": "ref-for-elementdef-rp\u2465"}, {"id": "ref-for-elementdef-rp\u2466"}, {"id": "ref-for-elementdef-rp\u2467"}], "title": "2.5. \nThe rp element"}, {"refs": [{"id": "ref-for-elementdef-rp\u2468"}, {"id": "ref-for-elementdef-rp\u2460\u24ea"}, {"id": "ref-for-elementdef-rp\u2460\u2460"}, {"id": "ref-for-elementdef-rp\u2460\u2461"}, {"id": "ref-for-elementdef-rp\u2460\u2462"}, {"id": "ref-for-elementdef-rp\u2460\u2463"}], "title": "3. \nOptional Tags"}, {"refs": [{"id": "ref-for-elementdef-rp\u2460\u2464"}, {"id": "ref-for-elementdef-rp\u2460\u2465"}, {"id": "ref-for-elementdef-rp\u2460\u2466"}, {"id": "ref-for-elementdef-rp\u2460\u2467"}, {"id": "ref-for-elementdef-rp\u2460\u2468"}, {"id": "ref-for-elementdef-rp\u2461\u24ea"}, {"id": "ref-for-elementdef-rp\u2461\u2460"}], "title": "\nAppendix A:\nEditorial Tweaks to HTML"}], "external": false};
-window.dfnpanelData['tabular-markup'] = {"dfnID": "tabular-markup", "url": "#tabular-markup", "dfnText": "tabular markup", "refSections": [{"refs": [{"id": "ref-for-tabular-markup"}, {"id": "ref-for-tabular-markup\u2460"}, {"id": "ref-for-tabular-markup\u2461"}], "title": "\nAppendix B:\nComparison With The HTML Standard"}], "external": false};
-</script>
 <script>/* Boilerplate: script-dom-helper */
+"use strict";
 function query(sel) { return document.querySelector(sel); }
 
 function queryAll(sel) { return [...document.querySelectorAll(sel)]; }
@@ -2302,5 +2011,654 @@ function parseHTML(markup) {
 		el.innerHTML = markup;
 		return el.content;
 	}
+}</script>
+<script>/* Boilerplate: script-dfn-panel */
+"use strict";
+{
+let dfnPanelData = {
+"073cf09c": {"dfnID":"073cf09c","dfnText":"represent","external":true,"refSections":[{"refs":[{"id":"ref-for-represents"},{"id":"ref-for-represents\u2460"},{"id":"ref-for-represents\u2461"},{"id":"ref-for-represents\u2462"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-represents\u2463"},{"id":"ref-for-represents\u2464"}],"title":"2.2. \nThe rb element"},{"refs":[{"id":"ref-for-represents\u2465"},{"id":"ref-for-represents\u2466"}],"title":"2.3. \nThe rt element"},{"refs":[{"id":"ref-for-represents\u2467"},{"id":"ref-for-represents\u2468"}],"title":"2.4. \nThe rtc element"},{"refs":[{"id":"ref-for-represents\u2460\u24ea"}],"title":"2.5. \nThe rp element"}],"url":"https://html.spec.whatwg.org/multipage/dom.html#represents"},
+"1236ac1a": {"dfnID":"1236ac1a","dfnText":"flow content","external":true,"refSections":[{"refs":[{"id":"ref-for-flow-content-2"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-flow-content-2\u2460"}],"title":"\nAppendix A:\nEditorial Tweaks to HTML"}],"url":"https://html.spec.whatwg.org/multipage/dom.html#flow-content-2"},
+"19a86e72": {"dfnID":"19a86e72","dfnText":"ruby-base","external":true,"refSections":[{"refs":[{"id":"ref-for-valdef-display-ruby-base"}],"title":"\nAppendix A:\nEditorial Tweaks to HTML"}],"url":"https://drafts.csswg.org/css-ruby-1/#valdef-display-ruby-base"},
+"2cb0b95d": {"dfnID":"2cb0b95d","dfnText":"alternate","external":true,"refSections":[{"refs":[{"id":"ref-for-valdef-ruby-position-alternate"}],"title":"\nAppendix A:\nEditorial Tweaks to HTML"}],"url":"https://drafts.csswg.org/css-ruby-1/#valdef-ruby-position-alternate"},
+"2ffaee93": {"dfnID":"2ffaee93","dfnText":"end tags","external":true,"refSections":[{"refs":[{"id":"ref-for-syntax-end-tag"},{"id":"ref-for-syntax-end-tag\u2460"},{"id":"ref-for-syntax-end-tag\u2461"},{"id":"ref-for-syntax-end-tag\u2462"}],"title":"3. \nOptional Tags"}],"url":"https://html.spec.whatwg.org/multipage/syntax.html#syntax-end-tag"},
+"317acf49": {"dfnID":"317acf49","dfnText":"dom interface","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-element-dom"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-concept-element-dom\u2460"}],"title":"2.2. \nThe rb element"},{"refs":[{"id":"ref-for-concept-element-dom\u2461"}],"title":"2.3. \nThe rt element"},{"refs":[{"id":"ref-for-concept-element-dom\u2462"}],"title":"2.4. \nThe rtc element"},{"refs":[{"id":"ref-for-concept-element-dom\u2463"}],"title":"2.5. \nThe rp element"}],"url":"https://html.spec.whatwg.org/multipage/dom.html#concept-element-dom"},
+"3c915747": {"dfnID":"3c915747","dfnText":"contexts in which this element can be used","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-element-contexts"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-concept-element-contexts\u2460"}],"title":"2.2. \nThe rb element"},{"refs":[{"id":"ref-for-concept-element-contexts\u2461"}],"title":"2.3. \nThe rt element"},{"refs":[{"id":"ref-for-concept-element-contexts\u2462"}],"title":"2.4. \nThe rtc element"},{"refs":[{"id":"ref-for-concept-element-contexts\u2463"}],"title":"2.5. \nThe rp element"}],"url":"https://html.spec.whatwg.org/multipage/dom.html#concept-element-contexts"},
+"5fd912e7": {"dfnID":"5fd912e7","dfnText":"accessibility considerations","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-element-accessibility-considerations"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-concept-element-accessibility-considerations\u2460"}],"title":"2.3. \nThe rt element"},{"refs":[{"id":"ref-for-concept-element-accessibility-considerations\u2461"}],"title":"2.5. \nThe rp element"}],"url":"https://html.spec.whatwg.org/multipage/dom.html#concept-element-accessibility-considerations"},
+"62ac5b1c": {"dfnID":"62ac5b1c","dfnText":"text","external":true,"refSections":[{"refs":[{"id":"ref-for-text-content"}],"title":"2.5. \nThe rp element"},{"refs":[{"id":"ref-for-text-content\u2460"}],"title":"\nAppendix A:\nEditorial Tweaks to HTML"}],"url":"https://html.spec.whatwg.org/multipage/dom.html#text-content"},
+"68675e70": {"dfnID":"68675e70","dfnText":"content attributes","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-element-attributes"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-concept-element-attributes\u2460"}],"title":"2.2. \nThe rb element"},{"refs":[{"id":"ref-for-concept-element-attributes\u2461"}],"title":"2.3. \nThe rt element"},{"refs":[{"id":"ref-for-concept-element-attributes\u2462"}],"title":"2.4. \nThe rtc element"},{"refs":[{"id":"ref-for-concept-element-attributes\u2463"}],"title":"2.5. \nThe rp element"}],"url":"https://html.spec.whatwg.org/multipage/dom.html#concept-element-attributes"},
+"88766833": {"dfnID":"88766833","dfnText":"content model","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-element-content-model"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-concept-element-content-model\u2460"}],"title":"2.2. \nThe rb element"},{"refs":[{"id":"ref-for-concept-element-content-model\u2461"}],"title":"2.3. \nThe rt element"},{"refs":[{"id":"ref-for-concept-element-content-model\u2462"}],"title":"2.4. \nThe rtc element"},{"refs":[{"id":"ref-for-concept-element-content-model\u2463"}],"title":"2.5. \nThe rp element"}],"url":"https://html.spec.whatwg.org/multipage/dom.html#concept-element-content-model"},
+"8fc74046": {"dfnID":"8fc74046","dfnText":"global attributes","external":true,"refSections":[{"refs":[{"id":"ref-for-global-attributes"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-global-attributes\u2460"}],"title":"2.2. \nThe rb element"},{"refs":[{"id":"ref-for-global-attributes\u2461"}],"title":"2.3. \nThe rt element"},{"refs":[{"id":"ref-for-global-attributes\u2462"}],"title":"2.4. \nThe rtc element"},{"refs":[{"id":"ref-for-global-attributes\u2463"}],"title":"2.5. \nThe rp element"},{"refs":[{"id":"ref-for-global-attributes\u2464"},{"id":"ref-for-global-attributes\u2465"},{"id":"ref-for-global-attributes\u2466"},{"id":"ref-for-global-attributes\u2467"},{"id":"ref-for-global-attributes\u2468"}],"title":"\nAppendix A:\nEditorial Tweaks to HTML"}],"url":"https://html.spec.whatwg.org/multipage/dom.html#global-attributes"},
+"annotation-pairing": {"dfnID":"annotation-pairing","dfnText":"annotation pairing","external":false,"refSections":[],"url":"#annotation-pairing"},
+"b08d0bb2": {"dfnID":"b08d0bb2","dfnText":"HTMLElement","external":true,"refSections":[{"refs":[{"id":"ref-for-htmlelement"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-htmlelement\u2460"}],"title":"2.2. \nThe rb element"},{"refs":[{"id":"ref-for-htmlelement\u2461"}],"title":"2.3. \nThe rt element"},{"refs":[{"id":"ref-for-htmlelement\u2462"}],"title":"2.4. \nThe rtc element"},{"refs":[{"id":"ref-for-htmlelement\u2463"}],"title":"2.5. \nThe rp element"},{"refs":[{"id":"ref-for-htmlelement\u2464"},{"id":"ref-for-htmlelement\u2465"},{"id":"ref-for-htmlelement\u2466"},{"id":"ref-for-htmlelement\u2467"},{"id":"ref-for-htmlelement\u2468"},{"id":"ref-for-htmlelement\u2460\u24ea"},{"id":"ref-for-htmlelement\u2460\u2460"}],"title":"\nAppendix A:\nEditorial Tweaks to HTML"}],"url":"https://html.spec.whatwg.org/multipage/dom.html#htmlelement"},
+"cb3fd7c7": {"dfnID":"cb3fd7c7","dfnText":"inter-element whitespace","external":true,"refSections":[{"refs":[{"id":"ref-for-inter-element-whitespace"}],"title":"2.1.1. \nRuby Segmentation and Pairing"}],"url":"https://html.spec.whatwg.org/multipage/dom.html#inter-element-whitespace"},
+"d54eeea2": {"dfnID":"d54eeea2","dfnText":"palpable content","external":true,"refSections":[{"refs":[{"id":"ref-for-palpable-content-2"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-palpable-content-2\u2460"}],"title":"\nAppendix A:\nEditorial Tweaks to HTML"}],"url":"https://html.spec.whatwg.org/multipage/dom.html#palpable-content-2"},
+"dd21c139": {"dfnID":"dd21c139","dfnText":"ruby-position","external":true,"refSections":[{"refs":[{"id":"ref-for-propdef-ruby-position"}],"title":"\nAppendix A:\nEditorial Tweaks to HTML"}],"url":"https://drafts.csswg.org/css-ruby-1/#propdef-ruby-position"},
+"dfc4f7e7": {"dfnID":"dfc4f7e7","dfnText":"categories","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-element-categories"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-concept-element-categories\u2460"}],"title":"2.2. \nThe rb element"},{"refs":[{"id":"ref-for-concept-element-categories\u2461"}],"title":"2.3. \nThe rt element"},{"refs":[{"id":"ref-for-concept-element-categories\u2462"}],"title":"2.4. \nThe rtc element"},{"refs":[{"id":"ref-for-concept-element-categories\u2463"}],"title":"2.5. \nThe rp element"}],"url":"https://html.spec.whatwg.org/multipage/dom.html#concept-element-categories"},
+"e5a7e26c": {"dfnID":"e5a7e26c","dfnText":"phrasing content","external":true,"refSections":[{"refs":[{"id":"ref-for-phrasing-content-2"},{"id":"ref-for-phrasing-content-2\u2460"},{"id":"ref-for-phrasing-content-2\u2461"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-phrasing-content-2\u2462"}],"title":"2.2. \nThe rb element"},{"refs":[{"id":"ref-for-phrasing-content-2\u2463"}],"title":"2.3. \nThe rt element"},{"refs":[{"id":"ref-for-phrasing-content-2\u2464"}],"title":"2.4. \nThe rtc element"},{"refs":[{"id":"ref-for-phrasing-content-2\u2465"},{"id":"ref-for-phrasing-content-2\u2466"},{"id":"ref-for-phrasing-content-2\u2467"},{"id":"ref-for-phrasing-content-2\u2468"},{"id":"ref-for-phrasing-content-2\u2460\u24ea"},{"id":"ref-for-phrasing-content-2\u2460\u2460"}],"title":"\nAppendix A:\nEditorial Tweaks to HTML"}],"url":"https://html.spec.whatwg.org/multipage/dom.html#phrasing-content-2"},
+"e7f0dd6c": {"dfnID":"e7f0dd6c","dfnText":"display","external":true,"refSections":[{"refs":[{"id":"ref-for-propdef-display"}],"title":"\nAppendix A:\nEditorial Tweaks to HTML"}],"url":"https://drafts.csswg.org/css-display-4/#propdef-display"},
+"elementdef-rb": {"dfnID":"elementdef-rb","dfnText":"rb","external":false,"refSections":[{"refs":[{"id":"ref-for-elementdef-rb"},{"id":"ref-for-elementdef-rb\u2460"},{"id":"ref-for-elementdef-rb\u2461"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-elementdef-rb\u2462"},{"id":"ref-for-elementdef-rb\u2463"},{"id":"ref-for-elementdef-rb\u2464"}],"title":"2.1.1. \nRuby Segmentation and Pairing"},{"refs":[{"id":"ref-for-elementdef-rb\u2465"}],"title":"2.1.2. \nMarkup Patterns for Multi-Character Ruby"},{"refs":[{"id":"ref-for-elementdef-rb\u2466"},{"id":"ref-for-elementdef-rb\u2467"},{"id":"ref-for-elementdef-rb\u2468"},{"id":"ref-for-elementdef-rb\u2460\u24ea"}],"title":"2.2. \nThe rb element"},{"refs":[{"id":"ref-for-elementdef-rb\u2460\u2460"},{"id":"ref-for-elementdef-rb\u2460\u2461"},{"id":"ref-for-elementdef-rb\u2460\u2462"},{"id":"ref-for-elementdef-rb\u2460\u2463"},{"id":"ref-for-elementdef-rb\u2460\u2464"},{"id":"ref-for-elementdef-rb\u2460\u2465"},{"id":"ref-for-elementdef-rb\u2460\u2466"}],"title":"3. \nOptional Tags"},{"refs":[{"id":"ref-for-elementdef-rb\u2460\u2467"}],"title":"5. \nConforming Features "},{"refs":[{"id":"ref-for-elementdef-rb\u2460\u2468"},{"id":"ref-for-elementdef-rb\u2461\u24ea"},{"id":"ref-for-elementdef-rb\u2461\u2460"},{"id":"ref-for-elementdef-rb\u2461\u2461"},{"id":"ref-for-elementdef-rb\u2461\u2462"}],"title":"\nAppendix A:\nEditorial Tweaks to HTML"},{"refs":[{"id":"ref-for-elementdef-rb\u2461\u2463"},{"id":"ref-for-elementdef-rb\u2461\u2464"},{"id":"ref-for-elementdef-rb\u2461\u2465"}],"title":"\nAppendix B:\nComparison With The HTML Standard"}],"url":"#elementdef-rb"},
+"elementdef-rp": {"dfnID":"elementdef-rp","dfnText":"rp","external":false,"refSections":[{"refs":[{"id":"ref-for-elementdef-rp"},{"id":"ref-for-elementdef-rp\u2460"},{"id":"ref-for-elementdef-rp\u2461"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-elementdef-rp\u2462"},{"id":"ref-for-elementdef-rp\u2463"}],"title":"2.1.1. \nRuby Segmentation and Pairing"},{"refs":[{"id":"ref-for-elementdef-rp\u2464"}],"title":"2.4. \nThe rtc element"},{"refs":[{"id":"ref-for-elementdef-rp\u2465"},{"id":"ref-for-elementdef-rp\u2466"},{"id":"ref-for-elementdef-rp\u2467"}],"title":"2.5. \nThe rp element"},{"refs":[{"id":"ref-for-elementdef-rp\u2468"},{"id":"ref-for-elementdef-rp\u2460\u24ea"},{"id":"ref-for-elementdef-rp\u2460\u2460"},{"id":"ref-for-elementdef-rp\u2460\u2461"},{"id":"ref-for-elementdef-rp\u2460\u2462"},{"id":"ref-for-elementdef-rp\u2460\u2463"}],"title":"3. \nOptional Tags"},{"refs":[{"id":"ref-for-elementdef-rp\u2460\u2464"},{"id":"ref-for-elementdef-rp\u2460\u2465"},{"id":"ref-for-elementdef-rp\u2460\u2466"},{"id":"ref-for-elementdef-rp\u2460\u2467"},{"id":"ref-for-elementdef-rp\u2460\u2468"},{"id":"ref-for-elementdef-rp\u2461\u24ea"},{"id":"ref-for-elementdef-rp\u2461\u2460"}],"title":"\nAppendix A:\nEditorial Tweaks to HTML"}],"url":"#elementdef-rp"},
+"elementdef-rt": {"dfnID":"elementdef-rt","dfnText":"rt","external":false,"refSections":[{"refs":[{"id":"ref-for-elementdef-rt"},{"id":"ref-for-elementdef-rt\u2460"},{"id":"ref-for-elementdef-rt\u2461"},{"id":"ref-for-elementdef-rt\u2462"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-elementdef-rt\u2463"},{"id":"ref-for-elementdef-rt\u2464"},{"id":"ref-for-elementdef-rt\u2465"},{"id":"ref-for-elementdef-rt\u2466"},{"id":"ref-for-elementdef-rt\u2467"},{"id":"ref-for-elementdef-rt\u2468"}],"title":"2.1.1. \nRuby Segmentation and Pairing"},{"refs":[{"id":"ref-for-elementdef-rt\u2460\u24ea"}],"title":"2.1.2. \nMarkup Patterns for Multi-Character Ruby"},{"refs":[{"id":"ref-for-elementdef-rt\u2460\u2460"},{"id":"ref-for-elementdef-rt\u2460\u2461"}],"title":"2.3. \nThe rt element"},{"refs":[{"id":"ref-for-elementdef-rt\u2460\u2462"},{"id":"ref-for-elementdef-rt\u2460\u2463"},{"id":"ref-for-elementdef-rt\u2460\u2464"}],"title":"2.4. \nThe rtc element"},{"refs":[{"id":"ref-for-elementdef-rt\u2460\u2465"},{"id":"ref-for-elementdef-rt\u2460\u2466"},{"id":"ref-for-elementdef-rt\u2460\u2467"},{"id":"ref-for-elementdef-rt\u2460\u2468"},{"id":"ref-for-elementdef-rt\u2461\u24ea"},{"id":"ref-for-elementdef-rt\u2461\u2460"}],"title":"3. \nOptional Tags"},{"refs":[{"id":"ref-for-elementdef-rt\u2461\u2461"},{"id":"ref-for-elementdef-rt\u2461\u2462"},{"id":"ref-for-elementdef-rt\u2461\u2463"},{"id":"ref-for-elementdef-rt\u2461\u2464"},{"id":"ref-for-elementdef-rt\u2461\u2465"},{"id":"ref-for-elementdef-rt\u2461\u2466"},{"id":"ref-for-elementdef-rt\u2461\u2467"},{"id":"ref-for-elementdef-rt\u2461\u2468"}],"title":"\nAppendix A:\nEditorial Tweaks to HTML"},{"refs":[{"id":"ref-for-elementdef-rt\u2462\u24ea"},{"id":"ref-for-elementdef-rt\u2462\u2460"},{"id":"ref-for-elementdef-rt\u2462\u2461"}],"title":"\nAppendix B:\nComparison With The HTML Standard"}],"url":"#elementdef-rt"},
+"elementdef-rtc": {"dfnID":"elementdef-rtc","dfnText":"rtc","external":false,"refSections":[{"refs":[{"id":"ref-for-elementdef-rtc"},{"id":"ref-for-elementdef-rtc\u2460"},{"id":"ref-for-elementdef-rtc\u2461"},{"id":"ref-for-elementdef-rtc\u2462"},{"id":"ref-for-elementdef-rtc\u2463"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-elementdef-rtc\u2464"},{"id":"ref-for-elementdef-rtc\u2465"},{"id":"ref-for-elementdef-rtc\u2466"}],"title":"2.1.1. \nRuby Segmentation and Pairing"},{"refs":[{"id":"ref-for-elementdef-rtc\u2467"},{"id":"ref-for-elementdef-rtc\u2468"},{"id":"ref-for-elementdef-rtc\u2460\u24ea"}],"title":"2.3. \nThe rt element"},{"refs":[{"id":"ref-for-elementdef-rtc\u2460\u2460"},{"id":"ref-for-elementdef-rtc\u2460\u2461"},{"id":"ref-for-elementdef-rtc\u2460\u2462"},{"id":"ref-for-elementdef-rtc\u2460\u2463"},{"id":"ref-for-elementdef-rtc\u2460\u2464"}],"title":"2.4. \nThe rtc element"},{"refs":[{"id":"ref-for-elementdef-rtc\u2460\u2465"},{"id":"ref-for-elementdef-rtc\u2460\u2466"}],"title":"2.5. \nThe rp element"},{"refs":[{"id":"ref-for-elementdef-rtc\u2460\u2467"},{"id":"ref-for-elementdef-rtc\u2460\u2468"},{"id":"ref-for-elementdef-rtc\u2461\u24ea"},{"id":"ref-for-elementdef-rtc\u2461\u2460"},{"id":"ref-for-elementdef-rtc\u2461\u2461"},{"id":"ref-for-elementdef-rtc\u2461\u2462"},{"id":"ref-for-elementdef-rtc\u2461\u2463"}],"title":"3. \nOptional Tags"},{"refs":[{"id":"ref-for-elementdef-rtc\u2461\u2464"}],"title":"5. \nConforming Features "},{"refs":[{"id":"ref-for-elementdef-rtc\u2461\u2465"},{"id":"ref-for-elementdef-rtc\u2461\u2466"},{"id":"ref-for-elementdef-rtc\u2461\u2467"},{"id":"ref-for-elementdef-rtc\u2461\u2468"},{"id":"ref-for-elementdef-rtc\u2462\u24ea"},{"id":"ref-for-elementdef-rtc\u2462\u2460"},{"id":"ref-for-elementdef-rtc\u2462\u2461"}],"title":"\nAppendix A:\nEditorial Tweaks to HTML"},{"refs":[{"id":"ref-for-elementdef-rtc\u2462\u2462"},{"id":"ref-for-elementdef-rtc\u2462\u2463"},{"id":"ref-for-elementdef-rtc\u2462\u2464"},{"id":"ref-for-elementdef-rtc\u2462\u2465"}],"title":"\nAppendix B:\nComparison With The HTML Standard"}],"url":"#elementdef-rtc"},
+"elementdef-ruby": {"dfnID":"elementdef-ruby","dfnText":"ruby","external":false,"refSections":[{"refs":[{"id":"ref-for-elementdef-ruby"},{"id":"ref-for-elementdef-ruby\u2460"},{"id":"ref-for-elementdef-ruby\u2461"},{"id":"ref-for-elementdef-ruby\u2462"},{"id":"ref-for-elementdef-ruby\u2463"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-elementdef-ruby\u2464"},{"id":"ref-for-elementdef-ruby\u2465"}],"title":"2.1.1. \nRuby Segmentation and Pairing"},{"refs":[{"id":"ref-for-elementdef-ruby\u2466"},{"id":"ref-for-elementdef-ruby\u2467"},{"id":"ref-for-elementdef-ruby\u2468"}],"title":"2.2. \nThe rb element"},{"refs":[{"id":"ref-for-elementdef-ruby\u2460\u24ea"},{"id":"ref-for-elementdef-ruby\u2460\u2460"},{"id":"ref-for-elementdef-ruby\u2460\u2461"},{"id":"ref-for-elementdef-ruby\u2460\u2462"}],"title":"2.3. \nThe rt element"},{"refs":[{"id":"ref-for-elementdef-ruby\u2460\u2463"},{"id":"ref-for-elementdef-ruby\u2460\u2464"},{"id":"ref-for-elementdef-ruby\u2460\u2465"}],"title":"2.4. \nThe rtc element"},{"refs":[{"id":"ref-for-elementdef-ruby\u2460\u2466"}],"title":"2.5. \nThe rp element"},{"refs":[{"id":"ref-for-elementdef-ruby\u2460\u2467"},{"id":"ref-for-elementdef-ruby\u2460\u2468"},{"id":"ref-for-elementdef-ruby\u2461\u24ea"},{"id":"ref-for-elementdef-ruby\u2461\u2460"},{"id":"ref-for-elementdef-ruby\u2461\u2461"},{"id":"ref-for-elementdef-ruby\u2461\u2462"},{"id":"ref-for-elementdef-ruby\u2461\u2463"},{"id":"ref-for-elementdef-ruby\u2461\u2464"},{"id":"ref-for-elementdef-ruby\u2461\u2465"},{"id":"ref-for-elementdef-ruby\u2461\u2466"}],"title":"\nAppendix A:\nEditorial Tweaks to HTML"}],"url":"#elementdef-ruby"},
+"ruby": {"dfnID":"ruby","dfnText":"Ruby","external":false,"refSections":[],"url":"#ruby"},
+"ruby-annotation-range": {"dfnID":"ruby-annotation-range","dfnText":"ruby annotation range","external":false,"refSections":[{"refs":[{"id":"ref-for-ruby-annotation-range"},{"id":"ref-for-ruby-annotation-range\u2460"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-ruby-annotation-range\u2461"},{"id":"ref-for-ruby-annotation-range\u2462"},{"id":"ref-for-ruby-annotation-range\u2463"},{"id":"ref-for-ruby-annotation-range\u2464"},{"id":"ref-for-ruby-annotation-range\u2465"},{"id":"ref-for-ruby-annotation-range\u2466"}],"title":"2.1.1. \nRuby Segmentation and Pairing"},{"refs":[{"id":"ref-for-ruby-annotation-range\u2467"},{"id":"ref-for-ruby-annotation-range\u2468"}],"title":"2.4. \nThe rtc element"}],"url":"#ruby-annotation-range"},
+"ruby-annotation-units": {"dfnID":"ruby-annotation-units","dfnText":"ruby annotation units","external":false,"refSections":[{"refs":[{"id":"ref-for-ruby-annotation-units"},{"id":"ref-for-ruby-annotation-units\u2460"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-ruby-annotation-units\u2461"},{"id":"ref-for-ruby-annotation-units\u2462"},{"id":"ref-for-ruby-annotation-units\u2463"},{"id":"ref-for-ruby-annotation-units\u2464"},{"id":"ref-for-ruby-annotation-units\u2465"},{"id":"ref-for-ruby-annotation-units\u2466"},{"id":"ref-for-ruby-annotation-units\u2467"},{"id":"ref-for-ruby-annotation-units\u2468"}],"title":"2.1.1. \nRuby Segmentation and Pairing"},{"refs":[{"id":"ref-for-ruby-annotation-units\u2460\u24ea"}],"title":"2.3. \nThe rt element"},{"refs":[{"id":"ref-for-ruby-annotation-units\u2460\u2460"}],"title":"2.4. \nThe rtc element"},{"refs":[{"id":"ref-for-ruby-annotation-units\u2460\u2461"},{"id":"ref-for-ruby-annotation-units\u2460\u2462"}],"title":"2.5. \nThe rp element"}],"url":"#ruby-annotation-units"},
+"ruby-base-range": {"dfnID":"ruby-base-range","dfnText":"ruby base range","external":false,"refSections":[{"refs":[{"id":"ref-for-ruby-base-range"},{"id":"ref-for-ruby-base-range\u2460"},{"id":"ref-for-ruby-base-range\u2461"}],"title":"2.1.1. \nRuby Segmentation and Pairing"},{"refs":[{"id":"ref-for-ruby-base-range\u2462"}],"title":"2.4. \nThe rtc element"}],"url":"#ruby-base-range"},
+"ruby-base-units": {"dfnID":"ruby-base-units","dfnText":"ruby base units","external":false,"refSections":[{"refs":[{"id":"ref-for-ruby-base-units"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-ruby-base-units\u2460"},{"id":"ref-for-ruby-base-units\u2461"},{"id":"ref-for-ruby-base-units\u2462"},{"id":"ref-for-ruby-base-units\u2463"},{"id":"ref-for-ruby-base-units\u2464"},{"id":"ref-for-ruby-base-units\u2465"}],"title":"2.1.1. \nRuby Segmentation and Pairing"},{"refs":[{"id":"ref-for-ruby-base-units\u2466"},{"id":"ref-for-ruby-base-units\u2467"}],"title":"2.1.2. \nMarkup Patterns for Multi-Character Ruby"},{"refs":[{"id":"ref-for-ruby-base-units\u2468"}],"title":"2.2. \nThe rb element"},{"refs":[{"id":"ref-for-ruby-base-units\u2460\u24ea"}],"title":"2.3. \nThe rt element"},{"refs":[{"id":"ref-for-ruby-base-units\u2460\u2460"}],"title":"2.4. \nThe rtc element"}],"url":"#ruby-base-units"},
+"ruby-segment": {"dfnID":"ruby-segment","dfnText":"ruby segment","external":false,"refSections":[{"refs":[{"id":"ref-for-ruby-segment"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-ruby-segment\u2460"},{"id":"ref-for-ruby-segment\u2461"}],"title":"2.1.1. \nRuby Segmentation and Pairing"}],"url":"#ruby-segment"},
+"tabular-markup": {"dfnID":"tabular-markup","dfnText":"tabular markup","external":false,"refSections":[{"refs":[{"id":"ref-for-tabular-markup"},{"id":"ref-for-tabular-markup\u2460"},{"id":"ref-for-tabular-markup\u2461"}],"title":"\nAppendix B:\nComparison With The HTML Standard"}],"url":"#tabular-markup"},
+};
+
+document.addEventListener("DOMContentLoaded", ()=>{
+    genAllDfnPanels();
+
+    document.body.addEventListener("click", (e) => {
+        // If not handled already, just hide all dfn panels.
+        hideAllDfnPanels();
+    });
+});
+
+window.addEventListener("resize", () => {
+    // Pin any visible dfn panel
+    queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(el=>positionDfnPanel(el));
+});
+
+function genAllDfnPanels() {
+    for(const panelData of Object.values(dfnPanelData)) {
+        const dfnID = panelData.dfnID;
+        const dfn = document.getElementById(dfnID);
+        if(!dfn) {
+            console.log(`Can't find dfn#${dfnID}.`, panelData);
+            continue;
+        }
+        dfn.panelData = panelData;
+        insertDfnPopupAction(dfn);
+    }
+}
+
+function genDfnPanel(dfn, { dfnID, url, dfnText, refSections, external }) {
+    const dfnPanel = mk.aside({
+        class: "dfn-panel on",
+        id: `infopanel-for-${dfnID}`,
+        "data-for": dfnID,
+        "aria-labelled-by":`infopaneltitle-for-${dfnID}`,
+        },
+        mk.span({id:`infopaneltitle-for-${dfnID}`, style:"display:none"},
+            `Info about the '${dfnText}' ${external?"external":""} reference.`),
+        mk.a({href:url, class:"dfn-link"}, url),
+        refSections.length == 0 ? [] :
+            mk.b({}, "Referenced in:"),
+            mk.ul({},
+                ...refSections.map(section=>
+                    mk.li({},
+                        ...section.refs.map((ref, refI)=>
+                            [
+                                mk.a({ href: `#${ref.id}` },
+                                    (refI == 0) ? section.title : `(${refI + 1})`
+                                ),
+                                " ",
+                            ]
+                        ),
+                    ),
+                ),
+            ),
+        genLinkingSyntaxes(dfn),
+    );
+
+    dfnPanel.addEventListener('click', (event) => {
+        if (event.target.nodeName == 'A') {
+            scrollToTargetAndHighlight(event);
+            pinDfnPanel(dfnPanel);
+        }
+        event.stopPropagation();
+        refocusOnTarget(event);
+    });
+    dfnPanel.addEventListener('keydown', (event) => {
+        if(event.keyCode == 27) { // Escape key
+            hideDfnPanel({dfnPanel});
+            event.stopPropagation();
+            event.preventDefault();
+        }
+    });
+
+    dfnPanel.dfn = dfn;
+    dfn.dfnPanel = dfnPanel;
+    return dfnPanel;
+}
+
+
+
+function hideAllDfnPanels() {
+    // Delete the currently-active dfn panel.
+    queryAll(".dfn-panel").forEach(dfnPanel=>hideDfnPanel({dfnPanel}));
+}
+
+function showDfnPanel(dfn) {
+    hideAllDfnPanels(); // Only display one at a time.
+
+    dfn.setAttribute("aria-expanded", "true");
+
+    const dfnPanel = genDfnPanel(dfn, dfn.panelData);
+
+    // Give the dfn a unique tabindex, and then
+    // give all the tabbable panel bits successive indexes.
+    let tabIndex = 100;
+    dfn.tabIndex = tabIndex++;
+    const tabbable = dfnPanel.querySelectorAll(":is(a, button)");
+    for (const el of tabbable) {
+        el.tabIndex = tabIndex++;
+    }
+
+    append(document.body, dfnPanel);
+    positionDfnPanel(dfnPanel);
+}
+
+function positionDfnPanel(dfnPanel) {
+    const dfn = dfnPanel.dfn;
+    const dfnPos = getBounds(dfn);
+    dfnPanel.style.top = dfnPos.bottom + "px";
+    dfnPanel.style.left = dfnPos.left + "px";
+
+    const panelPos = dfnPanel.getBoundingClientRect();
+    const panelMargin = 8;
+    const maxRight = document.body.parentNode.clientWidth - panelMargin;
+    if (panelPos.right > maxRight) {
+        const overflowAmount = panelPos.right - maxRight;
+        const newLeft = Math.max(panelMargin, dfnPos.left - overflowAmount);
+        dfnPanel.style.left = newLeft + "px";
+    }
+}
+
+function pinDfnPanel(dfnPanel) {
+    // Switch it to "activated" state, which pins it.
+    dfnPanel.classList.add("activated");
+    dfnPanel.style.position = "fixed";
+    dfnPanel.style.left = null;
+    dfnPanel.style.top = null;
+}
+
+function hideDfnPanel({dfn, dfnPanel}) {
+    if(!dfnPanel) dfnPanel = dfn.dfnPanel;
+    if(!dfn) dfn = dfnPanel.dfn;
+    dfn.dfnPanel = undefined;
+    dfnPanel.dfn = undefined;
+    dfn.setAttribute("aria-expanded", "false");
+    dfn.tabIndex = undefined;
+    dfnPanel.remove()
+}
+
+function toggleDfnPanel(dfn) {
+    if(dfn.dfnPanel) {
+        hideDfnPanel(dfn);
+    } else {
+        showDfnPanel(dfn);
+    }
+}
+
+function insertDfnPopupAction(dfn) {
+    dfn.setAttribute('role', 'button');
+    dfn.setAttribute('aria-expanded', 'false')
+    dfn.tabIndex = 0;
+    dfn.classList.add('has-dfn-panel');
+    dfn.addEventListener('click', (event) => {
+        toggleDfnPanel(dfn);
+        event.stopPropagation();
+    });
+    dfn.addEventListener('keypress', (event) => {
+        const kc = event.keyCode;
+        // 32->Space, 13->Enter
+        if(kc == 32 || kc == 13) {
+            toggleDfnPanel(dfn);
+            event.stopPropagation();
+            event.preventDefault();
+        }
+    });
+}
+
+function refocusOnTarget(event) {
+    const target = event.target;
+    setTimeout(() => {
+        // Refocus on the event.target element.
+        // This is needed after browser scrolls to the destination.
+        target.focus();
+    });
+}
+
+// TODO: shared util
+// Returns the root-level absolute position {left and top} of element.
+function getBounds(el, relativeTo=document.body) {
+    const relativeRect = relativeTo.getBoundingClientRect();
+    const elRect = el.getBoundingClientRect();
+    const top = elRect.top - relativeRect.top;
+    const left = elRect.left - relativeRect.left;
+    return {
+        top,
+        left,
+        bottom: top + elRect.height,
+        right: left + elRect.width,
+    }
+}
+
+function scrollToTargetAndHighlight(event) {
+    let hash = event.target.hash;
+    if (hash) {
+        hash = decodeURIComponent(hash.substring(1));
+        const dest = document.getElementById(hash);
+        if (dest) {
+            dest.classList.add('highlighted');
+            setTimeout(() => dest.classList.remove('highlighted'), 1000);
+        }
+    }
+}
+
+// Functions, divided by link type, that wrap an autolink's
+// contents with the appropriate outer syntax.
+// Alternately, a string naming another type they format
+// the same as.
+function needsFor(type) {
+    switch(type) {
+        case "descriptor":
+        case "value":
+        case "element-attr":
+        case "attr-value":
+        case "element-state":
+        case "method":
+        case "constructor":
+        case "argument":
+        case "attribute":
+        case "const":
+        case "dict-member":
+        case "event":
+        case "enum-value":
+        case "stringifier":
+        case "serializer":
+        case "iterator":
+        case "maplike":
+        case "setlike":
+        case "state":
+        case "mode":
+        case "context":
+        case "facet": return true;
+
+        default: return false;
+    }
+}
+function refusesFor(type) {
+    switch(type) {
+        case "property":
+        case "element":
+        case "interface":
+        case "namespace":
+        case "callback":
+        case "dictionary":
+        case "enum":
+        case "exception":
+        case "typedef":
+        case "http-header":
+        case "permission": return true;
+
+        default: return false;
+    }
+}
+function linkFormatterFromType(type) {
+    switch(type) {
+        case 'scheme':
+        case 'permission':
+        case 'dfn': return (text) => `[=${text}=]`;
+
+        case 'abstract-op': return (text) => `[\$${text}\$]`;
+
+        case 'function':
+        case 'at-rule':
+        case 'selector':
+        case 'value': return (text) => `''${text}''`;
+
+        case 'http-header': return (text) => `[:${text}:]`;
+
+        case 'interface':
+        case 'constructor':
+        case 'method':
+        case 'argument':
+        case 'attribute':
+        case 'callback':
+        case 'dictionary':
+        case 'dict-member':
+        case 'enum':
+        case 'enum-value':
+        case 'exception':
+        case 'const':
+        case 'typedef':
+        case 'stringifier':
+        case 'serializer':
+        case 'iterator':
+        case 'maplike':
+        case 'setlike':
+        case 'extended-attribute':
+        case 'event':
+        case 'idl': return (text) => `{{${text}}}`;
+
+        case 'element-state':
+        case 'element-attr':
+        case 'attr-value':
+        case 'element': return (element) => `<{${element}}>`;
+
+        case 'grammar': return (text) => `${text} (within a <pre class=prod>)`;
+
+        case 'type': return (text)=> `<<${text}>>`;
+
+        case 'descriptor':
+        case 'property': return (text) => `'${text}'`;
+
+        default: return;
+    };
+};
+
+function genLinkingSyntaxes(dfn) {
+    if(dfn.tagName != "DFN") return;
+
+    const type = dfn.getAttribute('data-dfn-type');
+    if(!type) {
+        console.log(`<dfn> doesn't have a data-dfn-type:`, dfn);
+        return [];
+    }
+
+    // Return a function that wraps link text based on the type
+    const linkFormatter = linkFormatterFromType(type);
+    if(!linkFormatter) {
+        console.log(`<dfn> has an unknown data-dfn-type:`, dfn);
+        return [];
+    }
+
+    let ltAlts;
+    if(dfn.hasAttribute('data-lt')) {
+        ltAlts = dfn.getAttribute('data-lt')
+            .split("|")
+            .map(x=>x.trim());
+    } else {
+        ltAlts = [dfn.textContent.trim()];
+    }
+    if(type == "type") {
+        // lt of "<foo>", but "foo" is the interior;
+        // <<foo/bar>> is how you write it with a for,
+        // not <foo/<bar>> or whatever.
+        for(var i = 0; i < ltAlts.length; i++) {
+            const lt = ltAlts[i];
+            const match = /<(.*)>/.exec(lt);
+            if(match) { ltAlts[i] = match[1]; }
+        }
+    }
+
+    let forAlts;
+    if(dfn.hasAttribute('data-dfn-for')) {
+        forAlts = dfn.getAttribute('data-dfn-for')
+            .split(",")
+            .map(x=>x.trim());
+    } else {
+        forAlts = [''];
+    }
+
+    let linkingSyntaxes = [];
+    if(!needsFor(type)) {
+        for(const lt of ltAlts) {
+            linkingSyntaxes.push(linkFormatter(lt));
+        }
+    }
+    if(!refusesFor(type)) {
+        for(const f of forAlts) {
+            linkingSyntaxes.push(linkFormatter(`${f}/${ltAlts[0]}`))
+        }
+    }
+    return [
+        mk.b({}, 'Possible linking syntaxes:'),
+        mk.ul({},
+            ...linkingSyntaxes.map(link => {
+                const copyLink = async () =>
+                    await navigator.clipboard.writeText(link);
+                return mk.li({},
+                    mk.div({ class: 'link-item' },
+                        mk.button({
+                            class: 'copy-icon', title: 'Copy',
+                            type: 'button',
+                            _onclick: copyLink,
+                            tabindex: 0,
+                        }, mk.span({ class: 'icon' }) ),
+                        mk.span({}, link)
+                    )
+                );
+            })
+        )
+    ];
+}
+}
+</script>
+<script>/* Boilerplate: script-ref-hints */
+"use strict";
+{
+let refsData = {
+"#elementdef-rb": {"export":true,"for_":[],"level":"","normative":true,"shortname":"html-ruby-extensions","spec":"html-ruby-extensions","status":"local","text":"rb","type":"element","url":"#elementdef-rb"},
+"#elementdef-rp": {"export":true,"for_":[],"level":"","normative":true,"shortname":"html-ruby-extensions","spec":"html-ruby-extensions","status":"local","text":"rp","type":"element","url":"#elementdef-rp"},
+"#elementdef-rt": {"export":true,"for_":[],"level":"","normative":true,"shortname":"html-ruby-extensions","spec":"html-ruby-extensions","status":"local","text":"rt","type":"element","url":"#elementdef-rt"},
+"#elementdef-rtc": {"export":true,"for_":[],"level":"","normative":true,"shortname":"html-ruby-extensions","spec":"html-ruby-extensions","status":"local","text":"rtc","type":"element","url":"#elementdef-rtc"},
+"#elementdef-ruby": {"export":true,"for_":[],"level":"","normative":true,"shortname":"html-ruby-extensions","spec":"html-ruby-extensions","status":"local","text":"ruby","type":"element","url":"#elementdef-ruby"},
+"#ruby-annotation-range": {"export":true,"for_":[],"level":"","normative":true,"shortname":"html-ruby-extensions","spec":"html-ruby-extensions","status":"local","text":"annotation range","type":"dfn","url":"#ruby-annotation-range"},
+"#ruby-annotation-units": {"export":true,"for_":[],"level":"","normative":true,"shortname":"html-ruby-extensions","spec":"html-ruby-extensions","status":"local","text":"annotation unit","type":"dfn","url":"#ruby-annotation-units"},
+"#ruby-base-range": {"export":true,"for_":[],"level":"","normative":true,"shortname":"html-ruby-extensions","spec":"html-ruby-extensions","status":"local","text":"ruby base range","type":"dfn","url":"#ruby-base-range"},
+"#ruby-base-units": {"export":true,"for_":[],"level":"","normative":true,"shortname":"html-ruby-extensions","spec":"html-ruby-extensions","status":"local","text":"ruby base units","type":"dfn","url":"#ruby-base-units"},
+"#ruby-segment": {"export":true,"for_":[],"level":"","normative":true,"shortname":"html-ruby-extensions","spec":"html-ruby-extensions","status":"local","text":"ruby segment","type":"dfn","url":"#ruby-segment"},
+"#tabular-markup": {"export":true,"for_":[],"level":"","normative":true,"shortname":"html-ruby-extensions","spec":"html-ruby-extensions","status":"local","text":"tabular markup","type":"dfn","url":"#tabular-markup"},
+"https://drafts.csswg.org/css-display-4/#propdef-display": {"export":true,"for_":[],"level":"4","normative":true,"shortname":"css-display","spec":"css-display-4","status":"current","text":"display","type":"property","url":"https://drafts.csswg.org/css-display-4/#propdef-display"},
+"https://drafts.csswg.org/css-ruby-1/#propdef-ruby-position": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"css-ruby","spec":"css-ruby-1","status":"current","text":"ruby-position","type":"property","url":"https://drafts.csswg.org/css-ruby-1/#propdef-ruby-position"},
+"https://drafts.csswg.org/css-ruby-1/#valdef-display-ruby-base": {"export":true,"for_":["display"],"level":"1","normative":true,"shortname":"css-ruby","spec":"css-ruby-1","status":"current","text":"ruby-base","type":"value","url":"https://drafts.csswg.org/css-ruby-1/#valdef-display-ruby-base"},
+"https://drafts.csswg.org/css-ruby-1/#valdef-ruby-position-alternate": {"export":true,"for_":["ruby-position"],"level":"1","normative":true,"shortname":"css-ruby","spec":"css-ruby-1","status":"current","text":"alternate","type":"value","url":"https://drafts.csswg.org/css-ruby-1/#valdef-ruby-position-alternate"},
+"https://html.spec.whatwg.org/multipage/dom.html#concept-element-accessibility-considerations": {"export":false,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"accessibility considerations","type":"dfn","url":"https://html.spec.whatwg.org/multipage/dom.html#concept-element-accessibility-considerations"},
+"https://html.spec.whatwg.org/multipage/dom.html#concept-element-attributes": {"export":false,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"content attributes","type":"dfn","url":"https://html.spec.whatwg.org/multipage/dom.html#concept-element-attributes"},
+"https://html.spec.whatwg.org/multipage/dom.html#concept-element-categories": {"export":true,"for_":["/"],"level":"","normative":true,"shortname":"html","spec":"html","status":"anchor-block","text":"categories","type":"dfn","url":"https://html.spec.whatwg.org/multipage/dom.html#concept-element-categories"},
+"https://html.spec.whatwg.org/multipage/dom.html#concept-element-content-model": {"export":false,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"content model","type":"dfn","url":"https://html.spec.whatwg.org/multipage/dom.html#concept-element-content-model"},
+"https://html.spec.whatwg.org/multipage/dom.html#concept-element-contexts": {"export":false,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"contexts in which this element can be used","type":"dfn","url":"https://html.spec.whatwg.org/multipage/dom.html#concept-element-contexts"},
+"https://html.spec.whatwg.org/multipage/dom.html#concept-element-dom": {"export":false,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"dom interface","type":"dfn","url":"https://html.spec.whatwg.org/multipage/dom.html#concept-element-dom"},
+"https://html.spec.whatwg.org/multipage/dom.html#flow-content-2": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"flow content","type":"dfn","url":"https://html.spec.whatwg.org/multipage/dom.html#flow-content-2"},
+"https://html.spec.whatwg.org/multipage/dom.html#global-attributes": {"export":false,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"global attributes","type":"dfn","url":"https://html.spec.whatwg.org/multipage/dom.html#global-attributes"},
+"https://html.spec.whatwg.org/multipage/dom.html#htmlelement": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"HTMLElement","type":"interface","url":"https://html.spec.whatwg.org/multipage/dom.html#htmlelement"},
+"https://html.spec.whatwg.org/multipage/dom.html#inter-element-whitespace": {"export":false,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"inter-element whitespace","type":"dfn","url":"https://html.spec.whatwg.org/multipage/dom.html#inter-element-whitespace"},
+"https://html.spec.whatwg.org/multipage/dom.html#palpable-content-2": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"palpable content","type":"dfn","url":"https://html.spec.whatwg.org/multipage/dom.html#palpable-content-2"},
+"https://html.spec.whatwg.org/multipage/dom.html#phrasing-content-2": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"phrasing content","type":"dfn","url":"https://html.spec.whatwg.org/multipage/dom.html#phrasing-content-2"},
+"https://html.spec.whatwg.org/multipage/dom.html#represents": {"export":false,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"represent","type":"dfn","url":"https://html.spec.whatwg.org/multipage/dom.html#represents"},
+"https://html.spec.whatwg.org/multipage/dom.html#text-content": {"export":true,"for_":["/"],"level":"","normative":true,"shortname":"html","spec":"html","status":"anchor-block","text":"text","type":"dfn","url":"https://html.spec.whatwg.org/multipage/dom.html#text-content"},
+"https://html.spec.whatwg.org/multipage/syntax.html#syntax-end-tag": {"export":false,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"end tags","type":"dfn","url":"https://html.spec.whatwg.org/multipage/syntax.html#syntax-end-tag"},
+};
+
+function mkRefHint(link, ref) {
+    const linkText = link.textContent;
+    let dfnTextElements = '';
+    if (ref.text != linkText) {
+        dfnTextElements =
+            mk.li({},
+                mk.b({}, "Term: "),
+                mk.span({}, ref.text)
+            );
+    }
+    const forList = ref.for_;
+    let forListElements;
+    if(forList.length == 0) {
+        forListElements = [];
+    } else if(forList.length == 1) {
+        forListElements = mk.li({},
+            mk.b({}, "For: "),
+            mk.span({}, forList[0]),
+        );
+    } else {
+        forListElements = mk.li({},
+            mk.b({}, "For: "),
+            mk.ul({},
+                ...forList.map(forItem =>
+                    mk.li({},
+                        mk.span({}, forItem)
+                    ),
+                ),
+            ),
+        );
+    }
+    const url = ref.url;
+    const safeUrl = encodeURIComponent(url);
+    const hintPanel = mk.aside({
+        class: "ref-hint",
+        id: `ref-hint-for-${safeUrl}`,
+        "data-for": url,
+        "aria-labelled-by": `ref-hint-for-${safeUrl}`,
+    },
+        mk.ul({},
+            dfnTextElements,
+            mk.li({},
+                mk.b({}, "URL: "),
+                mk.a({ href: url, class: "ref" }, url),
+            ),
+            mk.li({},
+                mk.b({}, "Type: "),
+                mk.span({}, `${ref.type}`),
+            ),
+            mk.li({},
+                mk.b({}, "Spec: "),
+                mk.span({}, `${ref.spec ? ref.spec : ''}`),
+            ),
+            forListElements
+        ),
+    );
+    hintPanel.forLink = link;
+    setupRefHintEventListeners(link, hintPanel);
+    return hintPanel;
+}
+
+function hideAllRefHints() {
+    queryAll(".ref-hint").forEach(el=>hideRefHint(el));
+}
+
+function hideRefHint(refHint) {
+    const link = refHint.forLink;
+    link.setAttribute("aria-expanded", "false");
+    if(refHint.teardownEventListeners) {
+        refHint.teardownEventListeners();
+    }
+    refHint.remove();
+}
+
+function showRefHint(link) {
+    if(link.classList.contains("dfn-link")) return;
+    const url = link.getAttribute("href");
+    const ref = refsData[url];
+    if(!ref) return;
+
+    hideAllRefHints(); // Only display one at this time.
+
+    const refHint = mkRefHint(link, ref);
+    append(document.body, refHint);
+    link.setAttribute("aria-expanded", "true");
+    positionRefHint(refHint);
+}
+
+function setupRefHintEventListeners(link, refHint) {
+    if (refHint.teardownEventListeners) return;
+    // Add event handlers to hide the refHint after the user moves away
+    // from both the link and refHint, if not hovering either within one second.
+    let timeout = null;
+    const startHidingRefHint = (event) => {
+        if (timeout) {
+            clearTimeout(timeout);
+        }
+        timeout = setTimeout(() => {
+            hideRefHint(refHint);
+        }, 1000);
+    }
+    const resetHidingRefHint = (event) => {
+        if (timeout) clearTimeout(timeout);
+        timeout = null;
+    };
+    link.addEventListener("mouseleave", startHidingRefHint);
+    link.addEventListener("mouseenter", resetHidingRefHint);
+    link.addEventListener("blur", startHidingRefHint);
+    link.addEventListener("focus", resetHidingRefHint);
+    refHint.addEventListener("mouseleave", startHidingRefHint);
+    refHint.addEventListener("mouseenter", resetHidingRefHint);
+    refHint.addEventListener("blur", startHidingRefHint);
+    refHint.addEventListener("focus", resetHidingRefHint);
+
+    refHint.teardownEventListeners = () => {
+        // remove event listeners
+        resetHidingRefHint();
+        link.removeEventListener("mouseleave", startHidingRefHint);
+        link.removeEventListener("mouseenter", resetHidingRefHint);
+        link.removeEventListener("blur", startHidingRefHint);
+        link.removeEventListener("focus", resetHidingRefHint);
+        refHint.removeEventListener("mouseleave", startHidingRefHint);
+        refHint.removeEventListener("mouseenter", resetHidingRefHint);
+        refHint.removeEventListener("blur", startHidingRefHint);
+        refHint.removeEventListener("focus", resetHidingRefHint);
+    };
+}
+
+function positionRefHint(refHint) {
+    const link = refHint.forLink;
+    const linkPos = getBounds(link);
+    refHint.style.top = linkPos.bottom + "px";
+    refHint.style.left = linkPos.left + "px";
+
+    const panelPos = refHint.getBoundingClientRect();
+    const panelMargin = 8;
+    const maxRight = document.body.parentNode.clientWidth - panelMargin;
+    if (panelPos.right > maxRight) {
+        const overflowAmount = panelPos.right - maxRight;
+        const newLeft = Math.max(panelMargin, linkPos.left - overflowAmount);
+        refHint.style.left = newLeft + "px";
+    }
+}
+
+// TODO: shared util
+// Returns the root-level absolute position {left and top} of element.
+function getBounds(el, relativeTo=document.body) {
+    const relativeRect = relativeTo.getBoundingClientRect();
+    const elRect = el.getBoundingClientRect();
+    const top = elRect.top - relativeRect.top;
+    const left = elRect.left - relativeRect.left;
+    return {
+        top,
+        left,
+        bottom: top + elRect.height,
+        right: left + elRect.width,
+    }
+}
+
+function showRefHintListener(e) {
+    // If the target isn't in a link (or is a link),
+    // just ignore it.
+    let link = e.target.closest("a");
+    if(!link) return;
+
+    // If the target is in a ref-hint panel
+    // (aka a link in the already-open one),
+    // also just ignore it.
+    if(link.closest(".ref-hint")) return;
+
+    // Otherwise, show the panel for the link.
+    showRefHint(link);
+}
+
+function hideAllHintsListener(e) {
+    // If the click is inside a ref-hint panel, ignore it.
+    if(e.target.closest(".ref-hint")) return;
+    // Otherwise, close all the current panels.
+    hideAllRefHints();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.body.addEventListener("mousedown", showRefHintListener);
+    document.body.addEventListener("focus", showRefHintListener);
+
+    document.body.addEventListener("click", hideAllHintsListener);
+});
+
+window.addEventListener("resize", () => {
+    // Hide any open ref hint.
+    hideAllRefHints();
+});
 }
 </script>
