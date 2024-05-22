@@ -17,4 +17,5 @@ jobs:
           SOURCE: Overview.bs
           W3C_ECHIDNA_TOKEN: ${{ secrets.ECHIDNA_TOKEN }}
           W3C_BUILD_OVERRIDE: |
-            Status: w3c/WD
+            group: htmlwg
+            status: WD
