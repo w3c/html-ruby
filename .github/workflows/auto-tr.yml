@@ -1,24 +1,11 @@
-name: CI
+name: CI-TR
 on:
   workflow_dispatch: {}
   pull_request: {}
   push:
     branches: [main]
 jobs:
-  ed:
-    name: Build, Validate and Deploy Editor's Draft
-    runs-on: ubuntu-20.04
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
-      - uses: w3c/spec-prod@v2
-        with:
-          TOOLCHAIN: bikeshed
-          GH_PAGES_BRANCH: gh-pages
-          SOURCE: Overview.bs
-          DESTINATION: index.html
-  tr:
+  main:
     name: Build, Validate and Deploy on TR
     runs-on: ubuntu-20.04
     steps:
