@@ -15,8 +15,6 @@ jobs:
           W3C_WG_DECISION_URL: https://github.com/w3c/htmlwg/issues/26#issuecomment-2088100459
           TOOLCHAIN: bikeshed
           SOURCE: Overview.bs
-          DESTINATION: spec.html
           W3C_ECHIDNA_TOKEN: ${{ secrets.ECHIDNA_TOKEN }}
           W3C_BUILD_OVERRIDE: |
-            group: htmlwg
-            status: w3c/WD
+            Status: WD
