@@ -6,7 +6,7 @@ Status: w3c/ED
 Group: htmlwg
 Repository: w3c/html-ruby
 TR: https://www.w3.org/TR/html-ruby-extensions/
-URL: https://w3c.github.io/html-ruby/
+ED: https://w3c.github.io/html-ruby/
 Editor: Florian Rivoal, Invited Expert, https://florian.rivoal.net, w3cid 43241
 Abstract:
 	Ruby, a form of interlinear annotation,
