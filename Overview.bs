@@ -2,7 +2,7 @@
 Title: HTML Ruby Markup Extensions
 Shortname: html-ruby-extensions
 Level: None
-Status: w3c/ED
+Status: ED
 Group: htmlwg
 Repository: w3c/html-ruby
 TR: https://www.w3.org/TR/html-ruby-extensions/
