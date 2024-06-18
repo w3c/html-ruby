@@ -116,7 +116,7 @@ Background and Relation to the [[HTML inline]]</h3>
 
 	This specification is written to promote--
 	and guide implementations of--
-	an revised and extended model for ruby,
+	a revised and extended model for ruby,
 	in order to more completely address the needs of ruby on the Web platform.
 	This effort is undertaken with the <a href="https://www.w3.org/2022/02/ruby-agreement">agreement of W3C and the WHATWG</a>.
 
