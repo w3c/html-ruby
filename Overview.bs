@@ -947,7 +947,7 @@ The <dfn element><code>rp</code></dfn> element</h3>
 		</code></pre>
 
 		In user agents that support ruby layout,
-		the rendering ommit the parentheses,
+		the rendering omit the parentheses,
 		but in user agents that do not, the rendering would be:
 
 		<pre lang="ja">...&#28450;&#23383;（&#12363;&#12435;&#12376;）...</pre>
