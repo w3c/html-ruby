@@ -7,7 +7,7 @@
   <link href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED" rel="stylesheet">
   <meta content="Bikeshed version a1dabb26c, updated Mon Jun 17 15:00:44 2024 -0700" name="generator">
   <link href="https://www.w3.org/TR/html-ruby-extensions/" rel="canonical">
-  <meta content="7ed7b4abe8d3df7befdd39374f371967afb617c9" name="revision">
+  <meta content="3c7aa951eef428f9b8b3522e82e1a64eca60db53" name="revision">
   <meta content="dark light" name="color-scheme">
   <link href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css">
 <style>/* Boilerplate: style-autolinks */
@@ -1413,11 +1413,16 @@ Comparison With The HTML Standard</a> summarizes the main differences,
 	an <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb①⑦">rb</a></code>, <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②①">rt</a></code>, <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc②④">rtc</a></code> or <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp①④">rp</a></code> element,
 	or if there is no more content in the parent element.</p>
    <h2 class="heading settled" data-level="4" id="rendering"><span class="secno">4. </span><span class="content"> Rendering</span><a class="self-link" href="#rendering"></a></h2>
-   <div class="advisement"> This section completes the <a href="https://html.spec.whatwg.org/multipage/rendering.html#non-replaced-elements"><cite>HTML</cite> § 15.3 Non-replaced elements</a> section of the <a data-biblio-display="inline" data-link-type="biblio" href="https://html.spec.whatwg.org/multipage/"><cite>HTML Standard</cite></a>,
+   <div class="advisement">
+     This section completes the <a href="https://html.spec.whatwg.org/multipage/rendering.html#non-replaced-elements"><cite>HTML</cite> § 15.3 Non-replaced elements</a> section of the <a data-biblio-display="inline" data-link-type="biblio" href="https://html.spec.whatwg.org/multipage/"><cite>HTML Standard</cite></a>,
 		and in particular its <a href="https://html.spec.whatwg.org/multipage/rendering.html#phrasing-content-3"><cite>HTML</cite> § 15.3.4 Phrasing content</a> subsection,
 		with the exception of
 		the <code class="highlight">rp <c- p>{</c-> <c- k>display</c-><c- p>:</c-> none<c- p>;</c-> <c- p>}</c-></code> rule
-		which belongs in the <a href="https://html.spec.whatwg.org/multipage/rendering.html#hidden-elements"><cite>HTML</cite> § 15.3.1 Hidden elements</a> subsection. </div>
+		which belongs in the <a href="https://html.spec.whatwg.org/multipage/rendering.html#hidden-elements"><cite>HTML</cite> § 15.3.1 Hidden elements</a> subsection. 
+    <p class="note" role="note"><span class="marker">Note:</span> <a href="https://html.spec.whatwg.org/multipage/rendering.html#phrasing-content-3"><cite>HTML</cite> § 15.3.4 Phrasing content</a> contains additional requirements about ruby;
+		they are not overridden or invalidated by this specification
+		and continue to apply.</p>
+   </div>
    <p>The following rules are added
 	to the <a href="https://html.spec.whatwg.org/multipage/rendering.html#the-css-user-agent-style-sheet-and-presentational-hints">HTML user agent style sheet</a>:</p>
 <pre><code class="highlight">ruby <c- p>{</c-> <c- k>display</c-><c- p>:</c-> ruby<c- p>;</c-> <c- p>}</c->
