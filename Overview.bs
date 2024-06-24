@@ -1013,6 +1013,10 @@ Rendering</h3>
 		with the exception of
 		the <code highlight=css>rp { display: none; }</code> rule
 		which belongs in the [[html/rendering#hidden-elements]] subsection.
+
+		Note: [[HTML/rendering#phrasing-content-3]] contains additional requirements about ruby;
+		they are not overridden or invalidated by this specification
+		and continue to apply.
 	</div>
 
 	The following rules are added
