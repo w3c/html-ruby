@@ -1009,7 +1009,7 @@ Rendering</h3>
 
 	<div class=advisement>
 		This section completes the [[html/rendering#non-replaced-elements]] section of the [[HTML inline]],
-		and in partcicular its [[HTML/rendering#phrasing-content-3]] subsection,
+		and in particular its [[HTML/rendering#phrasing-content-3]] subsection,
 		with the exception of
 		the <code highlight=css>rp { display: none; }</code> rule
 		which belongs in the [[html/rendering#hidden-elements]] subsection.
