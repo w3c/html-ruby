@@ -74,7 +74,8 @@ Introduction</h2>
 	or characters that have multiple readings
 	which can't be determined by the context
 	(eg. some Japanese names).
-	For example it is widely used in educational materials and children’s texts.
+	For example it is widely used in educational materials and children’s texts,
+	but it can also be readily found in many types of literature and signage.
 	It is also occasionally used to convey information about the meaning of ideographic characters.
 
 	<figure>
