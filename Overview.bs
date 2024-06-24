@@ -325,7 +325,7 @@ The <dfn element><code>ruby</code></dfn> element</h3>
 		</figure>
 
 		In horizontal writing,
-		they are frequently also typeset to the right,
+		they are usually also typeset to the right,
 		in this case sandwiched between individual base characters:
 
 		<figure>
