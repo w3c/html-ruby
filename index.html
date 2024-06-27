@@ -7,7 +7,7 @@
   <link href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED" rel="stylesheet">
   <meta content="Bikeshed version a1dabb26c, updated Mon Jun 17 15:00:44 2024 -0700" name="generator">
   <link href="https://www.w3.org/TR/html-ruby-extensions/" rel="canonical">
-  <meta content="895cdf5061f78e22969cd2b8254b6103aaad0124" name="revision">
+  <meta content="657377b52fa245e77f44197288a4e35970f3ff2e" name="revision">
   <meta content="dark light" name="color-scheme">
   <link href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css">
 <style>/* Boilerplate: style-autolinks */
@@ -690,7 +690,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">HTML Ruby Markup Extensions</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2024-06-24">24 June 2024</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2024-06-27">27 June 2024</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -952,9 +952,7 @@ Comparison With The HTML Standard</a> summarizes the main differences,
 		the above example is equivalent
 		(in meaning, though not in the DOM it produces)
 		to the following:</p>
-<pre><code class="highlight"><c- p>&lt;</c-><c- f>ruby</c-> <c- e>lang</c-><c- o>=</c-><c- s>zh-TW</c-><c- p>></c->
-  美<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->ㄇㄟˇ<c- p>&lt;</c-><c- f>rtc</c-> <c- e>lang</c-><c- o>=</c-><c- s>zh-Latn</c-><c- p>></c->měi
-<c- p>&lt;/</c-><c- f>ruby</c-><c- p>></c->
+<pre><code class="highlight"><c- p>&lt;</c-><c- f>ruby</c-> <c- e>lang</c-><c- o>=</c-><c- s>zh-TW</c-><c- p>></c->美<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->ㄇㄟˇ<c- p>&lt;</c-><c- f>rtc</c-> <c- e>lang</c-><c- o>=</c-><c- s>zh-Latn</c-><c- p>></c->měi<c- p>&lt;/</c-><c- f>ruby</c-><c- p>></c->
 </code></pre>
    </div>
    <p class="note" role="note"><span class="marker">Note:</span> The <a data-biblio-display="inline" data-link-type="biblio" href="https://drafts.csswg.org/css-ruby-1/"><cite>CSS Ruby Annotation Layout Module Level 1</cite></a> enables authors
@@ -989,10 +987,7 @@ Comparison With The HTML Standard</a> summarizes the main differences,
     <p>These differences are stylistic,
 		not semantic,
 		and therefore share the same markup:</p>
-<pre lang="zh-TW"><code class="highlight"><c- p>&lt;</c-><c- f>ruby</c-> <c- e>lang</c-><c- o>=</c-><c- s>zh-TW</c-><c- p>></c->
-  <c- p>&lt;</c-><c- f>rb</c-><c- p>></c->電<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->腦
-  <c- p>&lt;</c-><c- f>rt</c-><c- p>></c->ㄉㄧㄢˋ<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->ㄋㄠˇ
-<c- p>&lt;/</c-><c- f>ruby</c-><c- p>></c->
+<pre lang="zh-TW"><code class="highlight"><c- p>&lt;</c-><c- f>ruby</c-> <c- e>lang</c-><c- o>=</c-><c- s>zh-TW</c-><c- p>>&lt;</c-><c- f>rb</c-><c- p>></c->電<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->腦<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->ㄉㄧㄢˋ<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->ㄋㄠˇ<c- p>&lt;/</c-><c- f>ruby</c-><c- p>></c->
 </code></pre>
    </div>
    <h4 class="heading settled" data-level="2.1.1" id="ruby-pairing"><span class="secno">2.1.1. </span><span class="content"> Ruby Segmentation and Pairing</span><a class="self-link" href="#ruby-pairing"></a></h4>
@@ -1309,11 +1304,7 @@ Comparison With The HTML Standard</a> summarizes the main differences,
 		and annotation grouping information. 
     <figure> <img alt="上手 (skill) annotated in both kana and romaji" height="81" src="images/mono-or-jukugo-double.png" width="72"> </figure>
     <p>This enabled by the following  markup:</p>
-<pre><code class="highlight"><c- p>&lt;</c-><c- f>ruby</c-><c- p>></c->
-  <c- p>&lt;</c-><c- f>rb</c-><c- p>></c->上<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->手
-  <c- p>&lt;</c-><c- f>rt</c-><c- p>></c->じよう<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->ず
-  <c- p>&lt;</c-><c- f>rtc</c-><c- p>>&lt;</c-><c- f>rt</c-><c- p>></c->jou<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->zu
-<c- p>&lt;/</c-><c- f>ruby</c-><c- p>></c->
+<pre><code class="highlight"><c- p>&lt;</c-><c- f>ruby</c-><c- p>>&lt;</c-><c- f>rb</c-><c- p>></c->上<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->手<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->じよう<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->ず<c- p>&lt;</c-><c- f>rtc</c-><c- p>>&lt;</c-><c- f>rt</c-><c- p>></c->jou<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->zu<c- p>&lt;/</c-><c- f>ruby</c-><c- p>></c->
 </code></pre>
    </div>
    <p class="note" role="note"><span class="marker">Note:</span> Text that is a direct child of the <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc①③">rtc</a></code> element
@@ -1327,11 +1318,7 @@ Comparison With The HTML Standard</a> summarizes the main differences,
     <figure> <img alt="San Francisco in Chinese,
 					with both pinyin and the original English as annotations." height="84" src="images/group-double.png" width="113"> </figure>
     <p>Which is marked up as follows:</p>
-<pre><code class="highlight"><c- p>&lt;</c-><c- f>ruby</c-><c- p>></c->
-  <c- p>&lt;</c-><c- f>rb</c-><c- p>></c->旧<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->金<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->山
-  <c- p>&lt;</c-><c- f>rt</c-><c- p>></c->jiù<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->jīn<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->shān
-  <c- p>&lt;</c-><c- f>rtc</c-><c- p>></c->San Francisco
-<c- p>&lt;/</c-><c- f>ruby</c-><c- p>></c->
+<pre><code class="highlight"><c- p>&lt;</c-><c- f>ruby</c-><c- p>>&lt;</c-><c- f>rb</c-><c- p>></c->旧<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->金<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->山<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->jiù<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->jīn<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->shān<c- p>&lt;</c-><c- f>rtc</c-><c- p>></c->San Francisco<c- p>&lt;/</c-><c- f>ruby</c-><c- p>></c->
 </code></pre>
     <p>Here, a single base run of three base characters
 		is annotated with three pinyin ruby text segments
