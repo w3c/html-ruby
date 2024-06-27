@@ -296,9 +296,7 @@ The <dfn element><code>ruby</code></dfn> element</h3>
 		to the following:
 
 		<pre><code highlight="html">
-		&lt;ruby lang=zh-TW>
-			美&lt;rt>ㄇㄟˇ&lt;rtc lang=zh-Latn>měi
-		&lt;/ruby>
+		&lt;ruby lang=zh-TW>美&lt;rt>ㄇㄟˇ&lt;rtc lang=zh-Latn>měi&lt;/ruby>
 		</code></pre>
 	</div>
 
@@ -357,10 +355,7 @@ The <dfn element><code>ruby</code></dfn> element</h3>
 		and therefore share the same markup:
 
 		<pre lang="zh-TW"><code highlight="html">
-		&lt;ruby lang=zh-TW>
-			&lt;rb>電&lt;rb>腦
-			&lt;rt>ㄉㄧㄢˋ&lt;rt>ㄋㄠˇ
-		&lt;/ruby>
+		&lt;ruby lang=zh-TW>&lt;rb>電&lt;rb>腦&lt;rt>ㄉㄧㄢˋ&lt;rt>ㄋㄠˇ&lt;/ruby>
 		</code></pre>
 	</div>
 
@@ -851,11 +846,7 @@ The <dfn element><code>rtc</code></dfn> element</h3>
 		This enabled by the following  markup:
 
 		<pre><code highlight="html">
-			&lt;ruby>
-				&lt;rb>上&lt;rb>手
-				&lt;rt>じよう&lt;rt>ず
-				&lt;rtc>&lt;rt>jou&lt;rt>zu
-			&lt;/ruby>
+			&lt;ruby>&lt;rb>上&lt;rb>手&lt;rt>じよう&lt;rt>ず&lt;rtc>&lt;rt>jou&lt;rt>zu&lt;/ruby>
 		</code></pre>
 	</div>
 
@@ -880,11 +871,7 @@ The <dfn element><code>rtc</code></dfn> element</h3>
 		Which is marked up as follows:
 
 		<pre><code highlight="html">
-			&lt;ruby>
-				&lt;rb>旧&lt;rb>金&lt;rb>山
-				&lt;rt>jiù&lt;rt>jīn&lt;rt>shān
-				&lt;rtc>San Francisco
-			&lt;/ruby>
+			&lt;ruby>&lt;rb>旧&lt;rb>金&lt;rb>山&lt;rt>jiù&lt;rt>jīn&lt;rt>shān&lt;rtc>San Francisco&lt;/ruby>
 		</code></pre>
 
 		Here, a single base run of three base characters
