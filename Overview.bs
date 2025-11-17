@@ -636,7 +636,7 @@ Markup Patterns for Multi-Character Ruby</h4>
 
 		Whether—and how much—the annotations are merged can vary,
 		and can depend on the font size.
-		The following figures illustrate two possibilities:
+		The following figures illustrate two of several possibilities:
 		one where “jukugo ruby“ merges an annotation wider than its base
 		with the neighboring one
 		without necessarily merging them all,
