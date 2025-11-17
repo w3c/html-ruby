@@ -1,20 +1,20 @@
-name: CI-TR
-on:
-  workflow_dispatch: {}
-  pull_request: {}
-  push:
-    branches: []
-jobs:
-  main:
-    name: Build, Validate and Deploy on TR
-    runs-on: ubuntu-22.04
-    steps:
-      - uses: actions/checkout@v4
-      - uses: w3c/spec-prod@v2
-        with:
-          W3C_WG_DECISION_URL: https://github.com/w3c/htmlwg/issues/26#issuecomment-2088100459
-          TOOLCHAIN: bikeshed
-          SOURCE: Overview.bs
-          W3C_ECHIDNA_TOKEN: ${{ secrets.ECHIDNA_TOKEN }}
-          W3C_BUILD_OVERRIDE: |
-            Status: WD
+# name: CI-TR
+# on:
+#   workflow_dispatch: {}
+#   pull_request: {}
+#   push:
+#     branches: [main]
+# jobs:
+#   main:
+#     name: Build, Validate and Deploy on TR
+#     runs-on: ubuntu-22.04
+#     steps:
+#       - uses: actions/checkout@v4
+#       - uses: w3c/spec-prod@v2
+#         with:
+#           W3C_WG_DECISION_URL: https://github.com/w3c/htmlwg/issues/26#issuecomment-2088100459
+#           TOOLCHAIN: bikeshed
+#           SOURCE: Overview.bs
+#           W3C_ECHIDNA_TOKEN: ${{ secrets.ECHIDNA_TOKEN }}
+#           W3C_BUILD_OVERRIDE: |
+#             Status: WD
