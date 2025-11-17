@@ -1308,8 +1308,67 @@ Privacy Considerations</h2>
 
 	This specification has no known privacy implication.
 
-<h2 class=no-num id=ack>
+<h2 class=no-num id=a11y>
 Appendix E:
+Accessibility Considerations</h2>
+
+	<i>This section is non-normative</i>
+
+	Since its predominant usage is as a pronunciation guide,
+	ruby is itself an accessibility oriented feature,
+	enabling readers with varying levels of literacy
+	to access what could otherwise be challenging or impossible to read.
+	In this usage, ruby can be helpful for people such as
+	children or non-native speakers in the process of learning to read,
+	people with various learning or other cognitive disabilities,
+	or people under-privileged backgrounds and with a limited education…
+
+	A key motivation for this extension specification is recognizing
+	the diversity of uses of ruby,
+	as well as the diversity of users and corresponding expectations,
+	and ensuring that the available markup patterns
+	can provide the necessary structural information
+	to accommodate diverse situations.
+
+	People with dyslexia may find different visual presentations of the same content
+	more or less easy to read.
+	Among over variants,
+	some may prefer ruby annotations to be colored differently
+	to be spaced apart from the characters they annotate,
+	or to be shown as an inline parenthetical,
+	in order to make them easier to distinguish from the text they annotate.
+	Similarly, usage in educational contexts can call for a range of presentational variants.
+	While this specification does not directly cover visual layout,
+	the markup patterns defined here
+	are deliberately designed to enable authors
+	to express relevant structural information about ruby annotations
+	which in turn can be used by styling languages like CSS
+	to offer varied presentations supporting user needs and preferences,
+	without needing to change nor compromise the markup to do so.
+	See [[CSS-RUBY-1]].
+
+	People with limited vision or no vision
+	often rely on tools such as screen readers
+	to provide an alternative or complementary audio rendering of the document.
+	HTML Ruby markup and corresponding text-to-speech questions
+	predate this specification,
+	which neither introduces nor resolves these matters.
+	This extension specification acknowledges that
+	different usages of ruby
+	can benefit from different audio renderings,
+	but does not introduce any new mechanism to address this need,
+	as it focuses on advancing different aspects of the problem.
+	This important consideration is expected to be addressed by subsequent up work.
+	In the meanwhile, HTML user agents and screen readers are encouraged to consider heuristic methods
+	to determine the most helpful text-to-speech rendering.
+	<!-- uncomment once https://w3c.github.io/ruby-t2s-req/ has been published to /TR
+	(See [[ruby-tts-req]] for discussion of common patterns
+	and text-to-speech expectations in Japanese.)
+	-->
+
+
+<h2 class=no-num id=ack>
+Appendix F:
 Acknowledgements</h2>
 
 	<i>This section is non-normative</i>
