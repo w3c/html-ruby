@@ -993,7 +993,7 @@ Optional Tags</h2>
 
 
 <h2 id=rendering>
-Rendering</h3>
+Rendering</h2>
 
 	<div class=advisement>
 		This section completes the [[html/rendering#non-replaced-elements]] section of the [[HTML inline]],
@@ -1205,7 +1205,7 @@ Editorial Tweaks to HTML</h2>
 						<td><{rtc}>
 						<td>{{HTMLElement}}
 			</table>
-	</ol>
+	</ul>
 
 
 <h2 class=no-num id=diff-html>
