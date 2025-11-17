@@ -578,9 +578,9 @@ Markup Patterns for Multi-Character Ruby</h4>
 
 	<div class="example" id="jukugo-ruby">
 		In this example,
-		we will use the Japanese noun “<span lang="ja">京都市</span>”,
-		meaning “Kyoto City”.
-		Its characters are pronounced “きょう”, “と”, and “し”, respectively.
+		we will use the Japanese noun “<span lang="ja">浄瑠璃</span>” (jōruri),
+		a form of traditional Japanese narrative music.
+		Its characters are pronounced “じょう”, “る”, and “り”, respectively.
 		(Distinct colors shown in these examples for clarity:
 		in actual usage there would be no color distinction.)
 
@@ -592,9 +592,9 @@ Markup Patterns for Multi-Character Ruby</h4>
 		to make the correspondance between each character and its annotation clear.
 
 		<figure>
-			<img src="images/kyoto-s.png"
+			<img src="images/joruri-s.png"
 				width="140" height="71"
-				alt="“Kyoto City” written in horizontal Japanese,
+				alt="“Jōruri” written in horizontal Japanese,
 					with phonetic annotations over each of the three characters.
 					The first and second character are pushed apart from each other,
 					as the annotation over the first one is too long to fit.">
@@ -608,9 +608,9 @@ Markup Patterns for Multi-Character Ruby</h4>
 		(“jukugo” meaning “compound word”).
 
 		<figure>
-			<img src="images/kyoto-m.png"
+			<img src="images/joruri-m.png"
 				width="120" height="71"
-				alt="“Kyoto City” written in horizontal Japanese,
+				alt="“Jōruri” written in horizontal Japanese,
 					with phonetic annotations over the word.
 					The characters of each annotation are not alligned
 					to their corresponding base,
@@ -623,9 +623,9 @@ Markup Patterns for Multi-Character Ruby</h4>
 		the annotations are expected to remain associated with the correct base character.
 
 		<figure>
-			<img src="images/kyoto-lb.png"
+			<img src="images/joruri-lb.png"
 				width="224" height="123"
-				alt="“Kyoto City” written in horizontal Japanese,
+				alt="“Jōruri” written in horizontal Japanese,
 					broken across two lines.
 					The phonetic annotations displayed over the word
 					are paired with each base character,
@@ -638,9 +638,9 @@ Markup Patterns for Multi-Character Ruby</h4>
 		when at least one of them is longer than its base.
 
 		<figure>
-			<img src="images/kyoto-33.png"
+			<img src="images/joruri-33.png"
 				width="119" height="64"
-				alt="“Kyoto City” written in horizontal Japanese,
+				alt="“Jōruri” written in horizontal Japanese,
 					with phonetic annotations over each of the three characters.
 					At 33% of the base font size,
 					annotations are small enough to fit their base character,
@@ -649,9 +649,9 @@ Markup Patterns for Multi-Character Ruby</h4>
 		</figure>
 
 		<figure>
-			<img src="images/kyoto-50.png"
+			<img src="images/joruri-50.png"
 				width="120" height="71"
-				alt="“Kyoto City” written in horizontal Japanese,
+				alt="“Jōruri” written in horizontal Japanese,
 					with phonetic annotations over each of the three characters.
 					At 50% of the base font size,
 					the first annotation doesn't fit over its base character,
@@ -661,9 +661,9 @@ Markup Patterns for Multi-Character Ruby</h4>
 		</figure>
 
 		<figure>
-			<img src="images/kyoto-60.png"
+			<img src="images/joruri-60.png"
 				width="120" height="75"
-				alt="“Kyoto City” written in horizontal Japanese,
+				alt="“Jōruri” written in horizontal Japanese,
 					with phonetic annotations over each of the three characters.
 					At 60% of the base font size,
 					the first annotation doesn't fit over the first character,
@@ -678,7 +678,7 @@ Markup Patterns for Multi-Character Ruby</h4>
 		as well as the grouping of these pairs as a single word:
 
 		<pre><code highlight="html">
-			&lt;ruby>&lt;rb>京&lt;rb>都&lt;rb>市&lt;rt>きょう&lt;rt>と&lt;rt>し&lt;/ruby>
+			&lt;ruby>&lt;rb>浄&lt;rb>瑠&lt;rb>璃&lt;rt>じょう&lt;rt>る&lt;rt>り&lt;/ruby>
 		</code></pre>
 
 		Correct “jukugo ruby” is not be possible
