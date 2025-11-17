@@ -603,7 +603,9 @@ Markup Patterns for Multi-Character Ruby</h4>
 					as the annotation over the first one is too long to fit.">
 		</figure>
 
-		However, it is common to present such a word
+		However,
+		in various typographic traditions,
+		it is common to present such a word
 		with its annotations sharing space together
 		when they would otherwise create a separation in the base text,
 		to preserve the implication that it is a single word.
@@ -636,9 +638,15 @@ Markup Patterns for Multi-Character Ruby</h4>
 		</figure>
 
 		Whether—and how much—the annotations are merged can vary,
-		and can depend on the font size,
-		as “jukugo ruby“ only merges annotations
-		when at least one of them is longer than its base.
+		and can depend on the font size.
+		The following figures illustrate two possibilities:
+		one where “jukugo ruby“ merges an annotation wider than its base
+		with the neighboring one
+		without necessarily merging them all,
+		and one where “jukugo ruby“ merges all annotations
+		as soon as any of them is wider than its base.
+		No specific layout is mandated by this specification;
+		that is under the purview of styling technologies such as CSS.
 
 		<figure>
 			<img src="images/joruri-33.png"
@@ -648,7 +656,7 @@ Markup Patterns for Multi-Character Ruby</h4>
 					At 33% of the base font size,
 					annotations are small enough to fit their base character,
 					and are aligned to it.">
-			<figcaption>Ruby sized at 33%</figcaption>
+			<figcaption>Ruby sized at 33%: no merging needed when every annotation fits its base</figcaption>
 		</figure>
 
 		<figure>
@@ -660,7 +668,18 @@ Markup Patterns for Multi-Character Ruby</h4>
 					the first annotation doesn't fit over its base character,
 					so it merges with the second one.
 					The third remains separate.">
-			<figcaption>Ruby sized at 50%</figcaption>
+			<figcaption>Ruby sized at 50%, variant 1: only merging wide annotations with neighboring ones</figcaption>
+		</figure>
+
+		<figure>
+			<img src="images/joruri-m.png"
+				width="120" height="71"
+				alt="“Jōruri” written in horizontal Japanese,
+					with phonetic annotations over each of the three characters.
+					At 50% of the base font size,
+					the first annotation doesn't fit over its base character,
+					so all three are merged and aligned together.">
+			<figcaption>Ruby sized at 50%, variant 2: merging all annotations as soon as any doesn't fit its base</figcaption>
 		</figure>
 
 		<figure>
@@ -672,12 +691,13 @@ Markup Patterns for Multi-Character Ruby</h4>
 					the first annotation doesn't fit over the first character,
 					nor do the first and second together fit over the first two characters.
 					All three are merged and aligned together.">
-		<figcaption>Ruby sized at 60%</figcaption>
+		<figcaption>Ruby sized at 60%: merging necessary in both variants</figcaption>
 		</figure>
 
-		Since choosing to render as “jukugo ruby” or not is a stylistic choice,
-		the same markup needs to enable both--
-		and it needs to encode both the pairing information within the word
+		Regardless of what rendering variants are made available by the styling technology,
+		the same markup needs contain enough information to support any style,
+		since choosing whether to render as “jukugo ruby” and its variants is a stylistic choice.
+		Markup needs to encode both the pairing information within the word
 		as well as the grouping of these pairs as a single word:
 
 		<pre><code highlight="html">
