@@ -1057,13 +1057,13 @@ Editorial Tweaks to HTML</h2>
 	that would be desirable to make to the [[HTML inline]]
 	in order to make it fully align it with what is covered here.
 
-	<ul>
+	<ul class="non-normative">
 		<li>
 			Remove the outdated informative description
 			of CSS annonymous box generation for ruby bases
 			in the following paragraph in [[html/rendering#phrasing-content-3]]:
 
-			<blockquote class="non-normative">
+			<blockquote>
 				For the purposes of the CSS ruby model,
 				runs of children of <{ruby}> elements
 				that are not <{rt}> or <{rp}> elements
