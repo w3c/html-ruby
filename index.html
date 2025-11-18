@@ -8,7 +8,7 @@
   <meta content="Bikeshed version 7b3ff057a, updated Sun Nov 9 18:39:50 2025 -0800" name="generator">
   <link href="https://www.w3.org/TR/html-ruby-extensions/" rel="canonical">
   <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
-  <meta content="89e17a969eeaea9c97aeb686264f42c893c04232" name="revision">
+  <meta content="0a29d95a30c6abd4605f96b58b52b905c74d1696" name="revision">
   <meta content="dark light" name="color-scheme">
   <link href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css">
 <style>/* Boilerplate: style-autolinks */
@@ -793,8 +793,11 @@ Security Considerations</span></a>
     <li><a href="#priv"><span class="secno"></span> <span class="content">
 Appendix D:
 Privacy Considerations</span></a>
-    <li><a href="#ack"><span class="secno"></span> <span class="content">
+    <li><a href="#a11y"><span class="secno"></span> <span class="content">
 Appendix E:
+Accessibility Considerations</span></a>
+    <li><a href="#ack"><span class="secno"></span> <span class="content">
+Appendix F:
 Acknowledgements</span></a>
     <li>
      <a href="#changes"><span class="secno"></span> <span class="content">
@@ -2058,8 +2061,56 @@ Appendix D:
 Privacy Considerations</span><a class="self-link" href="#priv"></a></h2>
    <p><i>This section is non-normative</i></p>
    <p>This specification has no known privacy implication.</p>
-   <h2 class="heading no-num settled" id="ack"><span class="content">
+   <h2 class="heading no-num settled" id="a11y"><span class="content">
 Appendix E:
+Accessibility Considerations</span><a class="self-link" href="#a11y"></a></h2>
+   <p><i>This section is non-normative</i></p>
+   <p>Since its predominant usage is as a pronunciation guide,
+	ruby is itself an accessibility oriented feature,
+	enabling readers with varying levels of literacy
+	to access what could otherwise be challenging or impossible to read.
+	In this usage, ruby can be helpful for people such as
+	children or non-native speakers in the process of learning to read,
+	people with various learning or other cognitive disabilities,
+	or people under-privileged backgrounds and with a limited education…</p>
+   <p>A key motivation for this extension specification is recognizing
+	the diversity of uses of ruby,
+	as well as the diversity of users and corresponding expectations,
+	and ensuring that the available markup patterns
+	can provide the necessary structural information
+	to accommodate diverse situations.</p>
+   <p>People with dyslexia may find different visual presentations of the same content
+	more or less easy to read.
+	Among over variants,
+	some may prefer ruby annotations to be colored differently,
+	to be spaced apart from the characters they annotate,
+	or to be shown as an inline parenthetical,
+	in order to make them easier to distinguish from the text they annotate.
+	Similarly, usage in educational contexts can call for a range of presentational variants.
+	While this specification does not directly cover visual layout,
+	the markup patterns defined here
+	are deliberately designed to enable authors
+	to express relevant structural information about ruby annotations
+	which in turn can be used by styling languages like CSS
+	to offer varied presentations supporting user needs and preferences,
+	without needing to change nor compromise the markup to do so.
+	See <a data-link-type="biblio" href="#biblio-css-ruby-1" title="CSS Ruby Annotation Layout Module Level 1">[CSS-RUBY-1]</a>.</p>
+   <p>People with limited vision or no vision
+	often rely on tools such as screen readers
+	to provide an alternative or complementary audio rendering of the document.
+	HTML Ruby markup and corresponding text-to-speech questions
+	predate this specification,
+	which neither introduces nor resolves these matters.
+	This extension specification acknowledges that
+	different usages of ruby
+	can benefit from different audio renderings,
+	but does not introduce any new mechanism to address this need,
+	as it focuses on advancing different aspects of the problem.
+	This important consideration is expected to be addressed by subsequent up work.
+	In the meanwhile, HTML user agents and screen readers are encouraged to consider heuristic methods
+	to determine the most helpful text-to-speech rendering.</p>
+   <h2 class="heading no-num settled" id="ack"><span class="content">
+Appendix F:
 Acknowledgements</span><a class="self-link" href="#ack"></a></h2>
    <p><i>This section is non-normative</i></p>
    <p>This document derives from several sources (which to some degree also derive from each other).
