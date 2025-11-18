@@ -8,7 +8,7 @@
   <meta content="Bikeshed version 7b3ff057a, updated Sun Nov 9 18:39:50 2025 -0800" name="generator">
   <link href="https://www.w3.org/TR/html-ruby-extensions/" rel="canonical">
   <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
-  <meta content="92937737b8e0c23c5822668d7831949f50cacfcf" name="revision">
+  <meta content="c68c7031dded2596c02bccec93e6285cfd43bc37" name="revision">
   <meta content="dark light" name="color-scheme">
   <link href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css">
 <style>/* Boilerplate: style-autolinks */
@@ -695,7 +695,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
 </p>
    <h1 class="no-ref p-name" id="title">HTML Ruby Markup Extensions</h1>
    <p id="w3c-state"><a href="https://www.w3.org/standards/types/#ED">Editor’s Draft</a>,
-    <time class="dt-updated" datetime="2025-11-17">17 November 2025</time></p>
+    <time class="dt-updated" datetime="2025-11-18">18 November 2025</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -964,7 +964,7 @@ The <dfn class="dfn-paneled" data-dfn-type="element" data-export id="elementdef-
 		with ruby markup used to annotate the ideographs with their pronunciation.
 
 		
-<pre><code class="highlight"><c- p>&lt;</c-><c- f>ruby</c-><c- p>></c->霧<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->きり<c- p>&lt;/</c-><c- f>rt</c-><c- p>>&lt;/</c-><c- f>ruby</c-><c- p>></c->とも<c- p>&lt;</c-><c- f>ruby</c-><c- p>></c->霞<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->かすみ<c- p>&lt;/</c-><c- f>rt</c-><c- p>>&lt;/</c-><c- f>ruby</c-><c- p>></c->とも
+<pre><code class="highlight"><c- p>&lt;</c-><c- f>ruby</c-><c- p>>&lt;</c-><c- f>rb</c-><c- p>></c->霧<c- p>&lt;/</c-><c- f>rb</c-><c- p>>&lt;</c-><c- f>rt</c-><c- p>></c->きり<c- p>&lt;/</c-><c- f>rt</c-><c- p>>&lt;/</c-><c- f>ruby</c-><c- p>></c->とも<c- p>&lt;</c-><c- f>ruby</c-><c- p>>&lt;</c-><c- f>rb</c-><c- p>></c->霞<c- p>&lt;/</c-><c- f>rb</c-><c- p>>&lt;</c-><c- f>rt</c-><c- p>></c->かすみ<c- p>&lt;/</c-><c- f>rt</c-><c- p>>&lt;/</c-><c- f>ruby</c-><c- p>></c->とも
 </code></pre>
     <p>A typical rendering would be something akin to the following image:</p>
     <figure>
@@ -974,6 +974,8 @@ The <dfn class="dfn-paneled" data-dfn-type="element" data-export id="elementdef-
 					Each group of hiragana is horizontally centered
 					relative to the kanji it annotates." height="75" src="images/composition.png" width="280">
 		</figure>
+    <p class="note" role="note"><span class="marker">Note:</span> See <a href="#ruby-optional-tag-ex">the following example</a>
+		for discussion of syntax variants and simplifications.</p>
    </div>
    <p>The content model of <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby①">ruby</a></code> elements consists of
 	one or more of the following <a data-link-type="dfn" href="#ruby-segment" id="ref-for-ruby-segment">ruby segment</a> sequences:</p>
