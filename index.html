@@ -8,7 +8,7 @@
   <meta content="Bikeshed version 7b3ff057a, updated Sun Nov 9 18:39:50 2025 -0800" name="generator">
   <link href="https://www.w3.org/TR/html-ruby-extensions/" rel="canonical">
   <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
-  <meta content="0a29d95a30c6abd4605f96b58b52b905c74d1696" name="revision">
+  <meta content="33f38c78651b1f9583c1696da02c43d9a7a6be22" name="revision">
   <meta content="dark light" name="color-scheme">
   <link href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css">
 <style>/* Boilerplate: style-autolinks */
@@ -781,6 +781,15 @@ Optional Tags</span></a>
 Rendering</span></a>
     <li><a href="#conforming-features"><span class="secno">5</span> <span class="content">
 Conforming Features </span></a>
+    <li>
+     <a href="#interaction"><span class="secno">6</span> <span class="content">
+Interaction</span></a>
+     <ol class="toc">
+      <li><a href="#search"><span class="secno">6.1</span> <span class="content">
+Text search</span></a>
+      <li><a href="#copy-paste"><span class="secno">6.2</span> <span class="content">
+Copy &amp; Pasting</span></a>
+     </ol>
     <li><a href="#html-tweaks"><span class="secno"></span> <span class="content">
 Appendix A:
 Editorial Tweaks to HTML</span></a>
@@ -1759,6 +1768,140 @@ Conforming Features </span><a class="self-link" href="#conforming-features"></a>
 		this specification revokes this obsolete status,
 		and deems these two elements fully conforming.
 	</div>
+   <h2 class="heading settled" data-level="6" id="interaction"><span class="secno">6. </span><span class="content">
+Interaction</span><a class="self-link" href="#interaction"></a></h2>
+   <h3 class="heading non-normative settled" data-level="6.1" id="search"><span class="secno">6.1. </span><span class="content">
+Text search</span><a class="self-link" href="#search"></a></h3>
+   <p><i>This section is non-normative</i></p>
+   <p><a data-link-type="biblio" href="#biblio-html" title="HTML Standard">[HTML]</a> defines the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/interaction.html#find-in-page-2" id="ref-for-find-in-page-2">find-in-page</a> operation and its general mechanics
+	but leaves undefined
+	the exact way <a href="https://html.spec.whatwg.org/multipage/interaction.html#fip-matches">matches</a> are determined from the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/interaction.html#fip-query" id="ref-for-fip-query">query</a>.
+	A <code>window.find()</code> API is also supported by various HTML user agents,
+	but at the time of writing does not have a normative specification,
+	and the specifics of how to determine
+	if particular search string matches in a document
+	are also undefined.</p>
+   <p>Accordingly, this specification does not attempt to define a normative behavior
+	for the interaction of text search with ruby.
+	However, some general user expectations can be noted,
+	which user agents are encouraged to take into account
+	when implementing such functionality.</p>
+   <ul>
+    <li>
+			Users typically do not expect the presence of ruby annotations
+			to interfere with search.
+			Whether a word or phrase has ruby annotations or not,
+			and regardless of the markup pattern used to insert such annotations,
+			users expect to be able find the base text.
+			Given that users have generally no awareness of the specific markup pattern used,
+			this is the case even when annotations are interleaved between nodes of base text
+			and the query text is not found uninterrupted in the document.
+
+		
+    <li>
+			Similarly, when ruby annotations appear in the markup
+			after a word they annotate and before another word,
+			users generally have no awareness
+			that there is anything <em>between</em> the two words,
+			and would typically expect a query string composed of these two words
+			to find a match.
+
+		
+    <li>
+			In addition to base text,
+			users may also search for text contained in ruby annotations.
+			Here too, markup patterns are unknown and irrelevant to users,
+			who will generally expect to find what they think of as a word or phrase,
+			regardless of whether the text appears contiguously in the markup
+			or whether the markup contains interleaved ruby bases and annotations.
+
+		
+    <li>
+			As <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp①⑤">rp</a></code> elements are generally invisible,
+			users also typically expect their searches
+			to be unaffected by their presence.
+	
+   </ul>
+   <div class="example" id="search-ex">
+    <a class="self-link" href="#search-ex"></a>
+		Given any of the following markup patterns,
+		a user searching for either “東京” or “とうきょう”
+		would typically expect to find a match.
+
+		
+<pre><code class="highlight"><c- p>&lt;</c-><c- f>ruby</c-><c- p>>&lt;</c-><c- f>rb</c-><c- p>></c->東<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->京<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->とう<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->きょう<c- p>&lt;/</c-><c- f>ruby</c-><c- p>></c->に行く。
+</code></pre>
+<pre><code class="highlight"><c- p>&lt;</c-><c- f>ruby</c-><c- p>>&lt;</c-><c- f>rb</c-><c- p>></c->東<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->とう<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->京<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->きょう<c- p>&lt;/</c-><c- f>ruby</c-><c- p>></c->に行く。
+</code></pre>
+<pre><code class="highlight"><c- p>&lt;</c-><c- f>ruby</c-><c- p>>&lt;</c-><c- f>rb</c-><c- p>></c->東<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->京<c- p>&lt;</c-><c- f>rp</c-><c- p>></c->（<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->とう<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->きょう<c- p>&lt;</c-><c- f>rp</c-><c- p>></c->）<c- p>&lt;/</c-><c- f>ruby</c-><c- p>></c->に行く。
+</code></pre>
+    <p>This is expectation is not only present when searching for the word in isolation,
+		but also when combined with surrounding text,
+		such as searching for “東京に行く”
+		or “とうきょうに行く”,
+		which a user would also typically expect to match.</p>
+   </div>
+   <p class="note" role="note"><span class="marker">Note:</span> See also <a data-link-type="biblio" href="#biblio-string-search" title="String Searching">[string-search]</a> for further considerations
+	regarding the complexities of searching text.</p>
+   <h3 class="heading non-normative settled" data-level="6.2" id="copy-paste"><span class="secno">6.2. </span><span class="content">
+Copy &amp; Pasting</span><a class="self-link" href="#copy-paste"></a></h3>
+   <p><i>This section is non-normative</i></p>
+   <p>The web platform does not specify precisely
+	the details of the copy &amp; paste clipboard operations.
+	In particular, while the clipboard generally supports both structured text and plain text,
+	how one gets converted to the other,
+	and how the content of the document gets extracted into the clipboard
+	when copying is not generally defined.</p>
+   <p>Accordingly, this specification does not attempt to define a normative behavior
+	for the interaction of the clipboard with ruby.
+	However, some general user expectations can be noted,
+	which user agents are encouraged to take into account
+	when implementing such functionality.</p>
+   <ul>
+    <li>
+     
+			When converting annotated ruby text to plain text
+			via copy &amp; paste,
+			the user agent could keep the base text alone,
+			include both base and annotation text,
+			or offer the user a choice of copy &amp; paste with or without ruby annotations.
+
+
+     <p>If both ruby bases and annotations are included in a plain text rendering,
+			they need to be linearised.
+			In this context,
+			it would be appropriate to render otherwise hidden <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp①⑥">rp</a></code> elements.
+			The expectation expressed in <a href="https://html.spec.whatwg.org/multipage/rendering.html#phrasing-content-3"><cite>HTML</cite> § 15.3.4 Phrasing content</a>
+			that user agents which do not support correct ruby rendering
+			are to render parentheses around the text of <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②②">rt</a></code> elements
+			in the absence of <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp①⑦">rp</a></code> elements
+			is also relevant to this context.</p>
+     <div class="example" id="paste-ex">
+      <a class="self-link" href="#paste-ex"></a>
+				Consider a user selecting and copying either of the following text snippets,
+				and pasting into a <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/form-elements.html#the-textarea-element" id="ref-for-the-textarea-element">textarea</a></code>:
+
+				
+<pre><code class="highlight">My name is <c- p>&lt;</c-><c- f>ruby</c-><c- p>>&lt;</c-><c- f>rb</c-><c- p>></c->網<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->本<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->あみ<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->もと<c- p>&lt;/</c-><c- f>ruby</c-><c- p>></c->
+</code></pre>
+<pre><code class="highlight">My name is <c- p>&lt;</c-><c- f>ruby</c-><c- p>>&lt;</c-><c- f>rb</c-><c- p>></c->網<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->本<c- p>&lt;</c-><c- f>rp</c-><c- p>></c->(<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->あみ<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->もと<c- p>&lt;</c-><c- f>rp</c-><c- p>></c->)<c- p>&lt;/</c-><c- f>ruby</c-><c- p>></c->
+</code></pre>
+      <p>Either of <q>My name is 網本</q> or <q>My name is 網本(あみもと)</q>
+				could be expected.
+				However, <q>My name is 網本あみもと</q> keeps the annotation
+				but merges it with the base text without doing anything to indicate that it is an annotation,
+				and which is potentially confusing to the reader.</p>
+     </div>
+    <li>
+			Users generally expect to be able to copy what they can select.
+			If they specifically select either base text or annotation text,
+			that is would be typically expected to be found in the clipboard
+			after a copy operation.
+			In other words, simply discarding all annotations unconditionally
+			in all plain-text copy &amp; paste operations
+			is unlikely to meet user expectations.
+	
+   </ul>
    <h2 class="heading no-num non-normative settled" id="html-tweaks"><span class="content">
 Appendix A:
 Editorial Tweaks to HTML</span><a class="self-link" href="#html-tweaks"></a></h2>
@@ -1778,7 +1921,7 @@ Editorial Tweaks to HTML</span><a class="self-link" href="#html-tweaks"></a></h2
      <blockquote>
 				For the purposes of the CSS ruby model,
 				runs of children of <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby①⑧">ruby</a></code> elements
-				that are not <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②②">rt</a></code> or <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp①⑤">rp</a></code> elements
+				that are not <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②③">rt</a></code> or <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp①⑧">rp</a></code> elements
 				are expected to be wrapped in anonymous boxes
 				whose <a class="css property" data-link-type="property" href="https://drafts.csswg.org/css-display-4/#propdef-display" id="ref-for-propdef-display">display</a> property has the value <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-ruby-1/#valdef-display-ruby-base" id="ref-for-valdef-display-ruby-base">ruby-base</a>.
 				<a data-link-type="biblio" href="#biblio-css-ruby-1" title="CSS Ruby Annotation Layout Module Level 1">[CSS-RUBY-1]</a>
@@ -1794,7 +1937,7 @@ Editorial Tweaks to HTML</span><a class="self-link" href="#html-tweaks"></a></h2
        <p class="note" role="note"><span class="marker">Note:</span> When it becomes possible to do so,
 					the preceding requirement will be updated to be expressed in terms of CSS ruby.
 					(Currently, CSS ruby does not handle nested <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby①⑨">ruby</a></code> elements
-					or multiple sequential <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②③">rt</a></code> elements,
+					or multiple sequential <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②④">rt</a></code> elements,
 					which is how this semantic is expressed.)</p>
       </del>
       <ins>
@@ -1806,7 +1949,7 @@ Editorial Tweaks to HTML</span><a class="self-link" href="#html-tweaks"></a></h2
      </blockquote>
     <li>
      
-			Replacing the <q><code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby②⓪">ruby</a></code>, <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②④">rt</a></code>, <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp①⑥">rp</a></code></q> row of the table in <a href="https://html.spec.whatwg.org/multipage/text-level-semantics.html#usage-summary"><cite>HTML</cite> § 4.5.29 Usage summary</a>,
+			Replacing the <q><code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby②⓪">ruby</a></code>, <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②⑤">rt</a></code>, <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp①⑨">rp</a></code></q> row of the table in <a href="https://html.spec.whatwg.org/multipage/text-level-semantics.html#usage-summary"><cite>HTML</cite> § 4.5.29 Usage summary</a>,
 			with the following:
 
 			
@@ -1821,7 +1964,7 @@ Editorial Tweaks to HTML</span><a class="self-link" href="#html-tweaks"></a></h2
 				
       <tbody>
        <tr>
-        <td><code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby②①">ruby</a></code>, <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb①⑨">rb</a></code>, <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②⑤">rt</a></code>, <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc②⑥">rtc</a></code>, <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp①⑦">rp</a></code>
+        <td><code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby②①">ruby</a></code>, <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb①⑨">rb</a></code>, <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②⑥">rt</a></code>, <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc②⑥">rtc</a></code>, <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp②⓪">rp</a></code>
 						
         <td>Ruby annotations
 						
@@ -1834,7 +1977,7 @@ Editorial Tweaks to HTML</span><a class="self-link" href="#html-tweaks"></a></h2
      
 			Updating the table at <a href="https://html.spec.whatwg.org/multipage/indices.html#elements-3"><cite>HTML</cite> §  Elements</a>
 			to add rows for  <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb②⓪">rb</a></code> and <code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc②⑦">rtc</a></code>,
-			and to replace the rows for <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp①⑧">rp</a></code>, <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②⑥">rt</a></code>, and <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby②②">ruby</a></code>,
+			and to replace the rows for <code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp②①">rp</a></code>, <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②⑦">rt</a></code>, and <code><a data-link-type="element" href="#elementdef-ruby" id="ref-for-elementdef-ruby②②">ruby</a></code>,
 			as follows:
 
 			
@@ -1872,7 +2015,7 @@ Editorial Tweaks to HTML</span><a class="self-link" href="#html-tweaks"></a></h2
         <td><code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/dom.html#htmlelement" id="ref-for-htmlelement⑤">HTMLElement</a></code>
 					
        <tr>
-        <th><code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp①⑨">rp</a></code>
+        <th><code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp②②">rp</a></code>
 						
         <td>Parenthesis for ruby annotation text
 						
@@ -1887,7 +2030,7 @@ Editorial Tweaks to HTML</span><a class="self-link" href="#html-tweaks"></a></h2
         <td><code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/dom.html#htmlelement" id="ref-for-htmlelement⑥">HTMLElement</a></code>
 					
        <tr>
-        <th><code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②⑦">rt</a></code>
+        <th><code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②⑧">rt</a></code>
 						
         <td>Ruby annotation text
 						
@@ -1914,8 +2057,8 @@ Editorial Tweaks to HTML</span><a class="self-link" href="#html-tweaks"></a></h2
 						
         <td>
 							<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#phrasing-content-2" id="ref-for-phrasing-content-2⑧">phrasing</a>;
-							<code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②⑧">rt</a></code>;
-							<code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp②⓪">rp</a></code>
+							<code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②⑨">rt</a></code>;
+							<code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp②③">rp</a></code>
 						
         <td><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#global-attributes" id="ref-for-global-attributes⑧">globals</a>
 						
@@ -1936,9 +2079,9 @@ Editorial Tweaks to HTML</span><a class="self-link" href="#html-tweaks"></a></h2
         <td>
 							<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#phrasing-content-2" id="ref-for-phrasing-content-2①①">phrasing</a>;
 							<code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb②②">rb</a></code>;
-							<code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt②⑨">rt</a></code>;
+							<code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt③⓪">rt</a></code>;
 							<code><a data-link-type="element" href="#elementdef-rtc" id="ref-for-elementdef-rtc③①">rtc</a></code>;
-							<code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp②①">rp</a></code>*
+							<code><a data-link-type="element" href="#elementdef-rp" id="ref-for-elementdef-rp②④">rp</a></code>*
 						
         <td><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#global-attributes" id="ref-for-global-attributes⑨">globals</a>
 						
@@ -1990,7 +2133,7 @@ Comparison With The HTML Standard</span><a class="self-link" href="#diff-html"><
    <ol>
     <li>
      
-			In addition to the ability to interleave <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt③⓪">rt</a></code> elements between anonymous ruby bases,
+			In addition to the ability to interleave <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt③①">rt</a></code> elements between anonymous ruby bases,
 			the previously obsoleted <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb②⑤">rb</a></code> element is restored,
 			enabling the so-called <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="tabular-markup">tabular markup</dfn> pattern
 			where several consecutive bases are followed
@@ -2006,14 +2149,18 @@ Comparison With The HTML Standard</span><a class="self-link" href="#diff-html"><
 			in order to have the individual base/annotation pairing
 			necessary to correct handle
 			the various possible presentations of ruby on <a href="#jukugo-ruby">compound words</a>,
-			interleaving the <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt③①">rt</a></code> elements between segments of base text would be required.
+			interleaving the <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt③②">rt</a></code> elements between segments of base text would be required.
 			However, such this markup would not enable correct <a href="#ruby-inlining">ruby inlining</a>.</p>
      <p>Moreover, interleaved markup is also a source of issues
 			with operations like
 			copy&amp;paste,
 			searching through the document,
 			or speech synthesis,
-			due to the base text being interrupted by the annotations.</p>
+			due to the base text being interrupted by the annotations.
+			In the case of search,
+			the user agent <a href="#search">can mitigate this problem</a>,
+			but it remains an issue in simpler user agents
+			and for operations other than search.</p>
     <li>
      
 			This document defines a different model for handling multiple levels of annotations:
@@ -2021,7 +2168,7 @@ Comparison With The HTML Standard</span><a class="self-link" href="#diff-html"><
      <ul>
       <li>
        
-					The ability to associate multiple consecutive <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt③②">rt</a></code> elements with the preceding base text segment
+					The ability to associate multiple consecutive <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt③③">rt</a></code> elements with the preceding base text segment
 					without using explicit annotation containers
 					is dropped.
 					This pattern does not have interoperable implementations with the semantics intended by the <a data-biblio-display="inline" data-link-type="biblio" href="https://html.spec.whatwg.org/multipage/"><cite>HTML Standard</cite></a>,
@@ -2265,13 +2412,16 @@ Changes since the 04 February 2014 <cite>W3C HTML Ruby Markup Extensions</cite> 
      <li><span class="dfn-paneled" id="3c915747">contexts in which this element can be used</span>
      <li><span class="dfn-paneled" id="317acf49">DOM interface</span>
      <li><span class="dfn-paneled" id="2ffaee93">end tags</span>
+     <li><span class="dfn-paneled" id="05b9936d">find-in-page</span>
      <li><span class="dfn-paneled" id="1236ac1a">flow content</span>
      <li><span class="dfn-paneled" id="8fc74046">global attributes</span>
      <li><span class="dfn-paneled" id="cb3fd7c7">inter-element whitespace</span>
      <li><span class="dfn-paneled" id="d54eeea2">palpable content</span>
      <li><span class="dfn-paneled" id="e5a7e26c">phrasing content</span>
+     <li><span class="dfn-paneled" id="6311ff7c">query</span>
      <li><span class="dfn-paneled" id="073cf09c">represent</span>
      <li><span class="dfn-paneled" id="62ac5b1c">text</span>
+     <li><span class="dfn-paneled" id="fc736137">textarea</span>
     </ul>
   </ul>
   <h2 class="heading no-num no-ref settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
@@ -2298,6 +2448,8 @@ Changes since the 04 February 2014 <cite>W3C HTML Ruby Markup Extensions</cite> 
    <dd>Marcin Sawicki; et al. <a href="https://www.w3.org/TR/ruby/"><cite>Ruby Annotation</cite></a>. 31 May 2001. REC. URL: <a href="https://www.w3.org/TR/ruby/">https://www.w3.org/TR/ruby/</a>
    <dt id="biblio-simple-ruby">[SIMPLE-RUBY]
    <dd>Florian Rivoal; Atsushi Shimono; Richard Ishida. <a href="https://w3c.github.io/simple-ruby/"><cite>Rules for Simple Placement of Japanese Ruby</cite></a>. URL: <a href="https://w3c.github.io/simple-ruby/">https://w3c.github.io/simple-ruby/</a>
+   <dt id="biblio-string-search">[STRING-SEARCH]
+   <dd>Addison Phillips. <a href="https://w3c.github.io/string-search/"><cite>String Searching</cite></a>. URL: <a href="https://w3c.github.io/string-search/">https://w3c.github.io/string-search/</a>
    <dt id="biblio-unified-ruby">[UNIFIED-RUBY]
    <dd>Elika J. Etemad. <a href="https://fantasai.inkedblade.net/weblog/2011/ruby/"><cite>Towards a Unified Ruby Model</cite></a>. URL: <a href="https://fantasai.inkedblade.net/weblog/2011/ruby/">https://fantasai.inkedblade.net/weblog/2011/ruby/</a>
   </dl>
@@ -2501,6 +2653,7 @@ function parseHTML(markup) {
 "use strict";
 {
 let dfnPanelData = {
+"05b9936d": {"dfnID":"05b9936d","dfnText":"find-in-page","external":true,"refSections":[{"refs":[{"id":"ref-for-find-in-page-2"}],"title":"6.1. \nText search"}],"url":"https://html.spec.whatwg.org/multipage/interaction.html#find-in-page-2"},
 "073cf09c": {"dfnID":"073cf09c","dfnText":"represent","external":true,"refSections":[{"refs":[{"id":"ref-for-represents"},{"id":"ref-for-represents\u2460"},{"id":"ref-for-represents\u2461"},{"id":"ref-for-represents\u2462"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-represents\u2463"},{"id":"ref-for-represents\u2464"}],"title":"2.2. \nThe rb element"},{"refs":[{"id":"ref-for-represents\u2465"},{"id":"ref-for-represents\u2466"}],"title":"2.3. \nThe rt element"},{"refs":[{"id":"ref-for-represents\u2467"},{"id":"ref-for-represents\u2468"}],"title":"2.4. \nThe rtc element"},{"refs":[{"id":"ref-for-represents\u2460\u24ea"}],"title":"2.5. \nThe rp element"}],"url":"https://html.spec.whatwg.org/multipage/dom.html#represents"},
 "1236ac1a": {"dfnID":"1236ac1a","dfnText":"flow content","external":true,"refSections":[{"refs":[{"id":"ref-for-flow-content-2"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-flow-content-2\u2460"}],"title":"\nAppendix A:\nEditorial Tweaks to HTML"}],"url":"https://html.spec.whatwg.org/multipage/dom.html#flow-content-2"},
 "19a86e72": {"dfnID":"19a86e72","dfnText":"ruby-base","external":true,"refSections":[{"refs":[{"id":"ref-for-valdef-display-ruby-base"}],"title":"\nAppendix A:\nEditorial Tweaks to HTML"}],"url":"https://drafts.csswg.org/css-ruby-1/#valdef-display-ruby-base"},
@@ -2510,6 +2663,7 @@ let dfnPanelData = {
 "3c915747": {"dfnID":"3c915747","dfnText":"contexts in which this element can be used","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-element-contexts"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-concept-element-contexts\u2460"}],"title":"2.2. \nThe rb element"},{"refs":[{"id":"ref-for-concept-element-contexts\u2461"}],"title":"2.3. \nThe rt element"},{"refs":[{"id":"ref-for-concept-element-contexts\u2462"}],"title":"2.4. \nThe rtc element"},{"refs":[{"id":"ref-for-concept-element-contexts\u2463"}],"title":"2.5. \nThe rp element"}],"url":"https://html.spec.whatwg.org/multipage/dom.html#concept-element-contexts"},
 "5fd912e7": {"dfnID":"5fd912e7","dfnText":"accessibility considerations","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-element-accessibility-considerations"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-concept-element-accessibility-considerations\u2460"}],"title":"2.3. \nThe rt element"},{"refs":[{"id":"ref-for-concept-element-accessibility-considerations\u2461"}],"title":"2.5. \nThe rp element"}],"url":"https://html.spec.whatwg.org/multipage/dom.html#concept-element-accessibility-considerations"},
 "62ac5b1c": {"dfnID":"62ac5b1c","dfnText":"text","external":true,"refSections":[{"refs":[{"id":"ref-for-text-content"}],"title":"2.5. \nThe rp element"},{"refs":[{"id":"ref-for-text-content\u2460"}],"title":"\nAppendix A:\nEditorial Tweaks to HTML"}],"url":"https://html.spec.whatwg.org/multipage/dom.html#text-content"},
+"6311ff7c": {"dfnID":"6311ff7c","dfnText":"query","external":true,"refSections":[{"refs":[{"id":"ref-for-fip-query"}],"title":"6.1. \nText search"}],"url":"https://html.spec.whatwg.org/multipage/interaction.html#fip-query"},
 "68675e70": {"dfnID":"68675e70","dfnText":"content attributes","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-element-attributes"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-concept-element-attributes\u2460"}],"title":"2.2. \nThe rb element"},{"refs":[{"id":"ref-for-concept-element-attributes\u2461"}],"title":"2.3. \nThe rt element"},{"refs":[{"id":"ref-for-concept-element-attributes\u2462"}],"title":"2.4. \nThe rtc element"},{"refs":[{"id":"ref-for-concept-element-attributes\u2463"}],"title":"2.5. \nThe rp element"}],"url":"https://html.spec.whatwg.org/multipage/dom.html#concept-element-attributes"},
 "88766833": {"dfnID":"88766833","dfnText":"content model","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-element-content-model"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-concept-element-content-model\u2460"}],"title":"2.2. \nThe rb element"},{"refs":[{"id":"ref-for-concept-element-content-model\u2461"}],"title":"2.3. \nThe rt element"},{"refs":[{"id":"ref-for-concept-element-content-model\u2462"}],"title":"2.4. \nThe rtc element"},{"refs":[{"id":"ref-for-concept-element-content-model\u2463"}],"title":"2.5. \nThe rp element"}],"url":"https://html.spec.whatwg.org/multipage/dom.html#concept-element-content-model"},
 "8fc74046": {"dfnID":"8fc74046","dfnText":"global attributes","external":true,"refSections":[{"refs":[{"id":"ref-for-global-attributes"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-global-attributes\u2460"}],"title":"2.2. \nThe rb element"},{"refs":[{"id":"ref-for-global-attributes\u2461"}],"title":"2.3. \nThe rt element"},{"refs":[{"id":"ref-for-global-attributes\u2462"}],"title":"2.4. \nThe rtc element"},{"refs":[{"id":"ref-for-global-attributes\u2463"}],"title":"2.5. \nThe rp element"},{"refs":[{"id":"ref-for-global-attributes\u2464"},{"id":"ref-for-global-attributes\u2465"},{"id":"ref-for-global-attributes\u2466"},{"id":"ref-for-global-attributes\u2467"},{"id":"ref-for-global-attributes\u2468"}],"title":"\nAppendix A:\nEditorial Tweaks to HTML"}],"url":"https://html.spec.whatwg.org/multipage/dom.html#global-attributes"},
@@ -2522,10 +2676,11 @@ let dfnPanelData = {
 "e5a7e26c": {"dfnID":"e5a7e26c","dfnText":"phrasing content","external":true,"refSections":[{"refs":[{"id":"ref-for-phrasing-content-2"},{"id":"ref-for-phrasing-content-2\u2460"},{"id":"ref-for-phrasing-content-2\u2461"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-phrasing-content-2\u2462"}],"title":"2.2. \nThe rb element"},{"refs":[{"id":"ref-for-phrasing-content-2\u2463"}],"title":"2.3. \nThe rt element"},{"refs":[{"id":"ref-for-phrasing-content-2\u2464"}],"title":"2.4. \nThe rtc element"},{"refs":[{"id":"ref-for-phrasing-content-2\u2465"},{"id":"ref-for-phrasing-content-2\u2466"},{"id":"ref-for-phrasing-content-2\u2467"},{"id":"ref-for-phrasing-content-2\u2468"},{"id":"ref-for-phrasing-content-2\u2460\u24ea"},{"id":"ref-for-phrasing-content-2\u2460\u2460"}],"title":"\nAppendix A:\nEditorial Tweaks to HTML"}],"url":"https://html.spec.whatwg.org/multipage/dom.html#phrasing-content-2"},
 "e7f0dd6c": {"dfnID":"e7f0dd6c","dfnText":"display","external":true,"refSections":[{"refs":[{"id":"ref-for-propdef-display"}],"title":"\nAppendix A:\nEditorial Tweaks to HTML"}],"url":"https://drafts.csswg.org/css-display-4/#propdef-display"},
 "elementdef-rb": {"dfnID":"elementdef-rb","dfnText":"rb","external":false,"refSections":[{"refs":[{"id":"ref-for-elementdef-rb"},{"id":"ref-for-elementdef-rb\u2460"},{"id":"ref-for-elementdef-rb\u2461"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-elementdef-rb\u2462"},{"id":"ref-for-elementdef-rb\u2463"},{"id":"ref-for-elementdef-rb\u2464"}],"title":"2.1.1. \nRuby Segmentation and Pairing"},{"refs":[{"id":"ref-for-elementdef-rb\u2465"}],"title":"2.1.2. \nMarkup Patterns for Multi-Character Ruby"},{"refs":[{"id":"ref-for-elementdef-rb\u2466"},{"id":"ref-for-elementdef-rb\u2467"},{"id":"ref-for-elementdef-rb\u2468"},{"id":"ref-for-elementdef-rb\u2460\u24ea"}],"title":"2.2. \nThe rb element"},{"refs":[{"id":"ref-for-elementdef-rb\u2460\u2460"},{"id":"ref-for-elementdef-rb\u2460\u2461"},{"id":"ref-for-elementdef-rb\u2460\u2462"},{"id":"ref-for-elementdef-rb\u2460\u2463"},{"id":"ref-for-elementdef-rb\u2460\u2464"},{"id":"ref-for-elementdef-rb\u2460\u2465"},{"id":"ref-for-elementdef-rb\u2460\u2466"}],"title":"3. \nOptional Tags"},{"refs":[{"id":"ref-for-elementdef-rb\u2460\u2467"}],"title":"5. \nConforming Features "},{"refs":[{"id":"ref-for-elementdef-rb\u2460\u2468"},{"id":"ref-for-elementdef-rb\u2461\u24ea"},{"id":"ref-for-elementdef-rb\u2461\u2460"},{"id":"ref-for-elementdef-rb\u2461\u2461"},{"id":"ref-for-elementdef-rb\u2461\u2462"}],"title":"\nAppendix A:\nEditorial Tweaks to HTML"},{"refs":[{"id":"ref-for-elementdef-rb\u2461\u2463"},{"id":"ref-for-elementdef-rb\u2461\u2464"},{"id":"ref-for-elementdef-rb\u2461\u2465"}],"title":"\nAppendix B:\nComparison With The HTML Standard"}],"url":"#elementdef-rb"},
-"elementdef-rp": {"dfnID":"elementdef-rp","dfnText":"rp","external":false,"refSections":[{"refs":[{"id":"ref-for-elementdef-rp"},{"id":"ref-for-elementdef-rp\u2460"},{"id":"ref-for-elementdef-rp\u2461"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-elementdef-rp\u2462"},{"id":"ref-for-elementdef-rp\u2463"}],"title":"2.1.1. \nRuby Segmentation and Pairing"},{"refs":[{"id":"ref-for-elementdef-rp\u2464"}],"title":"2.4. \nThe rtc element"},{"refs":[{"id":"ref-for-elementdef-rp\u2465"},{"id":"ref-for-elementdef-rp\u2466"},{"id":"ref-for-elementdef-rp\u2467"}],"title":"2.5. \nThe rp element"},{"refs":[{"id":"ref-for-elementdef-rp\u2468"},{"id":"ref-for-elementdef-rp\u2460\u24ea"},{"id":"ref-for-elementdef-rp\u2460\u2460"},{"id":"ref-for-elementdef-rp\u2460\u2461"},{"id":"ref-for-elementdef-rp\u2460\u2462"},{"id":"ref-for-elementdef-rp\u2460\u2463"}],"title":"3. \nOptional Tags"},{"refs":[{"id":"ref-for-elementdef-rp\u2460\u2464"},{"id":"ref-for-elementdef-rp\u2460\u2465"},{"id":"ref-for-elementdef-rp\u2460\u2466"},{"id":"ref-for-elementdef-rp\u2460\u2467"},{"id":"ref-for-elementdef-rp\u2460\u2468"},{"id":"ref-for-elementdef-rp\u2461\u24ea"},{"id":"ref-for-elementdef-rp\u2461\u2460"}],"title":"\nAppendix A:\nEditorial Tweaks to HTML"}],"url":"#elementdef-rp"},
-"elementdef-rt": {"dfnID":"elementdef-rt","dfnText":"rt","external":false,"refSections":[{"refs":[{"id":"ref-for-elementdef-rt"},{"id":"ref-for-elementdef-rt\u2460"},{"id":"ref-for-elementdef-rt\u2461"},{"id":"ref-for-elementdef-rt\u2462"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-elementdef-rt\u2463"},{"id":"ref-for-elementdef-rt\u2464"},{"id":"ref-for-elementdef-rt\u2465"},{"id":"ref-for-elementdef-rt\u2466"},{"id":"ref-for-elementdef-rt\u2467"},{"id":"ref-for-elementdef-rt\u2468"}],"title":"2.1.1. \nRuby Segmentation and Pairing"},{"refs":[{"id":"ref-for-elementdef-rt\u2460\u24ea"}],"title":"2.1.2. \nMarkup Patterns for Multi-Character Ruby"},{"refs":[{"id":"ref-for-elementdef-rt\u2460\u2460"},{"id":"ref-for-elementdef-rt\u2460\u2461"}],"title":"2.3. \nThe rt element"},{"refs":[{"id":"ref-for-elementdef-rt\u2460\u2462"},{"id":"ref-for-elementdef-rt\u2460\u2463"},{"id":"ref-for-elementdef-rt\u2460\u2464"}],"title":"2.4. \nThe rtc element"},{"refs":[{"id":"ref-for-elementdef-rt\u2460\u2465"},{"id":"ref-for-elementdef-rt\u2460\u2466"},{"id":"ref-for-elementdef-rt\u2460\u2467"},{"id":"ref-for-elementdef-rt\u2460\u2468"},{"id":"ref-for-elementdef-rt\u2461\u24ea"},{"id":"ref-for-elementdef-rt\u2461\u2460"}],"title":"3. \nOptional Tags"},{"refs":[{"id":"ref-for-elementdef-rt\u2461\u2461"},{"id":"ref-for-elementdef-rt\u2461\u2462"},{"id":"ref-for-elementdef-rt\u2461\u2463"},{"id":"ref-for-elementdef-rt\u2461\u2464"},{"id":"ref-for-elementdef-rt\u2461\u2465"},{"id":"ref-for-elementdef-rt\u2461\u2466"},{"id":"ref-for-elementdef-rt\u2461\u2467"},{"id":"ref-for-elementdef-rt\u2461\u2468"}],"title":"\nAppendix A:\nEditorial Tweaks to HTML"},{"refs":[{"id":"ref-for-elementdef-rt\u2462\u24ea"},{"id":"ref-for-elementdef-rt\u2462\u2460"},{"id":"ref-for-elementdef-rt\u2462\u2461"}],"title":"\nAppendix B:\nComparison With The HTML Standard"}],"url":"#elementdef-rt"},
+"elementdef-rp": {"dfnID":"elementdef-rp","dfnText":"rp","external":false,"refSections":[{"refs":[{"id":"ref-for-elementdef-rp"},{"id":"ref-for-elementdef-rp\u2460"},{"id":"ref-for-elementdef-rp\u2461"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-elementdef-rp\u2462"},{"id":"ref-for-elementdef-rp\u2463"}],"title":"2.1.1. \nRuby Segmentation and Pairing"},{"refs":[{"id":"ref-for-elementdef-rp\u2464"}],"title":"2.4. \nThe rtc element"},{"refs":[{"id":"ref-for-elementdef-rp\u2465"},{"id":"ref-for-elementdef-rp\u2466"},{"id":"ref-for-elementdef-rp\u2467"}],"title":"2.5. \nThe rp element"},{"refs":[{"id":"ref-for-elementdef-rp\u2468"},{"id":"ref-for-elementdef-rp\u2460\u24ea"},{"id":"ref-for-elementdef-rp\u2460\u2460"},{"id":"ref-for-elementdef-rp\u2460\u2461"},{"id":"ref-for-elementdef-rp\u2460\u2462"},{"id":"ref-for-elementdef-rp\u2460\u2463"}],"title":"3. \nOptional Tags"},{"refs":[{"id":"ref-for-elementdef-rp\u2460\u2464"}],"title":"6.1. \nText search"},{"refs":[{"id":"ref-for-elementdef-rp\u2460\u2465"},{"id":"ref-for-elementdef-rp\u2460\u2466"}],"title":"6.2. \nCopy & Pasting"},{"refs":[{"id":"ref-for-elementdef-rp\u2460\u2467"},{"id":"ref-for-elementdef-rp\u2460\u2468"},{"id":"ref-for-elementdef-rp\u2461\u24ea"},{"id":"ref-for-elementdef-rp\u2461\u2460"},{"id":"ref-for-elementdef-rp\u2461\u2461"},{"id":"ref-for-elementdef-rp\u2461\u2462"},{"id":"ref-for-elementdef-rp\u2461\u2463"}],"title":"\nAppendix A:\nEditorial Tweaks to HTML"}],"url":"#elementdef-rp"},
+"elementdef-rt": {"dfnID":"elementdef-rt","dfnText":"rt","external":false,"refSections":[{"refs":[{"id":"ref-for-elementdef-rt"},{"id":"ref-for-elementdef-rt\u2460"},{"id":"ref-for-elementdef-rt\u2461"},{"id":"ref-for-elementdef-rt\u2462"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-elementdef-rt\u2463"},{"id":"ref-for-elementdef-rt\u2464"},{"id":"ref-for-elementdef-rt\u2465"},{"id":"ref-for-elementdef-rt\u2466"},{"id":"ref-for-elementdef-rt\u2467"},{"id":"ref-for-elementdef-rt\u2468"}],"title":"2.1.1. \nRuby Segmentation and Pairing"},{"refs":[{"id":"ref-for-elementdef-rt\u2460\u24ea"}],"title":"2.1.2. \nMarkup Patterns for Multi-Character Ruby"},{"refs":[{"id":"ref-for-elementdef-rt\u2460\u2460"},{"id":"ref-for-elementdef-rt\u2460\u2461"}],"title":"2.3. \nThe rt element"},{"refs":[{"id":"ref-for-elementdef-rt\u2460\u2462"},{"id":"ref-for-elementdef-rt\u2460\u2463"},{"id":"ref-for-elementdef-rt\u2460\u2464"}],"title":"2.4. \nThe rtc element"},{"refs":[{"id":"ref-for-elementdef-rt\u2460\u2465"},{"id":"ref-for-elementdef-rt\u2460\u2466"},{"id":"ref-for-elementdef-rt\u2460\u2467"},{"id":"ref-for-elementdef-rt\u2460\u2468"},{"id":"ref-for-elementdef-rt\u2461\u24ea"},{"id":"ref-for-elementdef-rt\u2461\u2460"}],"title":"3. \nOptional Tags"},{"refs":[{"id":"ref-for-elementdef-rt\u2461\u2461"}],"title":"6.2. \nCopy & Pasting"},{"refs":[{"id":"ref-for-elementdef-rt\u2461\u2462"},{"id":"ref-for-elementdef-rt\u2461\u2463"},{"id":"ref-for-elementdef-rt\u2461\u2464"},{"id":"ref-for-elementdef-rt\u2461\u2465"},{"id":"ref-for-elementdef-rt\u2461\u2466"},{"id":"ref-for-elementdef-rt\u2461\u2467"},{"id":"ref-for-elementdef-rt\u2461\u2468"},{"id":"ref-for-elementdef-rt\u2462\u24ea"}],"title":"\nAppendix A:\nEditorial Tweaks to HTML"},{"refs":[{"id":"ref-for-elementdef-rt\u2462\u2460"},{"id":"ref-for-elementdef-rt\u2462\u2461"},{"id":"ref-for-elementdef-rt\u2462\u2462"}],"title":"\nAppendix B:\nComparison With The HTML Standard"}],"url":"#elementdef-rt"},
 "elementdef-rtc": {"dfnID":"elementdef-rtc","dfnText":"rtc","external":false,"refSections":[{"refs":[{"id":"ref-for-elementdef-rtc"},{"id":"ref-for-elementdef-rtc\u2460"},{"id":"ref-for-elementdef-rtc\u2461"},{"id":"ref-for-elementdef-rtc\u2462"},{"id":"ref-for-elementdef-rtc\u2463"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-elementdef-rtc\u2464"},{"id":"ref-for-elementdef-rtc\u2465"},{"id":"ref-for-elementdef-rtc\u2466"}],"title":"2.1.1. \nRuby Segmentation and Pairing"},{"refs":[{"id":"ref-for-elementdef-rtc\u2467"},{"id":"ref-for-elementdef-rtc\u2468"},{"id":"ref-for-elementdef-rtc\u2460\u24ea"}],"title":"2.3. \nThe rt element"},{"refs":[{"id":"ref-for-elementdef-rtc\u2460\u2460"},{"id":"ref-for-elementdef-rtc\u2460\u2461"},{"id":"ref-for-elementdef-rtc\u2460\u2462"},{"id":"ref-for-elementdef-rtc\u2460\u2463"},{"id":"ref-for-elementdef-rtc\u2460\u2464"}],"title":"2.4. \nThe rtc element"},{"refs":[{"id":"ref-for-elementdef-rtc\u2460\u2465"},{"id":"ref-for-elementdef-rtc\u2460\u2466"}],"title":"2.5. \nThe rp element"},{"refs":[{"id":"ref-for-elementdef-rtc\u2460\u2467"},{"id":"ref-for-elementdef-rtc\u2460\u2468"},{"id":"ref-for-elementdef-rtc\u2461\u24ea"},{"id":"ref-for-elementdef-rtc\u2461\u2460"},{"id":"ref-for-elementdef-rtc\u2461\u2461"},{"id":"ref-for-elementdef-rtc\u2461\u2462"},{"id":"ref-for-elementdef-rtc\u2461\u2463"}],"title":"3. \nOptional Tags"},{"refs":[{"id":"ref-for-elementdef-rtc\u2461\u2464"}],"title":"5. \nConforming Features "},{"refs":[{"id":"ref-for-elementdef-rtc\u2461\u2465"},{"id":"ref-for-elementdef-rtc\u2461\u2466"},{"id":"ref-for-elementdef-rtc\u2461\u2467"},{"id":"ref-for-elementdef-rtc\u2461\u2468"},{"id":"ref-for-elementdef-rtc\u2462\u24ea"},{"id":"ref-for-elementdef-rtc\u2462\u2460"},{"id":"ref-for-elementdef-rtc\u2462\u2461"}],"title":"\nAppendix A:\nEditorial Tweaks to HTML"},{"refs":[{"id":"ref-for-elementdef-rtc\u2462\u2462"},{"id":"ref-for-elementdef-rtc\u2462\u2463"},{"id":"ref-for-elementdef-rtc\u2462\u2464"},{"id":"ref-for-elementdef-rtc\u2462\u2465"}],"title":"\nAppendix B:\nComparison With The HTML Standard"}],"url":"#elementdef-rtc"},
 "elementdef-ruby": {"dfnID":"elementdef-ruby","dfnText":"ruby","external":false,"refSections":[{"refs":[{"id":"ref-for-elementdef-ruby"},{"id":"ref-for-elementdef-ruby\u2460"},{"id":"ref-for-elementdef-ruby\u2461"},{"id":"ref-for-elementdef-ruby\u2462"},{"id":"ref-for-elementdef-ruby\u2463"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-elementdef-ruby\u2464"},{"id":"ref-for-elementdef-ruby\u2465"}],"title":"2.1.1. \nRuby Segmentation and Pairing"},{"refs":[{"id":"ref-for-elementdef-ruby\u2466"},{"id":"ref-for-elementdef-ruby\u2467"},{"id":"ref-for-elementdef-ruby\u2468"}],"title":"2.2. \nThe rb element"},{"refs":[{"id":"ref-for-elementdef-ruby\u2460\u24ea"},{"id":"ref-for-elementdef-ruby\u2460\u2460"},{"id":"ref-for-elementdef-ruby\u2460\u2461"},{"id":"ref-for-elementdef-ruby\u2460\u2462"}],"title":"2.3. \nThe rt element"},{"refs":[{"id":"ref-for-elementdef-ruby\u2460\u2463"},{"id":"ref-for-elementdef-ruby\u2460\u2464"},{"id":"ref-for-elementdef-ruby\u2460\u2465"}],"title":"2.4. \nThe rtc element"},{"refs":[{"id":"ref-for-elementdef-ruby\u2460\u2466"}],"title":"2.5. \nThe rp element"},{"refs":[{"id":"ref-for-elementdef-ruby\u2460\u2467"},{"id":"ref-for-elementdef-ruby\u2460\u2468"},{"id":"ref-for-elementdef-ruby\u2461\u24ea"},{"id":"ref-for-elementdef-ruby\u2461\u2460"},{"id":"ref-for-elementdef-ruby\u2461\u2461"},{"id":"ref-for-elementdef-ruby\u2461\u2462"},{"id":"ref-for-elementdef-ruby\u2461\u2463"},{"id":"ref-for-elementdef-ruby\u2461\u2464"},{"id":"ref-for-elementdef-ruby\u2461\u2465"},{"id":"ref-for-elementdef-ruby\u2461\u2466"}],"title":"\nAppendix A:\nEditorial Tweaks to HTML"}],"url":"#elementdef-ruby"},
+"fc736137": {"dfnID":"fc736137","dfnText":"textarea","external":true,"refSections":[{"refs":[{"id":"ref-for-the-textarea-element"}],"title":"6.2. \nCopy & Pasting"}],"url":"https://html.spec.whatwg.org/multipage/form-elements.html#the-textarea-element"},
 "ruby": {"dfnID":"ruby","dfnText":"Ruby","external":false,"refSections":[],"url":"#ruby"},
 "ruby-annotation-range": {"dfnID":"ruby-annotation-range","dfnText":"ruby annotation range","external":false,"refSections":[{"refs":[{"id":"ref-for-ruby-annotation-range"},{"id":"ref-for-ruby-annotation-range\u2460"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-ruby-annotation-range\u2461"},{"id":"ref-for-ruby-annotation-range\u2462"},{"id":"ref-for-ruby-annotation-range\u2463"},{"id":"ref-for-ruby-annotation-range\u2464"},{"id":"ref-for-ruby-annotation-range\u2465"},{"id":"ref-for-ruby-annotation-range\u2466"}],"title":"2.1.1. \nRuby Segmentation and Pairing"},{"refs":[{"id":"ref-for-ruby-annotation-range\u2467"},{"id":"ref-for-ruby-annotation-range\u2468"}],"title":"2.4. \nThe rtc element"}],"url":"#ruby-annotation-range"},
 "ruby-annotation-units": {"dfnID":"ruby-annotation-units","dfnText":"ruby annotation units","external":false,"refSections":[{"refs":[{"id":"ref-for-ruby-annotation-units"},{"id":"ref-for-ruby-annotation-units\u2460"}],"title":"2.1. \nThe ruby element"},{"refs":[{"id":"ref-for-ruby-annotation-units\u2461"},{"id":"ref-for-ruby-annotation-units\u2462"},{"id":"ref-for-ruby-annotation-units\u2463"},{"id":"ref-for-ruby-annotation-units\u2464"},{"id":"ref-for-ruby-annotation-units\u2465"},{"id":"ref-for-ruby-annotation-units\u2466"},{"id":"ref-for-ruby-annotation-units\u2467"},{"id":"ref-for-ruby-annotation-units\u2468"}],"title":"2.1.1. \nRuby Segmentation and Pairing"},{"refs":[{"id":"ref-for-ruby-annotation-units\u2460\u24ea"}],"title":"2.3. \nThe rt element"},{"refs":[{"id":"ref-for-ruby-annotation-units\u2460\u2460"}],"title":"2.4. \nThe rtc element"},{"refs":[{"id":"ref-for-ruby-annotation-units\u2460\u2461"},{"id":"ref-for-ruby-annotation-units\u2460\u2462"}],"title":"2.5. \nThe rp element"}],"url":"#ruby-annotation-units"},
@@ -2950,6 +3105,9 @@ let refsData = {
 "https://html.spec.whatwg.org/multipage/dom.html#phrasing-content-2": {"displayText":"phrasing content","export":true,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"phrasing content","type":"dfn","url":"https://html.spec.whatwg.org/multipage/dom.html#phrasing-content-2"},
 "https://html.spec.whatwg.org/multipage/dom.html#represents": {"displayText":"represent","export":false,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"represent","type":"dfn","url":"https://html.spec.whatwg.org/multipage/dom.html#represents"},
 "https://html.spec.whatwg.org/multipage/dom.html#text-content": {"displayText":"text","export":true,"for_":["/"],"level":"","normative":true,"shortname":"html","spec":"html","status":"anchor-block","text":"text","type":"dfn","url":"https://html.spec.whatwg.org/multipage/dom.html#text-content"},
+"https://html.spec.whatwg.org/multipage/form-elements.html#the-textarea-element": {"displayText":"textarea","export":true,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"textarea","type":"element","url":"https://html.spec.whatwg.org/multipage/form-elements.html#the-textarea-element"},
+"https://html.spec.whatwg.org/multipage/interaction.html#find-in-page-2": {"displayText":"find-in-page","export":false,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"find-in-page","type":"dfn","url":"https://html.spec.whatwg.org/multipage/interaction.html#find-in-page-2"},
+"https://html.spec.whatwg.org/multipage/interaction.html#fip-query": {"displayText":"query","export":false,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"query","type":"dfn","url":"https://html.spec.whatwg.org/multipage/interaction.html#fip-query"},
 "https://html.spec.whatwg.org/multipage/syntax.html#syntax-end-tag": {"displayText":"end tags","export":false,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"end tags","type":"dfn","url":"https://html.spec.whatwg.org/multipage/syntax.html#syntax-end-tag"},
 };
 
