@@ -197,7 +197,7 @@ The <dfn element><code>ruby</code></dfn> element</h3>
 		with ruby markup used to annotate the ideographs with their pronunciation.
 
 		<pre><code highlight="html">
-			&lt;ruby>霧&lt;rt>きり&lt;/rt>&lt;/ruby>とも&lt;ruby>霞&lt;rt>かすみ&lt;/rt>&lt;/ruby>とも
+			&lt;ruby>&lt;rb>霧&lt;/rb>&lt;rt>きり&lt;/rt>&lt;/ruby>とも&lt;ruby>&lt;rb>霞&lt;/rb>&lt;rt>かすみ&lt;/rt>&lt;/ruby>とも
 		</code></pre>
 
 		A typical rendering would be something akin to the following image:
@@ -212,6 +212,9 @@ The <dfn element><code>ruby</code></dfn> element</h3>
 					Each group of hiragana is horizontally centered
 					relative to the kanji it annotates.">
 		</figure>
+
+		Note: See <a href="#ruby-optional-tag-ex">the following example</a>
+		for discussion of syntax variants and simplifications.
 	</div>
 
 	The content model of <{ruby}> elements consists of
