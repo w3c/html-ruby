@@ -1574,7 +1574,9 @@ Changes</h2>
 Changes since the 07 May 2024 Working Draft</h3>
 
 	Significant changes since the <a href="https://www.w3.org/TR/2024/WD-html-ruby-extensions-20240507/">07 May 2024 Working Draft</a>:
-	* None yet.
+	* Addition of the non-normative [[#a11y]] section.
+	* Addition of the non-normative [[#interaction]] section.
+	* Various editorial tweaks to clarify examples, notes, and introductory prose.
 
 <h3 id=changes-since-2014>
 Changes since the 04 February 2014 <cite>W3C HTML Ruby Markup Extensions</cite> Working Group Note
