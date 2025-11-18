@@ -1046,6 +1046,152 @@ Conforming Features </h2>
 	</div>
 
 
+<h2 id=interaction>
+Interaction</h2>
+
+<h3 id=search class=non-normative>
+Text search</h3>
+
+	<i>This section is non-normative</i>
+
+	[[HTML]] defines the <a spec=html>find-in-page</a> operation and its general mechanics
+	but leaves undefined
+	the exact way <a spec=html href=https://html.spec.whatwg.org/multipage/interaction.html#fip-matches>matches</a> are determined from the <a spec=html>query</a>.
+	A <code>window.find()</code> API is also supported by various HTML user agents,
+	but at the time of writing does not have a normative specification,
+	and the specifics of how to determine
+	if particular search string matches in a document
+	are also undefined.
+
+	Accordingly, this specification does not attempt to define a normative behavior
+	for the interaction of text search with ruby.
+	However, some general user expectations can be noted,
+	which user agents are encouraged to take into account
+	when implementing such functionality.
+
+	<ul>
+		<li>
+			Users typically do not expect the presence of ruby annotations
+			to interfere with search.
+			Whether a word or phrase has ruby annotations or not,
+			and regardless of the markup pattern used to insert such annotations,
+			users expect to be able find the base text.
+			Given that users have generally no awareness of the specific markup pattern used,
+			this is the case even when annotations are interleaved between nodes of base text
+			and the query text is not found uninterrupted in the document.
+
+		<li>
+			Similarly, when ruby annotations appear in the markup
+			after a word they annotate and before another word,
+			users generally have no awareness
+			that there is anything <em>between</em> the two words,
+			and would typically expect a query string composed of these two words
+			to find a match.
+
+		<li>
+			In addition to base text,
+			users may also search for text contained in ruby annotations.
+			Here too, markup patterns are unknown and irrelevant to users,
+			who will generally expect to find what they think of as a word or phrase,
+			regardless of whether the text appears contiguously in the markup
+			or whether the markup contains interleaved ruby bases and annotations.
+
+		<li>
+			As <{rp}> elements are generally invisible,
+			users also typically expect their searches
+			to be unaffected by their presence.
+	</ul>
+
+	<div class=example id=search-ex>
+		Given any of the following markup patterns,
+		a user searching for either “東京” or “とうきょう”
+		would typically expect to find a match.
+
+		<pre><code highlight="html">
+			&lt;ruby>&lt;rb>東&lt;rb>京&lt;rt>とう&lt;rt>きょう&lt;/ruby>に行く。
+		</code></pre>
+		<pre><code highlight="html">
+			&lt;ruby>&lt;rb>東&lt;rt>とう&lt;rb>京&lt;rt>きょう&lt;/ruby>に行く。
+		</code></pre>
+		<pre><code highlight="html">
+			&lt;ruby>&lt;rb>東&lt;rb>京&lt;rp>（&lt;rt>とう&lt;rt>きょう&lt;rp>）&lt;/ruby>に行く。
+		</code></pre>
+
+		This is expectation is not only present when searching for the word in isolation,
+		but also when combined with surrounding text,
+		such as searching for “東京に行く”
+		or “とうきょうに行く”,
+		which a user would also typically expect to match.
+	</div>
+
+	Note: See also [[string-search]] for further considerations
+	regarding the complexities of searching text.
+
+<h3 id=copy-paste class=non-normative>
+Copy &amp; Pasting</h3>
+
+	<i>This section is non-normative</i>
+
+	The web platform does not specify precisely
+	the details of the copy &amp; paste clipboard operations.
+	In particular, while the clipboard generally supports both structured text and plain text,
+	how one gets converted to the other,
+	and how the content of the document gets extracted into the clipboard
+	when copying is not generally defined.
+
+	Accordingly, this specification does not attempt to define a normative behavior
+	for the interaction of the clipboard with ruby.
+	However, some general user expectations can be noted,
+	which user agents are encouraged to take into account
+	when implementing such functionality.
+
+	<ul>
+		<li>
+			When converting annotated ruby text to plain text
+			via copy &amp; paste,
+			the user agent could keep the base text alone,
+			include both base and annotation text,
+			or offer the user a choice of copy &amp; paste with or without ruby annotations.
+
+			If both ruby bases and annotations are included in a plain text rendering,
+			they need to be linearised.
+			In this context,
+			it would be appropriate to render otherwise hidden <{rp}> elements.
+			The expectation expressed in [[HTML/rendering#phrasing-content-3]]
+			that user agents which do not support correct ruby rendering
+			are to render parentheses around the text of <{rt}> elements
+			in the absence of <{rp}> elements
+			is also relevant to this context.
+
+			<div class=example id=paste-ex>
+				Consider a user selecting and copying either of the following text snippets,
+				and pasting into a <{textarea}>:
+
+				<pre><code highlight="html">
+					My name is &lt;ruby>&lt;rb>網&lt;rb>本&lt;rt>あみ&lt;rt>もと&lt;/ruby>
+				</code></pre>
+				<pre><code highlight="html">
+					My name is &lt;ruby>&lt;rb>網&lt;rb>本&lt;rp>(&lt;rt>あみ&lt;rt>もと&lt;rp>)&lt;/ruby>
+				</code></pre>
+
+				Either of <q>My name is 網本</q> or <q>My name is 網本(あみもと)</q>
+				could be expected.
+				However, <q>My name is 網本あみもと</q> keeps the annotation
+				but merges it with the base text without doing anything to indicate that it is an annotation,
+				and which is potentially confusing to the reader.
+			</div>
+
+		<li>
+			Users generally expect to be able to copy what they can select.
+			If they specifically select either base text or annotation text,
+			that is would be typically expected to be found in the clipboard
+			after a copy operation.
+			In other words, simply discarding all annotations unconditionally
+			in all plain-text copy &amp; paste operations
+			is unlikely to meet user expectations.
+	</ul>
+
+
 <h2 class="no-num non-normative" id=html-tweaks>
 Appendix A:
 Editorial Tweaks to HTML</h2>
@@ -1257,6 +1403,10 @@ Comparison With The HTML Standard</h2>
 			searching through the document,
 			or speech synthesis,
 			due to the base text being interrupted by the annotations.
+			In the case of search,
+			the user agent [[#search|can mitigate this problem]],
+			but it remains an issue in simpler user agents
+			and for operations other than search.
 
 		<li>
 			This document defines a different model for handling multiple levels of annotations:
