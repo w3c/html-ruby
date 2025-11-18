@@ -1,8 +1,9 @@
 {
-    "group": "wg/htmlwg",
+    "group": "wg/i18n-core",
     "contacts": [
-        "siusin",
-        "LJwatson",
+        "r12a",
+        "xfq",
+        "aphillips",
         "frivoal"
     ],
     "repo-type": "rec-track"
