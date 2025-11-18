@@ -1333,7 +1333,7 @@ Accessibility Considerations</h2>
 	People with dyslexia may find different visual presentations of the same content
 	more or less easy to read.
 	Among over variants,
-	some may prefer ruby annotations to be colored differently
+	some may prefer ruby annotations to be colored differently,
 	to be spaced apart from the characters they annotate,
 	or to be shown as an inline parenthetical,
 	in order to make them easier to distinguish from the text they annotate.
