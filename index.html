@@ -8,7 +8,7 @@
   <meta content="Bikeshed version 7b3ff057a, updated Sun Nov 9 18:39:50 2025 -0800" name="generator">
   <link href="https://www.w3.org/TR/html-ruby-extensions/" rel="canonical">
   <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
-  <meta content="c68c7031dded2596c02bccec93e6285cfd43bc37" name="revision">
+  <meta content="89e17a969eeaea9c97aeb686264f42c893c04232" name="revision">
   <meta content="dark light" name="color-scheme">
   <link href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css">
 <style>/* Boilerplate: style-autolinks */
@@ -1291,9 +1291,9 @@ Markup Patterns for Multi-Character Ruby</span><a class="self-link" href="#ruby-
    <div class="example" id="jukugo-ruby">
     <a class="self-link" href="#jukugo-ruby"></a>
 		In this example,
-		we will use the Japanese noun “<span lang="ja">京都市</span>”,
-		meaning “Kyoto City”.
-		Its characters are pronounced “きょう”, “と”, and “し”, respectively.
+		we will use the Japanese noun “<span lang="ja">浄瑠璃</span>” (jōruri),
+		a form of traditional Japanese narrative music.
+		Its characters are pronounced “じょう”, “る”, and “り”, respectively.
 		(Distinct colors shown in these examples for clarity:
 		in actual usage there would be no color distinction.)
 
@@ -1305,77 +1305,97 @@ Markup Patterns for Multi-Character Ruby</span><a class="self-link" href="#ruby-
 		surrounding text is pushed apart,
 		to make the correspondance between each character and its annotation clear.</p>
     <figure>
-			<img alt="“Kyoto City” written in horizontal Japanese,
+			<img alt="“Jōruri” written in horizontal Japanese,
 					with phonetic annotations over each of the three characters.
 					The first and second character are pushed apart from each other,
-					as the annotation over the first one is too long to fit." height="71" src="images/kyoto-s.png" width="140">
+					as the annotation over the first one is too long to fit." height="71" src="images/joruri-s.png" width="140">
 		</figure>
-    <p>However, it is common to present such a word
+    <p>However,
+		in various typographic traditions,
+		it is common to present such a word
 		with its annotations sharing space together
 		when they would otherwise create a separation in the base text,
 		to preserve the implication that it is a single word.
 		This style is called “jukugo ruby”
 		(“jukugo” meaning “compound word”).</p>
     <figure>
-			<img alt="“Kyoto City” written in horizontal Japanese,
+			<img alt="“Jōruri” written in horizontal Japanese,
 					with phonetic annotations over the word.
 					The characters of each annotation are not alligned
 					to their corresponding base,
-					instead they are collectively aligned to the whole word." height="71" src="images/kyoto-m.png" width="120">
+					instead they are collectively aligned to the whole word." height="71" src="images/joruri-m.png" width="120">
 		</figure>
     <p>Even when presenting as “jukugo ruby“ though,
 		the annotation are not always merged.
 		If a line break occurs in the middle of the word,
 		the annotations are expected to remain associated with the correct base character.</p>
     <figure>
-			<img alt="“Kyoto City” written in horizontal Japanese,
+			<img alt="“Jōruri” written in horizontal Japanese,
 					broken across two lines.
 					The phonetic annotations displayed over the word
 					are paired with each base character,
-					and line break together." height="123" src="images/kyoto-lb.png" width="224">
+					and line break together." height="123" src="images/joruri-lb.png" width="224">
 		</figure>
     <p>Whether—and how much—the annotations are merged can vary,
-		and can depend on the font size,
-		as “jukugo ruby“ only merges annotations
-		when at least one of them is longer than its base.</p>
+		and can depend on the font size.
+		The following figures illustrate two of several possibilities:
+		one where “jukugo ruby“ merges an annotation wider than its base
+		with the neighboring one
+		without necessarily merging them all,
+		and one where “jukugo ruby“ merges all annotations
+		as soon as any of them is wider than its base.
+		No specific layout is mandated by this specification;
+		that is under the purview of styling technologies such as CSS.</p>
     <figure>
      
-			<img alt="“Kyoto City” written in horizontal Japanese,
+			<img alt="“Jōruri” written in horizontal Japanese,
 					with phonetic annotations over each of the three characters.
 					At 33% of the base font size,
 					annotations are small enough to fit their base character,
-					and are aligned to it." height="64" src="images/kyoto-33.png" width="119">
+					and are aligned to it." height="64" src="images/joruri-33.png" width="119">
 			
-     <figcaption>Ruby sized at 33%</figcaption>
+     <figcaption>Ruby sized at 33%: no merging needed when every annotation fits its base</figcaption>
     </figure>
     <figure>
      
-			<img alt="“Kyoto City” written in horizontal Japanese,
+			<img alt="“Jōruri” written in horizontal Japanese,
 					with phonetic annotations over each of the three characters.
 					At 50% of the base font size,
 					the first annotation doesn&apos;t fit over its base character,
 					so it merges with the second one.
-					The third remains separate." height="71" src="images/kyoto-50.png" width="120">
+					The third remains separate." height="71" src="images/joruri-50.png" width="120">
 			
-     <figcaption>Ruby sized at 50%</figcaption>
+     <figcaption>Ruby sized at 50%, variant 1: only merging wide annotations with neighboring ones</figcaption>
     </figure>
     <figure>
      
-			<img alt="“Kyoto City” written in horizontal Japanese,
+			<img alt="“Jōruri” written in horizontal Japanese,
+					with phonetic annotations over each of the three characters.
+					At 50% of the base font size,
+					the first annotation doesn&apos;t fit over its base character,
+					so all three are merged and aligned together." height="71" src="images/joruri-m.png" width="120">
+			
+     <figcaption>Ruby sized at 50%, variant 2: merging all annotations as soon as any doesn’t fit its base</figcaption>
+    </figure>
+    <figure>
+     
+			<img alt="“Jōruri” written in horizontal Japanese,
 					with phonetic annotations over each of the three characters.
 					At 60% of the base font size,
 					the first annotation doesn&apos;t fit over the first character,
 					nor do the first and second together fit over the first two characters.
-					All three are merged and aligned together." height="75" src="images/kyoto-60.png" width="120">
+					All three are merged and aligned together." height="75" src="images/joruri-60.png" width="120">
 		
-     <figcaption>Ruby sized at 60%</figcaption>
+     <figcaption>Ruby sized at 60%: merging necessary in both variants</figcaption>
     </figure>
-    <p>Since choosing to render as “jukugo ruby” or not is a stylistic choice,
-		the same markup needs to enable both—​and it needs to encode both the pairing information within the word
+    <p>Regardless of what rendering variants are made available by the styling technology,
+		the same markup needs contain enough information to support any style,
+		since choosing whether to render as “jukugo ruby” and its variants is a stylistic choice.
+		Markup needs to encode both the pairing information within the word
 		as well as the grouping of these pairs as a single word:</p>
-<pre><code class="highlight"><c- p>&lt;</c-><c- f>ruby</c-><c- p>>&lt;</c-><c- f>rb</c-><c- p>></c->京<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->都<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->市<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->きょう<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->と<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->し<c- p>&lt;/</c-><c- f>ruby</c-><c- p>></c->
+<pre><code class="highlight"><c- p>&lt;</c-><c- f>ruby</c-><c- p>>&lt;</c-><c- f>rb</c-><c- p>></c->浄<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->瑠<c- p>&lt;</c-><c- f>rb</c-><c- p>></c->璃<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->じょう<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->る<c- p>&lt;</c-><c- f>rt</c-><c- p>></c->り<c- p>&lt;/</c-><c- f>ruby</c-><c- p>></c->
 </code></pre>
-    <p>Correct “jukugo ruby” is not be possible
+    <p>Correct “jukugo ruby” is not possible
 		if all the base characters are part of a single <code><a data-link-type="element" href="#elementdef-rb" id="ref-for-elementdef-rb⑥">rb</a></code> element
 		and all the annotation text in a single <code><a data-link-type="element" href="#elementdef-rt" id="ref-for-elementdef-rt①⓪">rt</a></code> element,
 		as their individual pairings would be lost.</p>
