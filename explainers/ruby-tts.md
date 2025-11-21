@@ -52,12 +52,18 @@ a translation into a different language,
 a pun or other word-play,
 or any other sort of thing that might seem appropriate in an interlinear annotation.
 
-More different patterns of ruby usage,
-with a focus on Japanese,
-are discussed in <cite>[Text to Speech of Electronic Documents Containing Ruby: User Requirements](https://w3c.github.io/ruby-t2s-req/)</cite>.
-With thanks to its author, this explainer borrows some examples from that document.
-See also <cite>[HTML Ruby Markup Extensions](https://www.w3.org/TR/html-ruby-extensions/)</cite> for a more general discussion of ruby markup,
-without a focus on text-to-speech.
+While the questions of how to markup ruby
+and how to visually lay it out
+are already well addressed by specifications
+(see <cite>[HTML Ruby Markup Extensions](https://www.w3.org/TR/html-ruby-extensions/)</cite> and <cite>[CSS Ruby Annotation Layout Module Level 1](https://www.w3.org/TR/css-ruby-1/)</cite>,
+how ruby should be presented through text-to-speech has not been well tended to so far.
+This explainer attempts to give a brief introduction to why that is a problem,
+and a potential solution.
+
+> Note: More different patterns of ruby usage,
+> with a focus on Japanese,
+> are discussed in <cite>[Text to Speech of Electronic Documents Containing Ruby: User Requirements](https://w3c.github.io/ruby-t2s-req/)</cite>.
+> With thanks to its author, this explainer borrows some examples from that document.
 
 In the context of this document,
 the term “<dfn>speech user agent</dfn>” will used to refer without distinction
