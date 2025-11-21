@@ -20,7 +20,7 @@ Ruby, a form of interlinear annotation, are short runs of text alongside the bas
 They are typically used in East Asian documents to indicate pronunciation or to provide a short annotation.
 
 <figure>
-    <img src="images/ruby-shinkansen.png"
+    <img src="../images/ruby-shinkansen.png"
         width=320 height=70
         alt="The Japanese word for bullet-train is written with 3 kanji characters,
             written horizontally, left to right.
@@ -300,12 +300,12 @@ for entire subtrees.
 Although a single annotation per piece of base text is most common,
 occasionally multiple layers of ruby annotation are attached to the same word or phrase.
 This could be in order to give multiple transcriptions of the phonetic guidance like
-<img alt="“Beautiful” in Chinese, with both pinyin and bopomofo annotations." height="84" src="images/zhuyin-mei.png" width="80">
+<img alt="“Beautiful” in Chinese, with both pinyin and bopomofo annotations." height="84" src="../images/zhuyin-mei.png" width="80">
 or
-<img alt="上手 (skill) annotated in both kana and romaji" height="81" src="images/mono-or-jukugo-double.png" width="72">
+<img alt="上手 (skill) annotated in both kana and romaji" height="81" src="../images/mono-or-jukugo-double.png" width="72">
 It could be in order to have both phonetic ruby and complementary information
 attached to the same base like
-<img alt="San Francisco in Chinese, with both pinyin and the original English as annotations." height="84" src="images/group-double.png" width="113">
+<img alt="San Francisco in Chinese, with both pinyin and the original English as annotations." height="84" src="../images/group-double.png" width="113">
 or even be about attaching multiple independent pieces of complementary information.
 
 This can be achieved via different markup techniques,
