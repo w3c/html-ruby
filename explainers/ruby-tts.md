@@ -300,12 +300,12 @@ for entire subtrees.
 Although a single annotation per piece of base text is most common,
 occasionally multiple layers of ruby annotation are attached to the same word or phrase.
 This could be in order to give multiple transcriptions of the phonetic guidance like
-<img alt="“Beautiful” in Chinese, with both pinyin and bopomofo annotations." height="84" src="../images/zhuyin-mei.png" width="80">
+<img alt="“Beautiful” in Chinese, with both pinyin and bopomofo annotations." src="../images/zhuyin-mei.png" width="60">
 or
-<img alt="上手 (skill) annotated in both kana and romaji" height="81" src="../images/mono-or-jukugo-double.png" width="72">
+<img alt="上手 (skill) annotated in both kana and romaji" src="../images/mono-or-jukugo-double.png" width="54">
 It could be in order to have both phonetic ruby and complementary information
 attached to the same base like
-<img alt="San Francisco in Chinese, with both pinyin and the original English as annotations." height="84" src="../images/group-double.png" width="113">
+<img alt="San Francisco in Chinese, with both pinyin and the original English as annotations." height="63" src="../images/group-double.png">
 or even be about attaching multiple independent pieces of complementary information.
 
 This can be achieved via different markup techniques,
