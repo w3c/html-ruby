@@ -193,6 +193,9 @@ but not always.
   吉川, a family name, can be Yoshikawa or Kikkawa;
   一郎, a given name, can be Ichirō or Kazuo…
 
+* Names written in ideographs can occasionally be assigned non-standard readings through ruby,
+  replacing the standard reading(s) that the reader would other otherwise have assumed.
+
 Therefore, attempting to determine pronunciation only from the base text
 is not fully reliable either.
 
