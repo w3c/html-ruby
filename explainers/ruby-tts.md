@@ -45,7 +45,7 @@ even if they are proficient readers.
 
 Also, even if phonetic ruby is the most common case,
 there are also other uses.
-Sometimes, ruby is used to to give non-phonetic supplemental information:
+Sometimes, ruby is used to give non-phonetic supplemental information:
 a mnemonic atop of phone number,
 dates of birth and death atop a person's name in a history book,
 a translation into a different language,
@@ -100,7 +100,7 @@ that speech user agents correctly determine
 whether to read both the base and the annotation separately,
 or whether to provide a single reading.
 Existing HTML ruby markup does not distinguish,
-leading annoyances, confusion, and misunderstandings
+leading to annoyances, confusion, and misunderstandings
 for text-to-speech readers of ruby-annotated documents.
 
 
