@@ -153,7 +153,7 @@ but this can in fact be insufficient.
   However, if working from the annotation alone,
   the user agent would be faced with “はははしっている”,
   which it might interpret correctly,
-  but may also read literally as “hahaha sitteiru” (Ha Ha Ha! I Know),
+  but may also read literally as “hahaha shitteiru” (Ha Ha Ha! I Know),
   or the rather bizarre “ha wa hashitteiru” (The tooth is running).
 
 * Even though many Japanese speakers are not consciously aware of it,
