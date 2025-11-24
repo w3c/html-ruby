@@ -13,6 +13,32 @@ The proposal and supportive arguments in this document are based on a long and r
 of discussions in and around the W3C Internationalization Working Group and Interest Group.
 Many thanks to all who have contributed to this topic over the years.
 
+## Table of Contents
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Context](#context)
+- [Problem](#problem)
+  - [Single or Double Reading?](#single-or-double-reading)
+  - [Which Single Reading?](#which-single-reading)
+- [Proposal](#proposal)
+  - [The `ruby-type` Attribute](#the-ruby-type-attribute)
+  - [Propagation](#propagation)
+  - [Multi-level Ruby](#multi-level-ruby)
+  - [Influence on the Pronunciation of Non-annotated Text](#influence-on-the-pronunciation-of-non-annotated-text)
+- [Alternatives considered](#alternatives-considered)
+  - [Additional values](#additional-values)
+    - [`phonetic-optional` vs `phonetic-required`](#phonetic-optional-vs-phonetic-required)
+    - [`alternate`](#alternate)
+  - [Full automation](#full-automation)
+  - [A Different Kind of Attribute](#a-different-kind-of-attribute)
+    - [What vs Why](#what-vs-why)
+    - [`base`, `annotation`, and `both` as Values](#base-annotation-and-both-as-values)
+  - [Using ARIA](#using-aria)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 
 ## Context
 
