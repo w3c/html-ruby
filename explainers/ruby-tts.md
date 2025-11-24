@@ -33,7 +33,7 @@ They are typically used in East Asian documents to indicate pronunciation or to 
 
 Ruby as a phonetic indication can be used for a variety of reasons.
 The most typical case is indicating the normal pronunciation of words
-for the benefit or readers who might not know them:
+for the benefit of readers who might not know them:
 children still learning to read,
 people with learning disabilities,
 non-native speakers…
@@ -241,7 +241,7 @@ Its values are:
   and must instead produce a single audio rendition.
   To the extent possible, it should derive the pronunciation from information contained in both the base and the annotation.
 
-  A typical patter would be to use the (possibly incomplete) phonetic representation in the annotation
+  A typical pattern would be to use the (possibly incomplete) phonetic representation in the annotation
   to select one of several fully characterized phonetic renderings stored in the user agent’s dictionary.
 
   If the speech user agent cannot reconcile the pronunciation of the base and of the annotation,
@@ -250,7 +250,7 @@ Its values are:
 
   Note: An actual spec could go into further details
   on how to arrive at a single pronunciation from multiple sources,
-  thought this would likely need to remain informative guidance,
+  though this would likely need to remain informative guidance,
   or as "should" rather than "must" requirements.
 
 * `auto`: the default state, assumed if the attribute is omitted.
@@ -328,7 +328,7 @@ which need to be distinguished for the purposes of text-to-speech.
 We propose that this can be addressed by defining that
 the state of the `ruby-type` attribute on the element carrying the annotation
 is what determines whether both the annotation(s) and base are to be read separately,
-or or combined into a single reading.
+or combined into a single reading.
 As with [Propagation](#propagation),
 if the `ruby-type` attribute is not set directly on the annotation,
 the speech user agent would refer to the closest ancestor that does have such an attribute,
@@ -342,7 +342,7 @@ Generalizing from [the earlier description](#the-ruby-type-attribute):
   pronunciation of the base text, and must not be read individually.
   If the annotations and the base disagree,
   the annotations take precedence.
-  If the annotations disagree with eachother,
+  If the annotations disagree with each other,
   the choice is somewhat arbitray,
   but we propose that the outermost annotation takes precedence.
 * if multiple annotations on the same base have `ruby-type=auto`,
@@ -353,7 +353,7 @@ Generalizing from [the earlier description](#the-ruby-type-attribute):
   > so we could specify a particular approach,
   > such as innermost annotation being treated as `ruby-type=phonetic`,
   > and all others being treated as `ruby^type=complementary`.
-  > This could however result it worse results
+  > This could however result in worse results
   > than what the user agent could have determined on its own.
   
 
@@ -365,7 +365,7 @@ Generalizing from [the earlier description](#the-ruby-type-attribute):
   although prosody may be influenced,
   similarly to how it would be had the annotation been inserted as an inline parenthetical.
 
-* Morphological or contextual analysis is often used to deterine the correct
+* Morphological or contextual analysis is often used to determine the correct
   pronunciation of text based on its surronding,
   including un-annotated text.
   As substituting the annotation for the base or concatenating both
@@ -395,12 +395,12 @@ Generalizing from [the earlier description](#the-ruby-type-attribute):
   However, this may not always be doable,
   at least not as a strict "must do" rule:
   words other than names can also have multiple readings,
-  and those may validly varry within a single document,
+  and those may validly vary within a single document,
   based on context.
   For instance, “開く”, which means “to open”,
   may be read as “aku” or as “hiraku”
   depending on whether it is used as a transitive or intransitive verb,
-  and depending idiomatic usage for the thing that is being opened.
+  and depending on idiomatic usage for the thing that is being opened.
 
   > Issue: How do we solve this?
   > Options include:
@@ -454,9 +454,9 @@ on the quality of the user agent's dictionaries and language analysis,
 which is not something the author can predict.
 
 Whether a sighted reader would know how to pronounce the word without the annotation
-varies enormounsly depending on the reader,
+varies enormously depending on the reader,
 and is not something the author can predict.
-Even uncomon readings may be known to a reader who is familiar with the subject matter,
+Even uncommon readings may be known to a reader who is familiar with the subject matter,
 and the level of annotation needed while learning to read varies enormously,
 even over the course of a school year,
 or depending on the text book used.
@@ -490,11 +490,11 @@ or are listening to a text-to-speech representation of the document.
 
 ### Full automation
 
-While historically, speech user agents have been insufficiently sofisticated
-to reliably provide the correct reading for ruby without author gudiance,
+While historically, speech user agents have been insufficiently sophisticated
+to reliably provide the correct reading for ruby without author guidance,
 it could be hoped that with improvements in text-to-speech dictionaries,
 and with improvements in context-aware heuristics,
-this problemm could be solved
+this problem could be solved
 without any need for authors to annotate their ruby content in any way,
 as user agents automatically and correctly determine
 whether any given ruby annotation is phonetic or complementary.
@@ -505,7 +505,7 @@ they can never be fully reliable:
   Place names and people names are not only a common source of rare ideographs
   whose readings might not be well known even to a machine,
   but more importantly,
-  even names composed of common ideographs have uncomon or unique readings on occasion,
+  even names composed of common ideographs have uncommon or unique readings on occasion,
   for a variety of reasons:
   dialectal variations,
   outdated readings,
@@ -525,7 +525,7 @@ they can never be fully reliable:
   the task becomes even more challenging
   if we consider also needing a Japnese dictionary of all Chinese names…
 * Ruby can be just as useful in minority or regional languages,
-  for which comprehensive dictionaries or contextal analysis systems do not always exist.
+  for which comprehensive dictionaries or contextual analysis systems do not always exist.
 * Not all user agents run on high-end devices with unlimited storage for comprehensive dictionaries,
   especially given that dictionaries in multiple languages may be needed.
 
@@ -569,7 +569,7 @@ The downsides of this proposal are:
    and hiding that from the user is likely unwise.
    More over, in exceptional cases,
    if there really is a need,
-   this can already be acheived by adding `aria-hidden` on the annotation.
+   this can already be achieved by adding `aria-hidden` on the annotation.
 * Although it could seems that `annotation` would be the right value to reach for
   in the case of phonetic annotations, 
   it overlooks the fact,
@@ -587,7 +587,7 @@ unless the base uses `aria-labeledby` to point to its annotation,
 in which case only the annotation would be read.
 However:
 * this fails to take advantage of the fact that
-  the relationship between the base and the label is already know,
+  the relationship between the base and the label is already known,
   and requires an obnoxious amount of redundant markup,
   including an `id` on every ruby annotation.
 * This does not address the fact
