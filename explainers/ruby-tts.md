@@ -160,7 +160,7 @@ but this can in fact be insufficient.
   pitch accent has phonemic value in Japanese,
   and may distinguish between words that would otherwise be homophones.
   Context is often helpful, but not always sufficient.
-  “あえがすき” (ame ga suki) could mean “I like rain” or “I like candy”.
+  “あめがすき” (ame ga suki) could mean “I like rain” or “I like candy”.
   The pronunciation is <em>not</em> identical:
   “rain” (雨 in ideographs) is “ame” with a falling pitch,
   “candy” (飴 in ideographs) is “ame” with a rising pitch.
