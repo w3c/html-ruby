@@ -194,7 +194,7 @@ but not always.
   一郎, a given name, can be Ichirō or Kazuo…
 
 * Names written in ideographs can occasionally be assigned non-standard readings through ruby,
-  replacing the standard reading(s) that the reader would other otherwise have assumed.
+  replacing the standard reading(s) that the reader would otherwise have assumed.
 
 Therefore, attempting to determine pronunciation only from the base text
 is not fully reliable either.
@@ -258,7 +258,7 @@ Its values are:
   whether to behave as `complementary` or as `phonetic`.
 
 In all cases, it is understood that the above requirements
-describe the default behavior speech user agents.
+describe the default behavior of speech user agents.
 It is always acceptable to enable users to opt into alternative behaviors
 via a variety of settings,
 (e.g. A person Bilingual in Chinese and Japanese but more familiar with Chinese culture
@@ -343,7 +343,7 @@ Generalizing from [the earlier description](#the-ruby-type-attribute):
   If the annotations and the base disagree,
   the annotations take precedence.
   If the annotations disagree with each other,
-  the choice is somewhat arbitray,
+  the choice is somewhat arbitrary,
   but we propose that the outermost annotation takes precedence.
 * if multiple annotations on the same base have `ruby-type=auto`,
   we propose to let the user agent decide for itself which is which.
@@ -366,7 +366,7 @@ Generalizing from [the earlier description](#the-ruby-type-attribute):
   similarly to how it would be had the annotation been inserted as an inline parenthetical.
 
 * Morphological or contextual analysis is often used to determine the correct
-  pronunciation of text based on its surronding,
+  pronunciation of text based on its surrounding,
   including un-annotated text.
   As substituting the annotation for the base or concatenating both
   could confuse the analysis,
@@ -405,7 +405,7 @@ Generalizing from [the earlier description](#the-ruby-type-attribute):
   > Issue: How do we solve this?
   > Options include:
   > 1. `ruby-type=phonetic` <em>adds</em> a reading for the annotated word
-  >    in the ua's pronunciation dictionary to be used on later unannotated words,
+  >    in the UA's pronunciation dictionary to be used on later unannotated words,
   >    but the UA is still expected to perform morphological and contextual analysis
   >    to pick the right reading.
   >    Seem appropriate and flexible,
@@ -567,7 +567,7 @@ The downsides of this proposal are:
 * `base` as a value is not terribly useful, and arguably a foot-gun.
    If an annotation is present, it generally conveys something,
    and hiding that from the user is likely unwise.
-   More over, in exceptional cases,
+   Moreover, in exceptional cases,
    if there really is a need,
    this can already be achieved by adding `aria-hidden` on the annotation.
 * Although it could seems that `annotation` would be the right value to reach for
