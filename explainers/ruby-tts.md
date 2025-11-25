@@ -280,8 +280,15 @@ Its values are:
   or as "should" rather than "must" requirements.
 
 * `auto`: the default state, assumed if the attribute is omitted.
-  Assistive technologies must attempt to automatically determine
-  whether to behave as `complementary` or as `phonetic`.
+  A speech user agents must attempt to automatically determine
+  whether to behave as `complementary` or as `phonetic`:
+  if it can determine
+  that the ruby annotation is a possible pronunciation
+  of the corresponding ruby base,
+  it should behave as `phonetic`;
+  if it can determine that it is not,
+  or if it cannot be sure either way,
+  it should behave as `complementary`.
 
 In all cases, it is understood that the above requirements
 describe the default behavior of speech user agents.
