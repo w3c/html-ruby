@@ -88,7 +88,7 @@ and a potential solution.
 
 > Note: More different patterns of ruby usage,
 > with a focus on Japanese,
-> are discussed in <cite>[Text to Speech of Electronic Documents Containing Ruby: User Requirements](https://w3c.github.io/ruby-t2s-req/)</cite>.
+> are discussed in <cite>[Text to Speech of Electronic Documents Containing Ruby: User Requirements](https://w3c.github.io/ruby-tts-req/)</cite>.
 > With thanks to its author, this explainer borrows some examples from that document.
 
 In the context of this document,
