@@ -728,7 +728,7 @@ Markup Patterns for Multi-Character Ruby</h4>
 	[[JLREQ#ruby_and_emphasis_dots|Ruby and Emphasis Dots]]
 	and [[JLREQ#positioning_of_jukugoruby|Appendix F]]),
 	[[SIMPLE-RUBY inline]],
-	and the section on [[CLREQ#interlinear_annotations|Interlinear annotations]] of [[CLREQ inline]].
+	and the section on [[CLREQ#h_inline_notes|Inline notes & annotations]] of [[CLREQ inline]].
 
 
 <h3 id=the-rb-element>
