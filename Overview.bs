@@ -1547,10 +1547,8 @@ Accessibility Considerations</h2>
 	This important consideration is expected to be addressed by subsequent up work.
 	In the meanwhile, HTML user agents and screen readers are encouraged to consider heuristic methods
 	to determine the most helpful text-to-speech rendering.
-	<!-- uncomment once https://w3c.github.io/ruby-t2s-req/ has been published to /TR
-	(See [[ruby-tts-req]] for discussion of common patterns
+	(See [[RUBY-TTS-REQ]] for discussion of common patterns
 	and text-to-speech expectations in Japanese.)
-	-->
 
 
 <h2 class=no-num id=ack>
