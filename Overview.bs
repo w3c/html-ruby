@@ -43,7 +43,6 @@ Status Text:
 
 <pre class=link-defaults>
 	spec:css-ruby-1; type:value; text:ruby-base
-	spec:css-ruby-1; type:property; text:display
 </pre>
 
 <pre class=biblio>
