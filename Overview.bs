@@ -1241,7 +1241,7 @@ Editorial Tweaks to HTML</h2>
 	<ul class="non-normative">
 		<li>
 			Remove the outdated informative description
-			of CSS annonymous box generation for ruby bases
+			of CSS anonymous box generation for ruby bases
 			in the following paragraph in [[html/rendering#phrasing-content-3]]:
 
 			<blockquote>
@@ -1292,9 +1292,7 @@ Editorial Tweaks to HTML</h2>
 					<tr>
 						<td><{ruby}>, <{rb}>, <{rt}>, <{rtc}>, <{rp}>
 						<td>Ruby annotations
-						<td><code highlight="html">
-						&lt;ruby><wbr>&lt;rb><wbr>旧&lt;rb><wbr>金&lt;rb><wbr>山&lt;rp><wbr> (&lt;rt><wbr>jiù&lt;rt><wbr>jīn&lt;rt><wbr>shān&lt;rtc><wbr>&lt;rp><wbr>: &lt;/rp><wbr>San Francisco&lt;/rtc><wbr>&lt;rp><wbr>)&lt;/ruby>
-						</code>
+						<td><code highlight="html">&lt;ruby>&#x200b;&lt;rb>&#x200b;旧&lt;rb>&#x200b;金&lt;rb>&#x200b;山&lt;rp>&#x200b; (&lt;rt>&#x200b;jiù&lt;rt>&#x200b;jīn&lt;rt>&#x200b;shān&lt;rtc>&#x200b;&lt;rp>&#x200b;: &lt;/rp>&#x200b;San Francisco&lt;/rtc>&#x200b;&lt;rp>&#x200b;)&lt;/ruby></code>
 			</table>
 
 		<li>
