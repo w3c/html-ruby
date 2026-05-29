@@ -8,6 +8,8 @@ Repository: w3c/html-ruby
 TR: https://www.w3.org/TR/html-ruby-extensions/
 ED: https://w3c.github.io/html-ruby/
 Editor: Florian Rivoal, Invited Expert, https://florian.rivoal.net, w3cid 43241
+Test Suite: https://wpt.fyi/results/html-ruby-extensions
+Implementation Report: https://w3c.github.io/html-ruby/implementation-report-2026-03
 Abstract:
 	Ruby, a form of interlinear annotation,
 	are short runs of text alongside the base text.
@@ -1599,3 +1601,57 @@ Changes since the 04 February 2014 <cite>W3C HTML Ruby Markup Extensions</cite> 
 	The <a href="https://www.w3.org/TR/2014/NOTE-html-ruby-extensions-20140204/#parsing-changes">parsing changes</a> proposed in the 2014 Working Group Note
 	are no longer discussed here
 	as they have since been adopted by the [[HTML inline]].
+
+
+<h2 class="no-num" id="cr-exit-criteria">
+Appendix G:
+CR exit criteria</h2>
+
+	<p>
+	For this specification to be advanced to Proposed Recommendation,
+	there must be at least two
+	independent,
+	interoperable
+	implementations of each feature.
+	Each feature may be implemented
+	by a different set of products,
+	there is no requirement
+	that all features be implemented by a single product.
+	For the purposes of this criterion,
+	we define the following terms:
+
+	<dl>
+		<dt>independent
+		</dt><dd>each implementation must be developed by a different party
+			and cannot share, reuse, or derive from code
+			used by another qualifying implementation.
+			Sections of code that have no bearing on the implementation of this specification
+			are exempt from this requirement.
+
+		</dd><dt>interoperable
+		</dt><dd>passing the respective test case(s) in the official test suite.
+
+		</dd><dt>implementation
+		</dt><dd>
+			a user agent which:
+
+			<ol>
+				<li>implements the specification.
+
+				<li>is available to the general public.
+					The implementation may be a shipping product
+					or other publicly available version
+					(i.e., beta version, preview release, or "nightly build").
+					Non-shipping product releases must have implemented the feature(s)
+					for a period of at least one month in order to demonstrate stability.
+
+				<li>is not experimental
+					(i.e., a version specifically designed to pass the test suite
+					and is not intended for normal usage going forward).
+
+			</ol>
+		</dd>
+	</dl>
+
+	<p>The specification will remain Candidate Recommendation
+	for at least 28 days.
