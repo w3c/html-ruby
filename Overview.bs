@@ -1580,6 +1580,12 @@ Changes</h2>
 
 	<i>This section is non-normative</i>
 
+<h3 id=changes-since-2026-06-wd>
+Changes since the 4 June 2026 Candidate Recommendation</h3>
+
+	Significant changes since the <a href="https://www.w3.org/TR/2026/CR-html-ruby-extensions-20260604/">06 June 2026 Working Draft</a>:
+	* None yet
+
 <h3 id=changes-since-2024-05-wd>
 Changes since the 07 May 2024 Working Draft</h3>
 
