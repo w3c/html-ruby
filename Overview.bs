@@ -189,7 +189,7 @@ The <dfn element><code>ruby</code></dfn> element</h3>
 
 		<dt> <a spec=html>Accessibility considerations</a>:
 		<dd><a href="https://w3c.github.io/html-aria/#el-ruby">For authors</a>.
-		<dd><a href="https://w3c.github.io/html-aam/#el-ruby">For implementers</a>.
+		<dd><a href="https://w3c.github.io/aria/html-aam/#el-ruby">For implementers</a>.
 
 		<dt><a spec=html>DOM interface</a>:
 		<dd>Uses {{HTMLElement}}.
@@ -806,7 +806,7 @@ The <dfn element><code>rt</code></dfn> element</h3>
 
 		<dt><a spec=html>Accessibility considerations</a>:
 		<dd><a href="https://w3c.github.io/html-aria/#el-rt">For authors</a>.
-		<dd><a href="https://w3c.github.io/html-aam/#el-rt">For implementers</a>.
+		<dd><a href="https://w3c.github.io/aria/html-aam/#el-rt">For implementers</a>.
 
 		<dt><a spec=html>DOM interface</a>:
 		<dd>Uses {{HTMLElement}}.
@@ -944,7 +944,7 @@ The <dfn element><code>rp</code></dfn> element</h3>
 
 		<dt><a spec=html>Accessibility considerations</a>:
 		<dd><a href="https://w3c.github.io/html-aria/#el-rp">For authors</a>.</dd>
-		<dd><a href="https://w3c.github.io/html-aam/#el-rp">For implementers</a>.</dd>
+		<dd><a href="https://w3c.github.io/aria/html-aam/#el-rp">For implementers</a>.</dd>
 
 		<dt><a spec=html>DOM interface</a>:
 		<dd>Uses {{HTMLElement}}.
