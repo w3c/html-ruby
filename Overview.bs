@@ -749,6 +749,10 @@ The <dfn element><code>rb</code></dfn> element</h3>
 		<dt><a spec=html>Content attributes</a>:
 		<dd><a spec=html>Global attributes</a>
 
+		<dt><a spec=html>Accessibility considerations</a>:
+		<dd><a href="https://w3c.github.io/html-aria/#el-rb">For authors</a>.
+		<dd><a href="https://w3c.github.io/html-aam/#el-rb">For implementers</a>.
+
 		<dt><a spec=html>DOM interface</a>:
 		<dd>Uses {{HTMLElement}}.
 	</dl>
@@ -844,6 +848,10 @@ The <dfn element><code>rtc</code></dfn> element</h3>
 
 		<dt><a spec=html>Content attributes</a>:
 		<dd><a spec=html>Global attributes</a>
+
+		<dt><a spec=html>Accessibility considerations</a>:
+		<dd><a href="https://w3c.github.io/html-aria/#el-rtc">For authors</a>.
+		<dd><a href="https://w3c.github.io/html-aam/#el-rtc">For implementers</a>.
 
 		<dt><a spec=html>DOM interface</a>:
 		<dd>Uses {{HTMLElement}}.
