@@ -556,7 +556,7 @@ they can never be fully reliable:
   Not only, as discussed above,
   is it impossible to have an exhaustive dictionary of Japanese pronunciation of all Japanese proper nouns,
   the task becomes even more challenging
-  if we consider also needing a Japnese dictionary of all Chinese names…
+  if we consider also needing a Japanese dictionary of all Chinese names…
 * Ruby can be just as useful in minority or regional languages,
   for which comprehensive dictionaries or contextual analysis systems do not always exist.
 * Not all user agents run on high-end devices with unlimited storage for comprehensive dictionaries,
