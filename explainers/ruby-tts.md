@@ -254,7 +254,8 @@ by speech user agents.
 Its values are:
 * `complementary`: indicates that the ruby annotations convey information that is complementary or supplemental to the base text.
   A speech user agent must convey both the base text and the ruby annotation separately to the user,
-  in document order.
+  in document order,
+  unless the user has configured their speech user agent otherwise.
 
   As an exception,
   if the audio rendering of the base and the annotation would be strictly identical,
